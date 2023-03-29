@@ -1,11 +1,7 @@
 package com.example.bioscoopapplicatie.presentation;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -14,17 +10,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.bioscoopapplicatie.R;
-import com.example.bioscoopapplicatie.domain.User;
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = this.getClass().getSimpleName();
     private Button log_in_btn;
+    private Button register_btn_act;
+    private TextView forgot_password_txt;
     private TextView email_txtField;
     private TextView password_txtField;
-    ///private UserViewModel userViewModel;
     private int orientation;
 
     @Override
@@ -40,8 +35,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         Log.i(TAG, "setComponents");
         this.log_in_btn = findViewById(R.id.login_btn);
         this.log_in_btn.setOnClickListener(this);
-        //this.email_txtField = findViewById(R.id.login_email_input_txt);
-        //this.password_txtField = findViewById(R.id.login_password_input_txt);
+        this.register_btn_act = findViewById(R.id.register_btn);
+        this.register_btn_act.setOnClickListener(this);
+        this.forgot_password_txt = findViewById(R.id.forgot_password_txt);
+        this.forgot_password_txt.setOnClickListener(this);
     }
 
     private void setUserViewModel() {
@@ -65,7 +62,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         Log.i(TAG, "setLayoutBasedOnOrientation");
         this.orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(R.layout.login_horizontal);
+            setContentView(R.layout.login_vertical); // change to horizontal
         } else {
             setContentView(R.layout.login_vertical);
         }
@@ -74,12 +71,21 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         Log.d(TAG, "onClick");
-        /*
+
         switch (view.getId()) {
-            case R.id.:
-                    //
-                    break;
-        }*/
+            case R.id.login_btn:
+                Intent profileIntent = new Intent(this, HomeScreenActivity.class);
+                startActivity(profileIntent);
+                break;
+            case R.id.register_btn:
+                Intent registerIntent = new Intent(this, RegisterActivity.class);
+                startActivity(registerIntent);
+                break;
+            case R.id.forgot_password_txt:
+                Intent forgotPasswordIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(forgotPasswordIntent);
+                break;
+        }
         //userViewModel.login(email_txtField.getText().toString(), password_txtField.getText().toString());
         //Intent intent = new Intent(this, Homepage.class);
         //startActivity(intent);

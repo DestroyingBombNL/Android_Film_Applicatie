@@ -60,7 +60,8 @@
             android:layout_width="192dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="Forgot Password" />
+            android:text="Forgot Password"
+            android:clickable="true"/>
 
     </LinearLayout>
 </LinearLayout>
