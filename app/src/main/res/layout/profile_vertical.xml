@@ -15,7 +15,7 @@
         android:layout_marginTop="50dp"/>
 
     <TextView
-        android:id="@+id/profile_view"
+        android:id="@+id/movie_homescreen_txt"
         android:layout_width="144dp"
         android:layout_height="53dp"
         android:layout_marginTop="112dp"
@@ -34,7 +34,7 @@
         android:layout_height="1dp"
         android:background="@android:color/black"
         tools:ignore="MissingConstraints"
-        app:layout_constraintTop_toBottomOf="@+id/profile_view"
+        app:layout_constraintTop_toBottomOf="@+id/movie_homescreen_txt"
         android:layout_marginTop="15dp"/>
 
     <TextView
