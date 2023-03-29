@@ -95,10 +95,10 @@
         app:layout_constraintTop_toBottomOf="@id/editFirstName"/>
 
     <EditText
-        android:id="@+id/editLastName"
+        android:id="@+id/editSurName"
         android:layout_width="207dp"
         android:layout_height="40dp"
-        android:hint="LastName"
+        android:hint="SurName"
         android:layout_marginTop="10dp"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +111,7 @@
         android:layout_height="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editLastName"/>
+        app:layout_constraintTop_toBottomOf="@id/editSurName"/>
 
     <Button
         android:id="@+id/btnSaveProfile"
