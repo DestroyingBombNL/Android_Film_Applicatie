@@ -17,8 +17,8 @@
     <TextView
         android:id="@+id/profile_view"
         android:layout_width="144dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="112dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="sans-serif-black"
         android:text="Edit Profile Information"
         android:textAlignment="center"
@@ -40,7 +40,7 @@
     <EditText
         android:id="@+id/editUsername"
         android:layout_width="207dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:hint="Username"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
     <EditText
         android:id="@+id/editEmail"
         android:layout_width="207dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:hint="E-Mail"
         android:layout_marginTop="10dp"
         android:textSize="12sp"
@@ -78,7 +78,7 @@
     <EditText
         android:id="@+id/editFirstName"
         android:layout_width="207dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:hint="FirstName"
         android:layout_marginTop="10dp"
         android:textSize="12sp"
@@ -97,7 +97,7 @@
     <EditText
         android:id="@+id/editSurName"
         android:layout_width="207dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:hint="SurName"
         android:layout_marginTop="10dp"
         android:textSize="12sp"
@@ -116,7 +116,7 @@
     <Button
         android:id="@+id/btnSaveProfile"
         android:layout_width="207dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:text="Save Profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

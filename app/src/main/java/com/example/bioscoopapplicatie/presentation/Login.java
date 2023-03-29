@@ -40,8 +40,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         Log.i(TAG, "setComponents");
         this.log_in_btn = findViewById(R.id.login_btn);
         this.log_in_btn.setOnClickListener(this);
-        this.email_txtField = findViewById(R.id.login_email_input_txt);
-        this.password_txtField = findViewById(R.id.login_password_input_txt);
+        //this.email_txtField = findViewById(R.id.login_email_input_txt);
+        //this.password_txtField = findViewById(R.id.login_password_input_txt);
     }
 
     private void setUserViewModel() {
@@ -81,8 +81,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     break;
         }*/
         //userViewModel.login(email_txtField.getText().toString(), password_txtField.getText().toString());
-        Intent intent = new Intent(this, Homepage.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, Homepage.class);
+        //startActivity(intent);
     }
 
     @Override
