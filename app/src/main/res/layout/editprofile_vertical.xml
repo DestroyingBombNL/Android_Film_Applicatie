@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/profile_view"
+        android:layout_width="144dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="112dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Edit Profile Information"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toBottomOf="@+id/profile_view"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:id="@+id/editUsername"
+        android:layout_width="207dp"
+        android:layout_height="40dp"
+        android:hint="Username"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="220dp" />
+
+    <TextView
+        android:id="@+id/txtErrorUsername"
+        android:layout_width="207dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editUsername"/>
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="207dp"
+        android:layout_height="40dp"
+        android:hint="E-Mail"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtErrorUsername" />
+
+    <TextView
+        android:id="@+id/txtErrorEmail"
+        android:layout_width="207dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editEmail"/>
+
+    <EditText
+        android:id="@+id/editFirstName"
+        android:layout_width="207dp"
+        android:layout_height="40dp"
+        android:hint="FirstName"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtErrorEmail" />
+
+    <TextView
+        android:id="@+id/txtErrorFirstname"
+        android:layout_width="207dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editFirstName"/>
+
+    <EditText
+        android:id="@+id/editLastName"
+        android:layout_width="207dp"
+        android:layout_height="40dp"
+        android:hint="LastName"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtErrorFirstname" />
+
+    <TextView
+        android:id="@+id/txtErrorSurname"
+        android:layout_width="207dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editLastName"/>
+
+    <Button
+        android:id="@+id/btnSaveProfile"
+        android:layout_width="207dp"
+        android:layout_height="40dp"
+        android:text="Save Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtErrorSurname"
+        android:layout_marginTop="20dp"/>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginBottom="50dp"
+        android:background="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
