@@ -1,4 +1,4 @@
-package com.example.bioscoopapplicatie.Domain;
+package com.example.bioscoopapplicatie.domain;
 
 public class GenreMedia {
     private Genre genre;

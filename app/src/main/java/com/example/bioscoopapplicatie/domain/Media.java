@@ -1,6 +1,4 @@
-package com.example.bioscoopapplicatie.Domain;
-
-import java.util.Date;
+package com.example.bioscoopapplicatie.domain;
 
 public class Media {
     private int id;

@@ -1,4 +1,4 @@
-package com.example.bioscoopapplicatie.Domain;
+package com.example.bioscoopapplicatie.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ public class MediaList {
     private String name;
     private String creationDate;
     private List<Media> mediaList;
-    private User user;
+    private com.example.bioscoopapplicatie.domain.User user;
 
-    public MediaList(int id, String name, String creationDate, User user, List<Media> mediaList) {
+    public MediaList(int id, String name, String creationDate, com.example.bioscoopapplicatie.domain.User user, List<Media> mediaList) {
         this.id = id;
         this.name = name;
         this.creationDate = creationDate;
@@ -18,7 +18,7 @@ public class MediaList {
         this.mediaList = new ArrayList<>();
     }
 
-    public MediaList(String name, String creationDate, User user, List<Media> mediaList) {
+    public MediaList(String name, String creationDate, com.example.bioscoopapplicatie.domain.User user, List<Media> mediaList) {
         this.name = name;
         this.creationDate = creationDate;
         this.user = user;
@@ -49,11 +49,11 @@ public class MediaList {
         this.creationDate = creationDate;
     }
 
-    public User getUser() {
+    public com.example.bioscoopapplicatie.domain.User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(com.example.bioscoopapplicatie.domain.User user) {
         this.user = user;
     }
 
