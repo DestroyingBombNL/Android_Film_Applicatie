@@ -1,7 +1,9 @@
-package com.example.bioscoopapplicatie;
+package com.example.bioscoopapplicatie.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.bioscoopapplicatie.R;
 
 public class MainActivity extends AppCompatActivity {
     @Override
