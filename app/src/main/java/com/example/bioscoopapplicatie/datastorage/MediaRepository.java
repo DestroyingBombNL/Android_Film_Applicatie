@@ -67,7 +67,6 @@ public class MediaRepository implements MediaDAO, GenreDAO, MediaListDAO, Review
     }
 
 
-
     /**
      * Inserts a meal into the database.
      */
