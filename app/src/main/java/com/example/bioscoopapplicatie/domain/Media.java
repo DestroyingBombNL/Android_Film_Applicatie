@@ -13,13 +13,13 @@ public class Media {
     private boolean adult;
     @Expose
     @ColumnInfo(name="backdrop_path")
-    private String backdropPath;
+    private String backdrop_path;
     @Expose
     @PrimaryKey(autoGenerate = true)
     private int id;
     @Expose
     @ColumnInfo(name="original_language")
-    private String language;
+    private String original_language;
     @Expose
     @ColumnInfo(name="original_title")
     private String title;
@@ -29,44 +29,44 @@ public class Media {
     private double popularity;
     @Expose
     @ColumnInfo(name="poster_path")
-    private String posterPath;
+    private String poster_path;
     @Expose
     @ColumnInfo(name="release_date")
-    private String releaseDate;
+    private String release_date;
     @Expose
     private boolean video;
     @Expose
     @ColumnInfo(name="vote_average")
-    private double voteAverage;
+    private double vote_average;
     @Expose
     @ColumnInfo(name="vote_count")
-    private int voteCount;
+    private int vote_count;
 
-    public Media(int id, String title, String language, String overview, double popularity, String releaseDate, boolean adult, String backdropPath, String posterPath, boolean video, double voteAverage, int voteCount) {
+    public Media(int id, String title, String original_language, String overview, double popularity, String release_date, boolean adult, String backdrop_path, String poster_path, boolean video, double vote_average, int vote_count) {
         this.id = id;
         this.title = title;
-        this.language = language;
+        this.original_language = original_language;
         this.overview = overview;
         this.popularity = popularity;
-        this.releaseDate = releaseDate;
+        this.release_date = release_date;
         this.adult = adult;
-        this.backdropPath = backdropPath;
-        this.posterPath = posterPath;
+        this.backdrop_path = backdrop_path;
+        this.poster_path = poster_path;
         this.video = video;
-        this.voteAverage = voteAverage;
-        this.voteCount = voteCount;
+        this.vote_average = vote_average;
+        this.vote_count = vote_count;
     }
 
     /*tweede constructor met velden die ingevuld moeten worden bij aanmaken van film
     @Ignore
-    public Media(String title, String language, String overview, String releaseDate, boolean adult, String backdropPath, String posterPath, boolean video) {
+    public Media(String title, String language, String overview, String releaseDate, boolean adult, String backdropPath, String poster_path, boolean video) {
         this.title = title;
         this.language = language;
         this.overview = overview;
         this.releaseDate = releaseDate;
         this.adult = adult;
         this.backdropPath = backdropPath;
-        this.posterPath = posterPath;
+        this.poster_path = poster_path;
         this.video = video;
     }*/
 
@@ -86,12 +86,12 @@ public class Media {
         this.title = title;
     }
 
-    public String getLanguage() {
-        return language;
+    public String getOriginal_language() {
+        return original_language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setOriginal_language(String original_language) {
+        this.original_language = original_language;
     }
 
     public String getOverview() {
@@ -110,12 +110,12 @@ public class Media {
         this.popularity = popularity;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getRelease_date() {
+        return release_date;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
     }
 
     public boolean isAdult() {
@@ -126,20 +126,20 @@ public class Media {
         this.adult = adult;
     }
 
-    public String getBackdropPath() {
-        return backdropPath;
+    public String getBackdrop_path() {
+        return backdrop_path;
     }
 
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
     }
 
-    public String getPosterPath() {
-        return posterPath;
+    public String getPoster_path() {
+        return poster_path;
     }
 
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
     }
 
     public boolean isVideo() {
@@ -150,19 +150,19 @@ public class Media {
         this.video = video;
     }
 
-    public double getVoteAverage() {
-        return voteAverage;
+    public double getVote_average() {
+        return vote_average;
     }
 
-    public void setVoteAverage(double voteAverage) {
-        this.voteAverage = voteAverage;
+    public void setVote_average(double vote_average) {
+        this.vote_average = vote_average;
     }
 
-    public int getVoteCount() {
-        return voteCount;
+    public int getVote_count() {
+        return vote_count;
     }
 
-    public void setVoteCount(int voteCount) {
-        this.voteCount = voteCount;
+    public void setVote_count(int vote_count) {
+        this.vote_count = vote_count;
     }
 }

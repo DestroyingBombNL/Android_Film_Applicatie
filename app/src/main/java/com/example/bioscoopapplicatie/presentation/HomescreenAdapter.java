@@ -5,11 +5,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.bioscoopapplicatie.R;
 import com.example.bioscoopapplicatie.domain.Media;
 
@@ -40,10 +42,11 @@ public class HomescreenAdapter extends RecyclerView.Adapter<HomescreenAdapter.Me
     public void onBindViewHolder(@NonNull MediaViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder nr " + position);
         Media mediaItem = this.media.get(position);
-        //Glide.with(holder.itemView).load(mediaItem.getPosterPath()).into(holder.image);
         holder.title.setText(mediaItem.getTitle());
-        holder.voteAverage.setText(String.valueOf(mediaItem.getVoteAverage()));
+        holder.voteAverage.setText(String.valueOf(mediaItem.getVote_average()));
         holder.popularity.setText(String.valueOf(mediaItem.getPopularity()));
+        Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/original" + mediaItem.getPoster_path()).into(holder.image);
+
     }
 
     @Override
@@ -62,10 +65,11 @@ public class HomescreenAdapter extends RecyclerView.Adapter<HomescreenAdapter.Me
     class MediaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final String TAG = MediaViewHolder.class.getSimpleName();
-        //public ImageView image;
+        public ImageView image;
         public TextView title;
         public TextView voteAverage;
         public TextView popularity;
+
 
         public MediaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,7 +78,7 @@ public class HomescreenAdapter extends RecyclerView.Adapter<HomescreenAdapter.Me
             title = itemView.findViewById(R.id.homescreen_item_txt);
             voteAverage = itemView.findViewById(R.id.show_media_list_item_vote_average_txt);
             popularity = itemView.findViewById(R.id.show_media_list_item_popularity_txt);
-
+            image = itemView.findViewById(R.id.show_media_list_item_img);
             itemView.setOnClickListener(this);
         }
 
