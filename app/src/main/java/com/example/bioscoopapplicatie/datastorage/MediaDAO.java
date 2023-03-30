@@ -18,9 +18,11 @@ import java.util.List;
 
 @Dao
 public interface MediaDAO {
-    @Query("SELECT * from media_table ORDER BY title ASC")
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insert(Media media);
+    @Query("SELECT * from media_table ORDER BY original_title ASC")
     LiveData<List<Media>> getAllMedia();
 
     @Query("SELECT * from media_table WHERE :filter")
-    LiveData<List<Media>> getFilteredMedia(String filter);
+    LiveData<List<Media>> getAllFilteredMedia(String filter);
 }

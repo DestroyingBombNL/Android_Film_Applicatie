@@ -10,21 +10,6 @@ import com.example.bioscoopapplicatie.domain.Media;
 
 import java.util.List;
 
-public class MediaListViewModel extends AndroidViewModel {
-    private final String TAG = this.getClass().getSimpleName();
-    private MediaRepository repository;
-    private LiveData<List<Media>> allMedia;
+public class MediaListViewModel {
 
-    public MediaListViewModel (Application application) {
-        super(application);
-        repository = new MediaRepository(application);
-    }
-
-    public LiveData<List<Media>> getAllMedia() {
-        this.repository.getALlMedia();
-    }
-
-    public LiveData<List<Media>> getFilteredMedia() {
-        this.repository.getAllFilteredMedia();
-    }
 }

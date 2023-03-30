@@ -1,6 +1,7 @@
 package com.example.bioscoopapplicatie.datastorage;
 
 import android.content.Context;
+import android.graphics.Movie;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -11,8 +12,14 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.bioscoopapplicatie.domain.Media;
+import com.example.bioscoopapplicatie.domain.MediaResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -22,11 +29,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * with it happen through the WordViewModel.
  */
 
-@Database(entities = {Media.class}, version = 2, exportSchema = false)
+@Database(entities = {Media.class}, version = 3, exportSchema = false)
 public abstract class TheMovieDatabase extends RoomDatabase {
-    public abstract MediaDao mediaDao();
-
     private final static String TAG = TheMovieDatabase.class.getSimpleName();
+
+    public abstract MediaDAO mediaDao();
+
     private static TheMovieDatabase INSTANCE;
 
     public static TheMovieDatabase getDatabase(final Context context) {
@@ -55,42 +63,40 @@ public abstract class TheMovieDatabase extends RoomDatabase {
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
-
             new PopulateDbAsync(INSTANCE).execute();
         }
     };
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
-            private final MediaDao mediaDao;
-            PopulateDbAsync(TheMovieDatabase db) {
-                mediaDao = db.mediaDao();
-            }
-            @Override
-            protected Void doInBackground(final Void... params) {
-                Log.d(TAG, "doInBackground");
-                Retrofit retrofit = new Retrofit.Builder() //?results=50/
-                        .baseUrl("https://shareameal-api.herokuapp.com")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                TheMovieAPI jsonApi = retrofit.create(TheMovieAPI.class);
-                List<Meal> meals;
-                Call<MealResponse> call = jsonApi.getMeals();
-                try {
-                    Response<MealResponse> response = call.execute();
-                    if (response.isSuccessful()) {
-                        MealResponse mealResponse = response.body();
-                        meals = mealResponse.getResult();
-                        for (Meal meal : meals) {
-                            mealDao.insert(meal);
-                        }
-                    } else {
-                        Log.e(TAG, "Error, no access to API");
-                    }
-                } catch (IOException e) {
-                    Log.e(TAG, "Error whilst trying to get meals from API");
-                    throw new RuntimeException(e);
-                }
-                return null;
-            }
+        private final String TAG = this.getClass().getSimpleName();
+        private final MediaDAO mediaDao;
+        PopulateDbAsync(TheMovieDatabase db) {
+            mediaDao = db.mediaDao();
         }
-    };
+        @Override
+        protected Void doInBackground(final Void... params) {
+            Log.d(TAG, "doInBackground");
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("https://api.themoviedb.org/3/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            TheMovieAPI jsonApi = retrofit.create(TheMovieAPI.class);
+            Call<MediaResponse> call = jsonApi.getAllMedia();
+            try {
+                Response<MediaResponse> response = call.execute();
+                Log.e(TAG, String.valueOf(response.code()));
+                if (response.isSuccessful()) {
+                    for (Media media : response.body().getResult()) {
+                        mediaDao.insert(media);
+                    }
+                } else {
+                    Log.e(TAG, "Error, no access to API");
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "Error whilst trying to get meals from API");
+                throw new RuntimeException(e);
+            }
+            return null;
+        }
+    }
+}

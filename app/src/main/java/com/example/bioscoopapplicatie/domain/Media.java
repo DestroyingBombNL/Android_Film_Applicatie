@@ -1,21 +1,48 @@
 package com.example.bioscoopapplicatie.domain;
 
-public class Media {
-    private int id;
-    private String title;
-    private String language;
-    private String overview;
-    private double popularity;
-    private String releaseDate;
-    private boolean adult;
-    private String backdropPath;
-    private String posterPath;
-    private boolean video;
-    private double voteAverage;
-    private int voteCount;
-    private int season;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
-    public Media(int id, String title, String language, String overview, double popularity, String releaseDate, boolean adult, String backdropPath, String posterPath, boolean video, double voteAverage, int voteCount, int season) {
+import com.google.gson.annotations.Expose;
+
+@Entity(tableName="media_table")
+public class Media {
+    @Expose
+    private boolean adult;
+    @Expose
+    @ColumnInfo(name="backdrop_path")
+    private String backdropPath;
+    @Expose
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+    @Expose
+    @ColumnInfo(name="original_language")
+    private String language;
+    @Expose
+    @ColumnInfo(name="original_title")
+    private String title;
+    @Expose
+    private String overview;
+    @Expose
+    private double popularity;
+    @Expose
+    @ColumnInfo(name="poster_path")
+    private String posterPath;
+    @Expose
+    @ColumnInfo(name="release_date")
+    private String releaseDate;
+    @Expose
+    private boolean video;
+    @Expose
+    @ColumnInfo(name="vote_average")
+    private double voteAverage;
+    @Expose
+    @ColumnInfo(name="vote_count")
+    private int voteCount;
+
+    public Media(int id, String title, String language, String overview, double popularity, String releaseDate, boolean adult, String backdropPath, String posterPath, boolean video, double voteAverage, int voteCount) {
         this.id = id;
         this.title = title;
         this.language = language;
@@ -28,11 +55,11 @@ public class Media {
         this.video = video;
         this.voteAverage = voteAverage;
         this.voteCount = voteCount;
-        this.season = season;
     }
 
-    //tweede constructor met velden die ingevuld moeten worden bij aanmaken van film
-    public Media(String title, String language, String overview, String releaseDate, boolean adult, String backdropPath, String posterPath, boolean video, int season) {
+    /*tweede constructor met velden die ingevuld moeten worden bij aanmaken van film
+    @Ignore
+    public Media(String title, String language, String overview, String releaseDate, boolean adult, String backdropPath, String posterPath, boolean video) {
         this.title = title;
         this.language = language;
         this.overview = overview;
@@ -41,8 +68,7 @@ public class Media {
         this.backdropPath = backdropPath;
         this.posterPath = posterPath;
         this.video = video;
-        this.season = season;
-    }
+    }*/
 
     public int getId() {
         return id;
@@ -138,13 +164,5 @@ public class Media {
 
     public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
-    }
-
-    public int getSeason() {
-        return season;
-    }
-
-    public void setSeason(int season) {
-        this.season = season;
     }
 }
