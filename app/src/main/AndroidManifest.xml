@@ -12,6 +12,12 @@
         android:theme="@style/Theme.BioscoopApplicatie"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.ShowMediaList"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.CreateMediaList"
+            android:exported="false" />
+        <activity
             android:name=".presentation.Login"
             android:exported="true">
             <intent-filter>

@@ -15,7 +15,7 @@
         android:layout_marginTop="50dp"/>
 
     <TextView
-        android:id="@+id/movie_homescreen_txt"
+        android:id="@+id/page_txt"
         android:layout_width="144dp"
         android:layout_height="64dp"
         android:layout_marginTop="80dp"
@@ -34,7 +34,7 @@
         android:layout_height="1dp"
         android:background="@android:color/black"
         tools:ignore="MissingConstraints"
-        app:layout_constraintTop_toBottomOf="@+id/movie_homescreen_txt"
+        app:layout_constraintTop_toBottomOf="@+id/page_txt"
         android:layout_marginTop="15dp"/>
 
     <EditText

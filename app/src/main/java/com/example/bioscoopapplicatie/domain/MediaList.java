@@ -1,28 +1,29 @@
 package com.example.bioscoopapplicatie.domain;
 
+import java.security.IdentityScope;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MediaList {
     private int id;
     private String name;
-    private String creationDate;
-    private List<Media> mediaList;
-    private com.example.bioscoopapplicatie.domain.User user;
+    private String description;
+    private String language;
+    private List<Integer> mediaList = new ArrayList<>();;
 
-    public MediaList(int id, String name, String creationDate, com.example.bioscoopapplicatie.domain.User user, List<Media> mediaList) {
+    public MediaList(int id, String name, String description, String language, List<Integer> mediaList) {
         this.id = id;
         this.name = name;
-        this.creationDate = creationDate;
-        this.user = user;
-        this.mediaList = new ArrayList<>();
+        this.description = description;
+        this.language = language;
+        this.mediaList = mediaList;
     }
 
-    public MediaList(String name, String creationDate, com.example.bioscoopapplicatie.domain.User user, List<Media> mediaList) {
+    public MediaList(String name, String description, String language, List<Integer> mediaList) {
         this.name = name;
-        this.creationDate = creationDate;
-        this.user = user;
-        this.mediaList = new ArrayList<>();
+        this.description = description;
+        this.language = language;
+        this.mediaList = mediaList;
     }
 
     public int getId() {
@@ -41,27 +42,23 @@ public class MediaList {
         this.name = name;
     }
 
-    public String getCreationDate() {
-        return creationDate;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public com.example.bioscoopapplicatie.domain.User getUser() {
-        return user;
-    }
+    public String getLanguage() { return language; }
 
-    public void setUser(com.example.bioscoopapplicatie.domain.User user) {
-        this.user = user;
-    }
+    public void setLanguage(String language) { this.language = language; }
 
-    public List<Media> getMediaList() {
+    public List<Integer> getMediaList() {
         return mediaList;
     }
 
-    public void setMediaList(List<Media> mediaList) {
+    public void setMediaList(List<Integer> mediaList) {
         this.mediaList = mediaList;
     }
 }
