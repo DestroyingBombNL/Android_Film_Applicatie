@@ -1,115 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/title_txt"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Make an account"
-        android:textSize="24sp"
-        android:gravity="center"
-        android:padding="16dp"/>
+        android:layout_height="match_parent">
 
-<!--    <TextView-->
-<!--        android:id="@+id/username_label"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/title_text"-->
-<!--        android:text="Username:"-->
-<!--        android:textSize="18sp"-->
-<!--        android:padding="16dp"/>-->
+        <TextView
+            android:id="@+id/title_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Make an account"
+            android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/username_edit_txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title_txt"
-        android:hint="Enter your username"
-        android:padding="16dp"
-    /><!--        android:layout_toRightOf="@id/username_label"-->
+        <!--    <TextView-->
+        <!--        android:id="@+id/username_label"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_below="@id/title_text"-->
+        <!--        android:text="Username:"-->
+        <!--        android:textSize="18sp"-->
+        <!--        android:padding="16dp"/>-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/email_label"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/username_edit_text"-->
-<!--        android:text="Email:"-->
-<!--        android:textSize="18sp"-->
-<!--        android:padding="16dp"/>-->
+        <EditText
+            android:id="@+id/username_edit_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_txt"
+            android:hint="Enter your username"
+            android:padding="16dp" /><!--        android:layout_toRightOf="@id/username_label"-->
 
-    <EditText
-        android:id="@+id/email_edit_txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/username_edit_txt"
-        android:hint="Enter your email"
-        android:padding="16dp"/>
-    <!--        android:layout_toRightOf="@id/email_label"-->
+        <!--    <TextView-->
+        <!--        android:id="@+id/email_label"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_below="@id/username_edit_text"-->
+        <!--        android:text="Email:"-->
+        <!--        android:textSize="18sp"-->
+        <!--        android:padding="16dp"/>-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/password_label"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/email_edit_text"-->
-<!--        android:text="Password:"-->
-<!--        android:textSize="18sp"-->
-<!--        android:padding="16dp"/>-->
+        <EditText
+            android:id="@+id/email_edit_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/username_edit_txt"
+            android:hint="Enter your email"
+            android:padding="16dp" />
+        <!--        android:layout_toRightOf="@id/email_label"-->
 
-    <EditText
-        android:id="@+id/password_edit_txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/email_edit_txt"
-        android:inputType="textPassword"
-        android:hint="Enter your password"
-        android:padding="16dp"/>
-    <!--        android:layout_toRightOf="@id/password_label"-->
+        <!--    <TextView-->
+        <!--        android:id="@+id/password_label"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_below="@id/email_edit_text"-->
+        <!--        android:text="Password:"-->
+        <!--        android:textSize="18sp"-->
+        <!--        android:padding="16dp"/>-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/repeat_password_label"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/password_edit_text"-->
-<!--        android:text="Repeat Password:"-->
-<!--        android:textSize="18sp"-->
-<!--        android:padding="16dp"/>-->
+        <EditText
+            android:id="@+id/password_edit_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email_edit_txt"
+            android:hint="Enter your password"
+            android:inputType="textPassword"
+            android:padding="16dp" />
+        <!--        android:layout_toRightOf="@id/password_label"-->
 
-    <EditText
-        android:id="@+id/repeat_password_edit_txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/password_edit_txt"
-        android:inputType="textPassword"
-        android:hint="Repeat password"
-        android:padding="16dp"/>
-    <!--        android:layout_toRightOf="@id/repeat_password_label"-->
+        <!--    <TextView-->
+        <!--        android:id="@+id/repeat_password_label"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_below="@id/password_edit_text"-->
+        <!--        android:text="Repeat Password:"-->
+        <!--        android:textSize="18sp"-->
+        <!--        android:padding="16dp"/>-->
 
-    <CheckBox
-        android:id="@+id/terms_cbx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/repeat_password_edit_txt"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="16dp"/>
+        <EditText
+            android:id="@+id/repeat_password_edit_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password_edit_txt"
+            android:hint="Repeat password"
+            android:inputType="textPassword"
+            android:padding="16dp" />
+        <!--        android:layout_toRightOf="@id/repeat_password_label"-->
 
-    <TextView
-        android:id="@+id/terms_et"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/repeat_password_edit_txt"
-        android:layout_toEndOf="@+id/terms_cbx"
-        android:layout_alignBaseline="@+id/terms_cbx"
-        android:text="I agree to the Terms and Conditions" />
+        <CheckBox
+            android:id="@+id/terms_cbx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/repeat_password_edit_txt"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp" />
 
-    <Button
-        android:id="@+id/register_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/terms_cbx"
-        android:text="Register"
-        android:padding="16dp"/>
+        <TextView
+            android:id="@+id/terms_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/repeat_password_edit_txt"
+            android:layout_alignBaseline="@+id/terms_cbx"
+            android:layout_toEndOf="@+id/terms_cbx"
+            android:text="I agree to the Terms and Conditions" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/terms_cbx"
+            android:padding="16dp"
+            android:text="Register" />
+
+    </RelativeLayout>
+</ScrollView>
