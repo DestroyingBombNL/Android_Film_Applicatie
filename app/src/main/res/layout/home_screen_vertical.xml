@@ -10,25 +10,25 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Spinner
             android:id="@+id/filter_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:minHeight="32dp"
-            android:contentDescription="Filter options"/>
+            android:contentDescription="Filter options"
+            android:minHeight="32dp" />
 
         <Spinner
             android:id="@+id/sort_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:minHeight="32dp"
-            android:contentDescription="Sort options"/>
+            android:contentDescription="Sort options"
+            android:minHeight="32dp" />
 
     </LinearLayout>
 

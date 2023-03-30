@@ -1,8 +1,4 @@
 
-Ñ
-Tapp/src/main/java/com/example/bioscoopapplicatie/presentation/HomescreenAdapter.java,2\3\23e03fda256492e6761cdc3d746e20d5f8d4114e
-}
-Mapp/src/main/java/com/example/bioscoopapplicatie/presentation/Homescreen.java,8\f\8f88bbc93b39fb4f72dad9ac1e31a42286b3acc0
 
 Oapp/src/main/java/com/example/bioscoopapplicatie/presentation/DetailsMedia.java,c\f\cffe1609f62adbe4e07a91f27a204f22942a0082
 A
@@ -11,3 +7,31 @@ A
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 v
 Fapp/src/main/java/com/example/bioscoopapplicatie/domain/MediaList.java,2\b\2b76e16cb0a69416ea15769e114eb74f7c325753
+Ö
+Uapp/src/main/java/com/example/bioscoopapplicatie/presentation/CreateListActivity.java,d\3\d3967cb6e4fbafbd847005de4c0488282440f9b2
+Ç
+Rapp/src/main/java/com/example/bioscoopapplicatie/presentation/CreateMediaList.java,d\c\dc4d8710b4c7339de025f8c3458c0b99bb546528
+@
+app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+z
+Japp/src/main/java/com/example/bioscoopapplicatie/domain/LoginResponse.java,1\5\1538ec2d5027f7a78e8e2d2c9128dcb3dd1ddb63
+r
+Bapp/src/main/java/com/example/bioscoopapplicatie/domain/Genre.java,4\1\41f52cabdf36c71efdf9534cc21562a710a8dcf9
+å
+\app/src/main/java/com/example/bioscoopapplicatie/presentation/viewmodel/ReviewViewModel.java,4\c\4c71be16b2356d2476293e12d2765c14a66f7f87
+q
+Aapp/src/main/java/com/example/bioscoopapplicatie/domain/User.java,8\b\8b441f9dbc3dcd61fb0ac28b977467fa0df00450
+
+Oapp/src/main/java/com/example/bioscoopapplicatie/presentation/ListActivity.java,5\5\55c8f13e61e414ea0748136ab7d3cbdfe5853538
+É
+Sapp/src/main/java/com/example/bioscoopapplicatie/presentation/RegisterActivity.java,9\0\9086e6dd4030552d6f527f006df917413f3b5b1a
+z
+Japp/src/main/java/com/example/bioscoopapplicatie/datastorage/GenreDAO.java,f\d\fd78d828d4a3de4dfa60d3a6e3f29bb0896b1620
+è
+_app/src/main/java/com/example/bioscoopapplicatie/presentation/viewmodel/MediaListViewModel.java,9\a\9a6c8127bb781deb03d9c213afa3a25e4c92e143
+{
+Kapp/src/main/java/com/example/bioscoopapplicatie/datastorage/ReviewDAO.java,7\a\7a49ad5d31cb5f87927373c6a36cec66fe89a403
+y
+Iapp/src/main/java/com/example/bioscoopapplicatie/datastorage/UserDAO.java,b\5\b5d3d5bf9f59209f9973bbfe5a630b9137298962
+ä
+Zapp/src/main/java/com/example/bioscoopapplicatie/presentation/viewmodel/UserViewModel.java,4\d\4da05156d1d1ed6973891cafea85bc5e01004ebe

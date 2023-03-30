@@ -74,8 +74,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         switch (view.getId()) {
             case R.id.login_btn:
-                Intent profileIntent = new Intent(this, HomeScreenActivity.class);
-                startActivity(profileIntent);
+                Intent homescreenIntent = new Intent(this, HomeScreenActivity.class);
+                startActivity(homescreenIntent);
                 break;
             case R.id.register_btn:
                 Intent registerIntent = new Intent(this, RegisterActivity.class);
