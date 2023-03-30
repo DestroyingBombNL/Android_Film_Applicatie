@@ -13,7 +13,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 
 import com.example.bioscoopapplicatie.R;
 import com.example.bioscoopapplicatie.domain.Media;
@@ -23,12 +25,13 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeScreenActivity extends AppCompatActivity {
+public class HomeScreenActivity extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = this.getClass().getSimpleName();
     private MediaViewModel mediaViewModel;
     private RecyclerView recyclerView;
     private HomescreenAdapter adapter;
     private GridLayoutManager mLayoutManager;
+    private EditText searchField;
     private int orientation;
     private int columnCount;
     @Override
@@ -42,6 +45,8 @@ public class HomeScreenActivity extends AppCompatActivity {
 
     private void setViews() {
         Log.i(TAG, "setViews");
+        this.searchField = findViewById(R.id.search_fld);
+        this.searchField.setOnClickListener(this);
     }
     private void setRecyclerView() {
         Log.i(TAG, "setRecyclerView");
@@ -74,6 +79,18 @@ public class HomeScreenActivity extends AppCompatActivity {
         } else {
             this.columnCount = 1;
             setContentView(R.layout.homescreen_vertical);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.search_fld:
+                /*
+                Intent intent = new Intent(this, SearchMedia.class);
+                startActivity(intent);
+                */
+                break;
         }
     }
 

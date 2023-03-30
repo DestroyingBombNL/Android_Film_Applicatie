@@ -35,3 +35,17 @@ y
 Iapp/src/main/java/com/example/bioscoopapplicatie/datastorage/UserDAO.java,b\5\b5d3d5bf9f59209f9973bbfe5a630b9137298962
 Š
 Zapp/src/main/java/com/example/bioscoopapplicatie/presentation/viewmodel/UserViewModel.java,4\d\4da05156d1d1ed6973891cafea85bc5e01004ebe
+}
+Mapp/src/main/java/com/example/bioscoopapplicatie/datastorage/TheMovieAPI.java,4\4\4478890a3844b0f363c5f403b46f8234e424e8af
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+~
+Napp/src/main/java/com/example/bioscoopapplicatie/datastorage/MediaListDAO.java,0\5\05980b5a6c3f6bb8c6bc1f4c77ac8ae4df62d2b3
+€
+Papp/src/main/java/com/example/bioscoopapplicatie/presentation/ShowMediaList.java,5\7\57d5ff522ad466ac7a7143c82bb72657fd109951
+}
+Mapp/src/main/java/com/example/bioscoopapplicatie/presentation/Homescreen.java,8\f\8f88bbc93b39fb4f72dad9ac1e31a42286b3acc0
+z
+Japp/src/main/java/com/example/bioscoopapplicatie/domain/MediaResponse.java,6\3\63c7e56492acae88b04fec889080d5163847e778
+‚
+Rapp/src/main/java/com/example/bioscoopapplicatie/datastorage/TheMovieDatabase.java,d\4\d4be200bab003960c4c0bb21a1bea7773e1415d6

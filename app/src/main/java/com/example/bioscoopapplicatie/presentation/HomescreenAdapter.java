@@ -44,7 +44,7 @@ public class HomescreenAdapter extends RecyclerView.Adapter<HomescreenAdapter.Me
         Media mediaItem = this.media.get(position);
         holder.title.setText(mediaItem.getTitle());
         holder.voteAverage.setText(String.valueOf(mediaItem.getVote_average()));
-        holder.popularity.setText(String.valueOf(mediaItem.getPopularity()));
+        holder.popularity.setText(String.valueOf((int) (mediaItem.getPopularity() / 100)) + "%");
         Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/original" + mediaItem.getPoster_path()).into(holder.image);
 
     }
@@ -73,7 +73,6 @@ public class HomescreenAdapter extends RecyclerView.Adapter<HomescreenAdapter.Me
 
         public MediaViewHolder(@NonNull View itemView) {
             super(itemView);
-
             //image = itemView.findViewById(R.id.show_media_list_item_img);
             title = itemView.findViewById(R.id.homescreen_item_txt);
             voteAverage = itemView.findViewById(R.id.show_media_list_item_vote_average_txt);
