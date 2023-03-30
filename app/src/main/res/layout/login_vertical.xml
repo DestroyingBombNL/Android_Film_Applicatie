@@ -42,12 +42,14 @@
         android:layout_height="wrap_content"
         android:text="Login"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:layout_margin="5dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
 
         <Button
             android:id="@+id/register_btn"
@@ -58,7 +60,7 @@
         <TextView
             android:id="@+id/forgot_password_txt"
             android:layout_width="192dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginLeft="16dp"
             android:text="Forgot Password"
             android:clickable="true"/>

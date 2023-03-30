@@ -21,7 +21,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.RegisterActivity" />
-        <activity android:name=".presentation.ProfileActivity" />
         <activity android:name=".presentation.ForgotPasswordActivity"/>
         <activity android:name=".presentation.HomeScreenActivity"/>
     </application>
