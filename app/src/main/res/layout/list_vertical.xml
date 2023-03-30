@@ -55,6 +55,7 @@
 
         <!-- Spinner to select options -->
         <Spinner
+            android:spinnerMode="dialog"
             android:id="@+id/spinner_filters"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

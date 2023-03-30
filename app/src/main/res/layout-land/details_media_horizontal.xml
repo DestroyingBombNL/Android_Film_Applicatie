@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:ignore="MissingDefaultResource">
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_weight="1"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/details_media_title_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Title" />
+
+            <TextView
+                android:id="@+id/details_media_popularity_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Popularity" />
+
+            <TextView
+                android:id="@+id/details_media_duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Duration" />
+
+            <TextView
+                android:id="@+id/details_media_date_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date" />
+
+            <TextView
+                android:id="@+id/details_media_language_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Language" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/details_media_share_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Share" />
+
+            <Button
+                android:id="@+id/details_media_to_list_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="To List" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/details_media_description_txt"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:text="Description" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
