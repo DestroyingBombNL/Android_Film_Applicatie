@@ -8,7 +8,6 @@ public class GenreMedia {
         this.genre = genre;
         this.media = media;
     }
-
     public Genre getGenre() {
         return genre;
     }

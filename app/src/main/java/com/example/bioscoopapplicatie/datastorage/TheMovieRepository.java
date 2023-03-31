@@ -46,7 +46,6 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
         allMedia = mediaDao.getAllMedia();
         return allMedia;
     }
-
     @Override
     public LiveData<List<Integer>> getAllMediaId() {
         allMediaId = mediaDao.getAllMediaId();

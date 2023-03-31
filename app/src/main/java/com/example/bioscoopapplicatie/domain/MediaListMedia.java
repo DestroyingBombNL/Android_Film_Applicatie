@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 @Entity(primaryKeys = {"mediaListId", "mediaId"}, tableName="media_list_media_table")
 public class MediaListMedia {
     @NonNull

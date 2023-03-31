@@ -1,5 +1,4 @@
 package com.example.bioscoopapplicatie.domain;
-
 public class User {
     private int id;
     private String username;

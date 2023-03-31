@@ -19,7 +19,6 @@ public interface TheMovieAPI {
 
     @GET("list/{list_id}")
     Call<MediaListResponse> getAllMediaLists(@Path("list_id") int listId, @Query("api_key") String apiKey);
-
     @GET("movie/{media_id}/reviews")
     Call<ReviewResponse> getReviews(@Path("media_id") int mediaId, @Query("api_key") String apiKey);
     /*

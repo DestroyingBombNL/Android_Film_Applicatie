@@ -11,7 +11,6 @@ import com.example.bioscoopapplicatie.domain.MediaListMedia;
  * Each method performs a database operation, such as inserting or deleting a word,
  * running a DB query, or deleting all words.
  */
-
 @Dao
 public interface MediaListMediaDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)

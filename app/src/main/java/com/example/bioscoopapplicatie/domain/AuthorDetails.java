@@ -13,7 +13,6 @@ public class AuthorDetails {
     @SerializedName("avatar_path")
     private String avatarPath;
     private double rating;
-
     public AuthorDetails(String name, String username, String avatarPath, double rating) {
         this.name = name;
         this.username = username;

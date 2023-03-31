@@ -3,7 +3,6 @@ package com.example.bioscoopapplicatie.domain;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
-
 public class MediaListResponse {
 
     @SerializedName("created_by")

@@ -16,7 +16,6 @@ import java.util.List;
  * Each method performs a database operation, such as inserting or deleting a word,
  * running a DB query, or deleting all words.
  */
-
 @Dao
 public interface ReviewDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)

@@ -177,7 +177,6 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                 }
                 listId++;
             }
-
             //For every media in the database, check whether it has a review attached to it
             return null;
         }
