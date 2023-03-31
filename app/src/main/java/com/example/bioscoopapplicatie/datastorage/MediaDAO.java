@@ -22,7 +22,8 @@ public interface MediaDAO {
     void insert(Media media);
     @Query("SELECT * from media_table ORDER BY original_title ASC")
     LiveData<List<Media>> getAllMedia();
-
+    @Query("SELECT id from media_table ORDER BY id ASC")
+    LiveData<List<Integer>> getAllMediaId();
     @Query("SELECT * from media_table WHERE original_title LIKE :filter")
     LiveData<List<Media>> getAllFilteredMedia(String filter);
 }
