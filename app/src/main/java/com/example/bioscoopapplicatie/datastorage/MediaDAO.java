@@ -23,6 +23,6 @@ public interface MediaDAO {
     @Query("SELECT * from media_table ORDER BY original_title ASC")
     LiveData<List<Media>> getAllMedia();
 
-    @Query("SELECT * from media_table WHERE :filter")
+    @Query("SELECT * from media_table WHERE original_title LIKE :filter")
     LiveData<List<Media>> getAllFilteredMedia(String filter);
 }

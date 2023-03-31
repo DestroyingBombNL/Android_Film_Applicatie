@@ -63,7 +63,7 @@ public class MediaRepository implements MediaDAO, GenreDAO, MediaListDAO, Review
     @Override
     public LiveData<List<Media>> getAllFilteredMedia(String filter) {
         allMedia = mediaDao.getAllMedia();
-        return null;
+        return allMedia;
     }
 
 
