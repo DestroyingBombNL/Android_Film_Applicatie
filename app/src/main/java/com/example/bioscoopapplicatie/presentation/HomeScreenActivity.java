@@ -1,6 +1,5 @@
 package com.example.bioscoopapplicatie.presentation;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,8 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Switch;
 
 import com.example.bioscoopapplicatie.R;
 import com.example.bioscoopapplicatie.domain.Media;
@@ -31,7 +28,7 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     private RecyclerView recyclerView;
     private HomescreenAdapter adapter;
     private GridLayoutManager mLayoutManager;
-    private EditText searchField;
+    private Button searchButton;
     private int orientation;
     private int columnCount;
     @Override
@@ -45,8 +42,8 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
 
     private void setViews() {
         Log.i(TAG, "setViews");
-        this.searchField = findViewById(R.id.search_fld);
-        this.searchField.setOnClickListener(this);
+        this.searchButton = findViewById(R.id.search);
+        this.searchButton.setOnClickListener(this);
     }
     private void setRecyclerView() {
         Log.i(TAG, "setRecyclerView");
@@ -85,11 +82,11 @@ public class HomeScreenActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.search_fld:
-                /*
-                Intent intent = new Intent(this, SearchMedia.class);
+            case R.id.search:
+
+                Intent intent = new Intent(this, SearchActivity.class);
                 startActivity(intent);
-                */
+
                 break;
         }
     }
