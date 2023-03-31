@@ -20,8 +20,8 @@ import com.example.bioscoopapplicatie.domain.Media;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchAdapter extends RecyclerView.Adapter<HomescreenAdapter.MediaViewHolder> {
-    private static final String TAG = HomescreenAdapter.class.getSimpleName();
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MediaViewHolder> {
+    private static final String TAG = SearchAdapter.class.getSimpleName();
     private List<Media> media;
     private LayoutInflater inflater;
     private Context context;
@@ -33,7 +33,7 @@ public class SearchAdapter extends RecyclerView.Adapter<HomescreenAdapter.MediaV
 
     @NonNull
     @Override
-    public HomescreenAdapter.MediaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchAdapter.MediaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder");
         // Inflate an item view.
         View mItemView = inflater.inflate(R.layout.show_media_list_item, parent, false);
@@ -41,7 +41,7 @@ public class SearchAdapter extends RecyclerView.Adapter<HomescreenAdapter.MediaV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomescreenAdapter.MediaViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchAdapter.MediaViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder nr " + position);
         Media mediaItem = this.media.get(position);
         holder.title.setText(mediaItem.getTitle());
