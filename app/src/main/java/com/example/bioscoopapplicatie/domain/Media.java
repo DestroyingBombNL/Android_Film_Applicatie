@@ -6,55 +6,71 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName="media_table")
 public class Media {
     @Expose
     private boolean adult;
+
+    @SerializedName("backdrop_path")
     @Expose
     @ColumnInfo(name="backdrop_path")
-    private String backdrop_path;
+    private String backdropPath;
     @Expose
     @PrimaryKey(autoGenerate = true)
     private int id;
+
+    @SerializedName("original_language")
     @Expose
     @ColumnInfo(name="original_language")
-    private String original_language;
+    private String originalLanguage;
+
+    @SerializedName("original_title")
     @Expose
     @ColumnInfo(name="original_title")
     private String title;
+
     @Expose
     private String overview;
     @Expose
     private double popularity;
+
+    @SerializedName("poster_path")
     @Expose
     @ColumnInfo(name="poster_path")
-    private String poster_path;
+    private String posterPath;
+
+    @SerializedName("release_date")
     @Expose
     @ColumnInfo(name="release_date")
-    private String release_date;
+    private String releaseDate;
     @Expose
     private boolean video;
+
+    @SerializedName("vote_average")
     @Expose
     @ColumnInfo(name="vote_average")
-    private double vote_average;
+    private double voteAverage;
+
+    @SerializedName("vote_count")
     @Expose
     @ColumnInfo(name="vote_count")
-    private int vote_count;
+    private int voteCount;
 
-    public Media(int id, String title, String original_language, String overview, double popularity, String release_date, boolean adult, String backdrop_path, String poster_path, boolean video, double vote_average, int vote_count) {
+    public Media(int id, String title, String originalLanguage, String overview, double popularity, String releaseDate, boolean adult, String backdropPath, String posterPath, boolean video, double voteAverage, int voteCount) {
         this.id = id;
         this.title = title;
-        this.original_language = original_language;
+        this.originalLanguage = originalLanguage;
         this.overview = overview;
         this.popularity = popularity;
-        this.release_date = release_date;
+        this.releaseDate = releaseDate;
         this.adult = adult;
-        this.backdrop_path = backdrop_path;
-        this.poster_path = poster_path;
+        this.backdropPath = backdropPath;
+        this.posterPath = posterPath;
         this.video = video;
-        this.vote_average = vote_average;
-        this.vote_count = vote_count;
+        this.voteAverage = voteAverage;
+        this.voteCount = voteCount;
     }
 
     /*tweede constructor met velden die ingevuld moeten worden bij aanmaken van film
@@ -86,12 +102,12 @@ public class Media {
         this.title = title;
     }
 
-    public String getOriginal_language() {
-        return original_language;
+    public String getOriginalLanguage() {
+        return originalLanguage;
     }
 
-    public void setOriginal_language(String original_language) {
-        this.original_language = original_language;
+    public void setOriginalLanguage(String originalLanguage) {
+        this.originalLanguage = originalLanguage;
     }
 
     public String getOverview() {
@@ -110,12 +126,12 @@ public class Media {
         this.popularity = popularity;
     }
 
-    public String getRelease_date() {
-        return release_date;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public boolean isAdult() {
@@ -126,20 +142,20 @@ public class Media {
         this.adult = adult;
     }
 
-    public String getBackdrop_path() {
-        return backdrop_path;
+    public String getBackdropPath() {
+        return backdropPath;
     }
 
-    public void setBackdrop_path(String backdrop_path) {
-        this.backdrop_path = backdrop_path;
+    public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
     }
 
-    public String getPoster_path() {
-        return poster_path;
+    public String getPosterPath() {
+        return posterPath;
     }
 
-    public void setPoster_path(String poster_path) {
-        this.poster_path = poster_path;
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
     }
 
     public boolean isVideo() {
@@ -150,19 +166,19 @@ public class Media {
         this.video = video;
     }
 
-    public double getVote_average() {
-        return vote_average;
+    public double getVoteAverage() {
+        return voteAverage;
     }
 
-    public void setVote_average(double vote_average) {
-        this.vote_average = vote_average;
+    public void setVoteAverage(double voteAverage) {
+        this.voteAverage = voteAverage;
     }
 
-    public int getVote_count() {
-        return vote_count;
+    public int getVoteCount() {
+        return voteCount;
     }
 
-    public void setVote_count(int vote_count) {
-        this.vote_count = vote_count;
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
     }
 }
