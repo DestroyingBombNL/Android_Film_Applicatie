@@ -43,8 +43,8 @@ public class HomescreenAdapter extends RecyclerView.Adapter<HomescreenAdapter.Me
         Log.d(TAG, "onBindViewHolder nr " + position);
         Media mediaItem = this.media.get(position);
         holder.title.setText(mediaItem.getTitle());
-        holder.voteAverage.setText(String.valueOf(mediaItem.getVoteAverage()));
-        holder.popularity.setText(String.valueOf((int) (mediaItem.getPopularity() / 100)) + "%");
+        holder.voteAverage.setText("Rating: " + String.valueOf(mediaItem.getVoteAverage()));
+        holder.popularity.setText("Popularity: " + String.valueOf((int) (mediaItem.getPopularity() / 100)) + "%");
         Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/original" + mediaItem.getPosterPath()).into(holder.image);
 
     }
