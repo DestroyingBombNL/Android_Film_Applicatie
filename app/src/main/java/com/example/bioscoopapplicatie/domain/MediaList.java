@@ -1,29 +1,33 @@
 package com.example.bioscoopapplicatie.domain;
 
-import java.security.IdentityScope;
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.util.List;
 
+@Entity(tableName="media_list_table")
 public class MediaList {
+    @PrimaryKey
+    @NonNull
     private int id;
     private String name;
     private String description;
-    private String language;
-    private List<Integer> mediaList = new ArrayList<>();;
+    private int favoriteCount;
 
-    public MediaList(int id, String name, String description, String language, List<Integer> mediaList) {
+    public MediaList(int id, String name, String description, int favoriteCount) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.language = language;
-        this.mediaList = mediaList;
+        this.favoriteCount = favoriteCount;
     }
 
-    public MediaList(String name, String description, String language, List<Integer> mediaList) {
+    @Ignore
+    public MediaList(String name, String description, int favoriteCount, List<Integer> mediaList) {
         this.name = name;
         this.description = description;
-        this.language = language;
-        this.mediaList = mediaList;
+        this.favoriteCount = favoriteCount;
     }
 
     public int getId() {
@@ -50,15 +54,11 @@ public class MediaList {
         this.description = description;
     }
 
-    public String getLanguage() { return language; }
-
-    public void setLanguage(String language) { this.language = language; }
-
-    public List<Integer> getMediaList() {
-        return mediaList;
+    public int getFavoriteCount() {
+        return favoriteCount;
     }
 
-    public void setMediaList(List<Integer> mediaList) {
-        this.mediaList = mediaList;
+    public void setFavoriteCount(int favoriteCount) {
+        this.favoriteCount = favoriteCount;
     }
 }

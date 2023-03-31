@@ -46,7 +46,6 @@ public class HomescreenAdapter extends RecyclerView.Adapter<HomescreenAdapter.Me
         holder.voteAverage.setText(String.valueOf(mediaItem.getVote_average()));
         holder.popularity.setText(String.valueOf((int) (mediaItem.getPopularity() / 100)) + "%");
         Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/original" + mediaItem.getPoster_path()).into(holder.image);
-
     }
 
     @Override

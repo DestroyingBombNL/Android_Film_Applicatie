@@ -6,6 +6,9 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.bioscoopapplicatie.domain.Media;
+import com.example.bioscoopapplicatie.domain.MediaList;
+
 import java.util.List;
 
 /**
@@ -16,6 +19,6 @@ import java.util.List;
 
 @Dao
 public interface MediaListDAO {
-
-
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insert(MediaList mediaList);
 }

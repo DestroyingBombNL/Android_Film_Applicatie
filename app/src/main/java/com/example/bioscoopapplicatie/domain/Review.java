@@ -1,36 +1,57 @@
 package com.example.bioscoopapplicatie.domain;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import com.google.gson.annotations.SerializedName;
+
+@Entity(tableName="review_table")
 public class Review {
-    private String title;
-    private int rating;
+    @NonNull
+    private String author;
+    @Ignore
+    @SerializedName("author_details")
+    private AuthorDetails authorDetails;
+    @SerializedName("content")
     private String description;
-    private String reviewDate;
-    private Media media;
-    private User user;
+    @SerializedName("created_at")
+    private String createdAt;
+    @PrimaryKey
+    @NonNull
+    private String id;
 
-    public Review(String title, int rating, String description, String reviewDate, Media media, User user) {
-        this.title = title;
-        this.rating = rating;
+    public Review(String author, String description, String createdAt, String id) {
+        this.author = author;
         this.description = description;
-        this.reviewDate = reviewDate;
-        this.media = media;
-        this.user = user;
+        this.createdAt = createdAt;
+        this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    @Ignore
+    public Review(String author, AuthorDetails authorDetails, String description, String createdAt, String id) {
+        this.author = author;
+        this.authorDetails = authorDetails;
+        this.description = description;
+        this.createdAt = createdAt;
+        this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getAuthor() {
+        return author;
     }
 
-    public int getRating() {
-        return rating;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public AuthorDetails getAuthorDetails() {
+        return authorDetails;
+    }
+
+    public void setAuthorDetails(AuthorDetails authorDetails) {
+        this.authorDetails = authorDetails;
     }
 
     public String getDescription() {
@@ -41,27 +62,19 @@ public class Review {
         this.description = description;
     }
 
-    public String getReviewDate() {
-        return reviewDate;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setReviewDate(String reviewDate) {
-        this.reviewDate = reviewDate;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Media getMedia() {
-        return media;
+    public String getId() {
+        return id;
     }
 
-    public void setMedia(Media media) {
-        this.media = media;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setId(String id) {
+        this.id = id;
     }
 }
