@@ -17,7 +17,7 @@ import com.example.bioscoopapplicatie.R;
 public class CreateMediaList extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = this.getClass().getSimpleName();
     private ImageView logo_img;
-    private EditText search_fld;
+    private Button search_fld;
     /*private Button bar_home_btn;
     private Button bar_create_media_list_btn;
     private Button bar_show_media_list_btn;*/
@@ -88,9 +88,9 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);*/
                 break;
             case R.id.search_fld:
-                /*
-                Intent intent = new Intent(this, SearchMedia.class);
-                startActivity(intent);*/
+
+                Intent searchIntent = new Intent(this, SearchMedia.class);
+                startActivity(searchIntent);
                 break;
             case R.id.create_media_list_create_list_btn:
                 Intent intent = new Intent(this, ShowMediaList.class);

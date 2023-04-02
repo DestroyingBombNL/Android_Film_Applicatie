@@ -33,7 +33,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <EditText
+        <Button
             android:id="@+id/search_fld"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -73,14 +73,13 @@
         android:id="@+id/create_media_list_create_list_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="500dp"
+        android:layout_marginBottom="450dp"
         android:text="Create List" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:background="#7A7A7A">
 
         <LinearLayout
