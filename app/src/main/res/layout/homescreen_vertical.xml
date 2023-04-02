@@ -79,12 +79,13 @@
         android:layout_below="@+id/linearSpinner"
         android:layout_margin="5dp"/>
 
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#7A7A7A">
+        android:background="#7A7A7A"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -116,5 +117,5 @@
                 android:layout_marginLeft="60dp"
                 app:srcCompat="@android:drawable/ic_dialog_dialer" />
         </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
 </RelativeLayout>

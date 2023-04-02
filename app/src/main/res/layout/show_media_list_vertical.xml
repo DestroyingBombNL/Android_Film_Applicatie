@@ -10,6 +10,7 @@
     tools:context=".presentation.ShowMediaList">
 
     <LinearLayout
+        android:id="@+id/linearTop"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
@@ -69,7 +70,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/show_media_list_recycler_vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearTop"/>
 
     <Button
         android:id="@+id/show_media_list_share_btn"

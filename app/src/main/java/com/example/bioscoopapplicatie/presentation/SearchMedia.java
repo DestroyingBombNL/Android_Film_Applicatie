@@ -3,7 +3,7 @@ package com.example.bioscoopapplicatie.presentation;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.res.Configuration;
@@ -27,7 +27,7 @@ public class SearchMedia extends AppCompatActivity implements View.OnClickListen
     private MediaViewModel mediaViewModel;
     private RecyclerView recyclerView;
     private HomescreenAdapter adapter;
-    private GridLayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager;
     private EditText searchInput;
     private int orientation;
     private int columnCount;
@@ -52,7 +52,7 @@ public class SearchMedia extends AppCompatActivity implements View.OnClickListen
         Log.i(TAG, "setRecyclerView");
         recyclerView = findViewById(R.id.search_recycler_view);
         adapter = new HomescreenAdapter(this);
-        mLayoutManager = new GridLayoutManager(this, columnCount);
+        mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
     }

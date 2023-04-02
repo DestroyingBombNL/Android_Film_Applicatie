@@ -135,6 +135,7 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        Log.d(TAG, "onClick aangeroepen");
         switch (v.getId()) {
             case R.id.search:
                 Intent intent = new Intent(this, SearchMedia.class);
@@ -142,19 +143,19 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
                 break;
 
             case R.id.homeScreenButton:
-                Log.i(TAG, "Home button geklikt");
+                Log.d(TAG, "Button aangeroepen");
                 Intent intentHome = new Intent(this, Homescreen.class);
                 startActivity(intentHome);
                 break;
 
             case R.id.listAddButton:
-                Log.i(TAG, "List Add button geklikt");
+                Log.d(TAG, "Button aangeroepen");
                 Intent intentListAdd = new Intent(this, CreateList.class);
                 startActivity(intentListAdd);
                 break;
 
             case R.id.listViewButton:
-                Log.i(TAG, "List View button geklikt");
+                Log.d(TAG, "Button aangeroepen");
                 Intent intentListView = new Intent(this, ShowMediaList.class);
                 startActivity(intentListView);
                 break;
