@@ -13,10 +13,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.example.bioscoopapplicatie.R;
-import com.example.bioscoopapplicatie.domain.DataGenre;
 import com.example.bioscoopapplicatie.domain.DataOrder;
 import com.example.bioscoopapplicatie.domain.Media;
 import com.example.bioscoopapplicatie.presentation.adapter.GenreSpinnerAdapter;
@@ -42,6 +42,8 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
     private Spinner spinner_order;
     private OrderSpinnerAdapter orderAdapter;
 
+    private ImageButton homeScreenButton, listAddButton, listViewButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +52,15 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         setRecyclerView();
         setViewModel();
         setSpinner();
+
     }
+
 
     private void setSpinner(){
         Log.i(TAG, "setSpinners");
         //Genre spinner
         this.spinner_genre = findViewById(R.id.homescreen_genre_spn);
-        genreAdapter = new GenreSpinnerAdapter(Homescreen.this, DataGenre.getGenreList());
+//        genreAdapter = new GenreSpinnerAdapter(Homescreen.this, DataGenre.getGenreList());
         spinner_genre.setAdapter(genreAdapter);
         spinner_genre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -136,8 +140,27 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
                 Intent intent = new Intent(this, SearchMedia.class);
                 startActivity(intent);
                 break;
+
+            case R.id.homeScreenButton:
+                Log.i(TAG, "Home button geklikt");
+                Intent intentHome = new Intent(this, Homescreen.class);
+                startActivity(intentHome);
+                break;
+
+            case R.id.listAddButton:
+                Log.i(TAG, "List Add button geklikt");
+                Intent intentListAdd = new Intent(this, CreateList.class);
+                startActivity(intentListAdd);
+                break;
+
+            case R.id.listViewButton:
+                Log.i(TAG, "List View button geklikt");
+                Intent intentListView = new Intent(this, ShowMediaList.class);
+                startActivity(intentListView);
+                break;
         }
     }
+
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

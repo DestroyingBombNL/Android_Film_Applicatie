@@ -83,6 +83,7 @@ public class HomescreenAdapter extends RecyclerView.Adapter<HomescreenAdapter.Me
         }
 
 
+
         @Override
         public void onClick(View view) {
             Log.d(TAG, "ViewHolder onClick - listitem nr " + getAdapterPosition());
