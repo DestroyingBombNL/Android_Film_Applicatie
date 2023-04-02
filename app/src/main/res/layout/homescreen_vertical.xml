@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
-    android:orientation="vertical">
-
-    <!--    <View-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="50dp"-->
-    <!--        android:background="@android:color/black" />-->
+    android:orientation="vertical"
+    android:background="#8E8E8E">
 
     <LinearLayout
+        android:id="@+id/linearTop"
         android:layout_width="match_parent"
         android:layout_height="68dp"
+        android:layout_alignParentTop="true"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/logo_img"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:background="@mipmap/app_logo_foreground" />
 
@@ -45,13 +42,16 @@
             android:ems="10"
             android:gravity="center"
             android:text="Search"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:layout_marginEnd="10dp"/>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearSpinner"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_below="@+id/linearTop"
         android:layout_marginVertical="10dp"
         android:orientation="horizontal">
 
@@ -60,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
+            android:layout_marginStart="15dp"
             android:layout_weight="1" />
 
         <Spinner
@@ -67,49 +68,53 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
+            android:layout_marginEnd="15dp"
             android:layout_weight="1" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homescreen_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearSpinner"
+        android:layout_margin="5dp"/>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#7A7A7A">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_marginStart="36dp"
+            android:layout_marginBottom="10dp">
 
-        <ImageButton
-            android:id="@+id/homeScreenButton"
-            android:layout_width="55dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="6dp"
-            app:srcCompat="@mipmap/app_logo_foreground" />
+            <ImageButton
+                android:id="@+id/homeScreenButton"
+                android:layout_width="55dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                app:srcCompat="@mipmap/app_logo_foreground" />
 
-        <ImageButton
-            android:id="@+id/listAddButton"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="80dp"
-            app:srcCompat="@android:drawable/ic_menu_add" />
+            <ImageButton
+                android:id="@+id/listAddButton"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="60dp"
+                app:srcCompat="@android:drawable/ic_menu_add" />
 
-        <ImageButton
-            android:id="@+id/listViewButton"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="80dp"
-            app:srcCompat="@android:drawable/ic_dialog_dialer" />
+            <ImageButton
+                android:id="@+id/listViewButton"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="60dp"
+                app:srcCompat="@android:drawable/ic_dialog_dialer" />
+        </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
-</LinearLayout>
-
-    <!--    <View-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="50dp"-->
-    <!--        android:background="@android:color/black" />-->
+</RelativeLayout>
