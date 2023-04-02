@@ -21,6 +21,7 @@ public interface TheMovieAPI {
 
     @GET("genre/movie/list")
     Call<GenreResponse> getGenres(@Query("api_key") String apiKey);
+
     /*
     @POST("api/auth/login")
     Call<LoginResponse> login(@Body() LoginData loginData);
