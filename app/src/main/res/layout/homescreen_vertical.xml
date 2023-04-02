@@ -7,10 +7,10 @@
     android:layout_margin="20dp"
     android:orientation="vertical">
 
-<!--    <View-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:background="@android:color/black" />-->
+    <!--    <View-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:background="@android:color/black" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,10 +45,9 @@
             android:ems="10"
             android:gravity="center"
             android:text="Search"
-            android:textSize="18dp"/>
+            android:textSize="18dp" />
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,44 +75,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <RelativeLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="clip_vertical">
+            android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/homeScreenButton"
-                android:layout_width="55dp"
-                android:layout_height="60dp"
-                app:srcCompat="@mipmap/app_logo_foreground"
-                android:layout_marginTop="6dp"
-                android:layout_marginLeft="10dp"/>
+        <ImageButton
+            android:id="@+id/homeScreenButton"
+            android:layout_width="55dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            app:srcCompat="@mipmap/app_logo_foreground" />
 
-            <ImageButton
-                android:id="@+id/listAddButton"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                app:srcCompat="@android:drawable/ic_menu_add"
-                android:layout_marginLeft="80dp"/>
+        <ImageButton
+            android:id="@+id/listAddButton"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="80dp"
+            app:srcCompat="@android:drawable/ic_menu_add" />
 
-            <ImageButton
-                android:id="@+id/listViewButton"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                app:srcCompat="@android:drawable/ic_dialog_dialer"
-                android:layout_marginLeft="80dp"/>
-
-        </LinearLayout>
-    </RelativeLayout>
+        <ImageButton
+            android:id="@+id/listViewButton"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="80dp"
+            app:srcCompat="@android:drawable/ic_dialog_dialer" />
+    </androidx.appcompat.widget.Toolbar>
+</LinearLayout>
 
     <!--    <View-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:background="@android:color/black" />-->
-</LinearLayout>
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:background="@android:color/black" />-->
