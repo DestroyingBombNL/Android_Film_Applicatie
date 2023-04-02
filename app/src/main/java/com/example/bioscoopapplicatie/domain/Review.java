@@ -12,8 +12,7 @@ public class Review {
     private String author;
     @Ignore
     @SerializedName("author_details")
-    private AuthorDetails authorDetails;
-
+    private AuthorDetail authorDetail;
     @SerializedName("content")
     private String description;
     @SerializedName("created_at")
@@ -30,9 +29,9 @@ public class Review {
     }
 
     @Ignore
-    public Review(String author, AuthorDetails authorDetails, String description, String createdAt, String id) {
+    public Review(String author, AuthorDetail authorDetail, String description, String createdAt, String id) {
         this.author = author;
-        this.authorDetails = authorDetails;
+        this.authorDetail = authorDetail;
         this.description = description;
         this.createdAt = createdAt;
         this.id = id;
@@ -46,12 +45,12 @@ public class Review {
         this.author = author;
     }
 
-    public AuthorDetails getAuthorDetails() {
-        return authorDetails;
+    public AuthorDetail getAuthorDetails() {
+        return authorDetail;
     }
 
-    public void setAuthorDetails(AuthorDetails authorDetails) {
-        this.authorDetails = authorDetails;
+    public void setAuthorDetails(AuthorDetail authorDetail) {
+        this.authorDetail = authorDetail;
     }
 
     public String getDescription() {

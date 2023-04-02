@@ -1,11 +1,13 @@
 package com.example.bioscoopapplicatie.domain;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AuthorDetails {
+@Entity(tableName="author_details_table")
+public class AuthorDetail {
     private String name;
     @PrimaryKey
     @NonNull
@@ -13,7 +15,7 @@ public class AuthorDetails {
     @SerializedName("avatar_path")
     private String avatarPath;
     private double rating;
-    public AuthorDetails(String name, String username, String avatarPath, double rating) {
+    public AuthorDetail(String name, String username, String avatarPath, double rating) {
         this.name = name;
         this.username = username;
         this.avatarPath = avatarPath;

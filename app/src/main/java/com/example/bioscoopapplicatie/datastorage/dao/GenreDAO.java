@@ -6,6 +6,9 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.bioscoopapplicatie.domain.Genre;
+import com.example.bioscoopapplicatie.domain.Media;
+
 import java.util.List;
 
 /**
@@ -15,5 +18,8 @@ import java.util.List;
  */
 @Dao
 public interface GenreDAO {
-
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insert(Genre genre);
+    @Query("SELECT * from genre_table")
+    LiveData<List<Genre>> getAllGenres();
 }
