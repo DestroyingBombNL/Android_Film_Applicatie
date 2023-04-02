@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.bioscoopapplicatie.R;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = this.getClass().getSimpleName();
     private Button log_in_btn;
     private Button register_btn_act;
@@ -78,11 +78,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(homescreenIntent);
                 break;
             case R.id.register_btn:
-                Intent registerIntent = new Intent(this, RegisterActivity.class);
+                Intent registerIntent = new Intent(this, Register.class);
                 startActivity(registerIntent);
                 break;
             case R.id.forgot_password_txt:
-                Intent forgotPasswordIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                Intent forgotPasswordIntent = new Intent(Login.this, ForgotPassword.class);
                 startActivity(forgotPasswordIntent);
                 break;
         }

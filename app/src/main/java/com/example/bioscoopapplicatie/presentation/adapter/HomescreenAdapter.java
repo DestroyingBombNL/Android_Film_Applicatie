@@ -1,4 +1,4 @@
-package com.example.bioscoopapplicatie.presentation;
+package com.example.bioscoopapplicatie.presentation.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.bioscoopapplicatie.R;
 import com.example.bioscoopapplicatie.domain.Media;
+import com.example.bioscoopapplicatie.presentation.DetailsMedia;
 
 import java.util.ArrayList;
 import java.util.List;

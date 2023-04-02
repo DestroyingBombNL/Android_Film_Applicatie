@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bioscoopapplicatie.R;
 
-public class RegisterActivity extends AppCompatActivity {
+public class Register extends AppCompatActivity {
     private final String TAG = this.getClass().getSimpleName();
 
     private Button register_btn;
@@ -32,12 +32,12 @@ public class RegisterActivity extends AppCompatActivity {
         this.register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                Intent loginIntent = new Intent(Register.this, Login.class);
                 if(terms_cbx.isChecked()){
                     startActivity(loginIntent);
                 }
                 else{
-                    Toast.makeText(RegisterActivity.this, "Must agree to terms and conditions", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, "Must agree to terms and conditions", Toast.LENGTH_SHORT).show();
                 }
 
             }

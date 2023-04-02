@@ -1,15 +1,10 @@
-package com.example.bioscoopapplicatie.datastorage;
+package com.example.bioscoopapplicatie.datastorage.dao;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
 
-import com.example.bioscoopapplicatie.domain.Media;
-import com.example.bioscoopapplicatie.domain.MediaList;
-
-import java.util.List;
+import com.example.bioscoopapplicatie.domain.linkingtable.MediaListMedia;
 
 /**
  * Data Access Object (DAO) for a word.
@@ -17,7 +12,7 @@ import java.util.List;
  * running a DB query, or deleting all words.
  */
 @Dao
-public interface MediaListDAO {
+public interface MediaListMediaDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(MediaList mediaList);
+    void insert(MediaListMedia mediaListMedia);
 }

@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,13 +15,14 @@ import android.widget.EditText;
 
 import com.example.bioscoopapplicatie.R;
 import com.example.bioscoopapplicatie.domain.Media;
+import com.example.bioscoopapplicatie.presentation.adapter.HomescreenAdapter;
 import com.example.bioscoopapplicatie.presentation.viewmodel.MediaViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchMedia extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = this.getClass().getSimpleName();
     private MediaViewModel mediaViewModel;
     private RecyclerView recyclerView;

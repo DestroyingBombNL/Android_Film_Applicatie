@@ -1,5 +1,6 @@
-package com.example.bioscoopapplicatie.domain;
+package com.example.bioscoopapplicatie.domain.response;
 
+import com.example.bioscoopapplicatie.domain.Review;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 

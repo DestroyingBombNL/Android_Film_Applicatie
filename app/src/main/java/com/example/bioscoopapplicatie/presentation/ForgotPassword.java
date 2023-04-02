@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bioscoopapplicatie.R;
 
-public class ForgotPasswordActivity extends AppCompatActivity {
+public class ForgotPassword extends AppCompatActivity {
     private Button send_email_btn;
     private final String TAG = this.getClass().getSimpleName();
     @Override
@@ -25,7 +25,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         this.send_email_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+                Intent intent = new Intent(ForgotPassword.this, Login.class);
                 startActivity(intent);
             }
         });

@@ -1,4 +1,4 @@
-package com.example.bioscoopapplicatie.presentation;
+package com.example.bioscoopapplicatie.presentation.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

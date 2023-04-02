@@ -1,6 +1,8 @@
-package com.example.bioscoopapplicatie.domain;
+package com.example.bioscoopapplicatie.domain.response;
 
 import android.util.Log;
+
+import com.example.bioscoopapplicatie.domain.Media;
 
 import java.util.List;
 public class MediaResponse {

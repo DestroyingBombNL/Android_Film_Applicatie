@@ -1,4 +1,4 @@
-package com.example.bioscoopapplicatie.domain;
+package com.example.bioscoopapplicatie.domain.linkingtable;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
