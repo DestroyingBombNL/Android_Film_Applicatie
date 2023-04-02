@@ -57,6 +57,7 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         setRecyclerView();
         setViewModel();
         setSpinner();
+        setComponents();
 
     }
 
@@ -102,17 +103,6 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         Log.i(TAG, "setViews");
         this.searchButton = findViewById(R.id.search);
         this.searchButton.setOnClickListener(this);
-        //Homepage footer
-        this.homeScreenButton = findViewById(R.id.homeScreenButton);
-        this.homeScreenButton.setOnClickListener(this);
-
-        //List_add footer
-        this.listAddButton = findViewById(R.id.listAddButton);
-        this.listAddButton.setOnClickListener(this);
-
-        //List button footer
-        this.listViewButton = findViewById(R.id.listViewButton);
-        this.listViewButton.setOnClickListener(this);
     }
 
     private void setRecyclerView() {
@@ -147,6 +137,20 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
             this.columnCount = 1;
             setContentView(R.layout.homescreen_vertical);
         }
+    }
+
+    public void setComponents(){
+        //Homepage footer
+        this.homeScreenButton = findViewById(R.id.homeScreenButton);
+        this.homeScreenButton.setOnClickListener(this);
+
+        //List_add footer
+        this.listAddButton = findViewById(R.id.listAddButton);
+        this.listAddButton.setOnClickListener(this);
+
+        //List button footer
+        this.listViewButton = findViewById(R.id.listViewButton);
+        this.listViewButton.setOnClickListener(this);
     }
 
     @Override
