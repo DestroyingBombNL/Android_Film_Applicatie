@@ -106,7 +106,7 @@ public abstract class TheMovieDatabase extends RoomDatabase {
             listId = 1;
             mediaReviewId = 1;
         }
-        //Repeat this process 6 times: Go through the pagenumber and add every media object to the database
+
         @Override
         protected Void doInBackground(final Void... params) {
             Log.d(TAG, "doInBackground");
@@ -117,6 +117,7 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                     .build();
             TheMovieAPI jsonApi = retrofit.create(TheMovieAPI.class);
 
+            //Repeat this process 6 times: Go through the pagenumber and add every media object to the database
             for (int i = 0; i < 6; i++) {
                 Call<MediaResponse> callMedia = jsonApi.getAllMedia(apiKey, pageNumber);
                 try {
@@ -193,6 +194,7 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                 listId++;
             }
 
+            //Get all genres
             Call<GenreResponse> callGenres = jsonApi.getGenres(apiKey);
             try {
                 Response<GenreResponse> genreResponse = callGenres.execute();
@@ -204,7 +206,6 @@ public abstract class TheMovieDatabase extends RoomDatabase {
             } catch (IOException e) {
                 Log.e(TAG, "Error whilst trying to get mediaLists from API");
             }
-
             return null;
         }
     }
