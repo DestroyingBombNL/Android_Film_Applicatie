@@ -112,12 +112,6 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         Log.d(TAG, "onClick");
-        Button shareButton = findViewById(R.id.details_media_share_btn);
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Example Subject");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "Example Text");
-        startActivity(Intent.createChooser(shareIntent, "Share via"));
         finish();
     }
 
