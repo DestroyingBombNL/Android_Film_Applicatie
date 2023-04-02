@@ -100,6 +100,7 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_TEXT, "Jelle & Co's latest development for the hit cinema is a new app, click here to download!");
                 startActivity(Intent.createChooser(intent, "Choose one"));
+                break;
         }
     }
 
