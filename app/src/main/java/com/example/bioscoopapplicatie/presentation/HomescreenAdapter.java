@@ -1,6 +1,7 @@
 package com.example.bioscoopapplicatie.presentation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,6 @@ public class HomescreenAdapter extends RecyclerView.Adapter<HomescreenAdapter.Me
         holder.voteAverage.setText("Rating: " + String.valueOf(mediaItem.getVoteAverage()));
         holder.popularity.setText("Popularity: " + String.valueOf((int) (mediaItem.getPopularity() / 100)) + "%");
         Glide.with(holder.itemView).load("https://image.tmdb.org/t/p/original" + mediaItem.getPosterPath()).into(holder.image);
-
     }
 
     @Override
@@ -86,11 +86,10 @@ public class HomescreenAdapter extends RecyclerView.Adapter<HomescreenAdapter.Me
         public void onClick(View view) {
             Log.d(TAG, "ViewHolder onClick - listitem nr " + getAdapterPosition());
             Media currentMedia = media.get(getAdapterPosition());
-            /*
             Intent detailsIntent = new Intent(context, DetailsMedia.class);
             detailsIntent.putExtra("id", currentMedia.getId());
             detailsIntent.putExtra("title", currentMedia.getTitle());
-            detailsIntent.putExtra("language", currentMedia.getLanguage());
+            detailsIntent.putExtra("language", currentMedia.getOriginalLanguage());
             detailsIntent.putExtra("overview", currentMedia.getOverview());
             detailsIntent.putExtra("popularity", currentMedia.getPopularity());
             detailsIntent.putExtra("releaseDate", currentMedia.getReleaseDate());
@@ -100,10 +99,8 @@ public class HomescreenAdapter extends RecyclerView.Adapter<HomescreenAdapter.Me
             detailsIntent.putExtra("video", currentMedia.isVideo());
             detailsIntent.putExtra("voteAverage", currentMedia.getVoteAverage());
             detailsIntent.putExtra("voteCount", currentMedia.getVoteCount());
-            detailsIntent.putExtra("season", currentMedia.getSeason());
             detailsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(detailsIntent);
-            */
         }
     }
 }

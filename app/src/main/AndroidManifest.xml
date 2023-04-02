@@ -23,6 +23,9 @@
             android:name=".presentation.CreateMediaList"
             android:exported="false" />
         <activity
+            android:name=".presentation.DetailsMedia"
+            android:exported="false" />
+        <activity
             android:name=".presentation.LoginActivity"
             android:exported="true" >
             <intent-filter>
@@ -33,7 +36,7 @@
         </activity>
         <activity android:name=".presentation.RegisterActivity" />
         <activity android:name=".presentation.ForgotPasswordActivity" />
-        <activity android:name=".presentation.HomeScreenActivity" />
+        <activity android:name=".presentation.Homescreen" />
     </application>
 
 </manifest>
