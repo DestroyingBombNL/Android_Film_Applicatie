@@ -26,6 +26,9 @@
             android:name=".presentation.DetailsMedia"
             android:exported="false" />
         <activity
+            android:name=".presentation.Homescreen"
+            android:exported="false" />
+        <activity
             android:name=".presentation.Login"
             android:exported="true" >
             <intent-filter>

@@ -64,21 +64,8 @@ public class SearchMedia extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onChanged(List<Media> media) {
                 // Check if user has entered any search query
-                String searchQuery = searchInput.getText().toString().trim();
-                if (!searchQuery.isEmpty()) {
-                    // Filter the media list based on search query
-                    ArrayList<Media> filteredMediaList = new ArrayList<>();
-                    for (Media m : media) {
-                        if (m.getTitle().toLowerCase().contains(searchQuery.toLowerCase())) {
-                            filteredMediaList.add(m);
-                        }
-                    }
-                    adapter.setData(filteredMediaList);
-                    Snackbar.make(recyclerView, String.valueOf(filteredMediaList.size() + " Media read"), Snackbar.LENGTH_LONG).show();
-                } else {
-                    adapter.setData((ArrayList<Media>) media);
-                    Snackbar.make(recyclerView, String.valueOf(media.size() + " Media read"), Snackbar.LENGTH_LONG).show();
-                }
+                adapter.setData((ArrayList<Media>) media);
+                Snackbar.make(recyclerView, String.valueOf(media.size() + " Media read"), Snackbar.LENGTH_LONG).show();
             }
         });
     }
@@ -105,15 +92,8 @@ public class SearchMedia extends AppCompatActivity implements View.OnClickListen
                     mediaViewModel.getFilteredMedia(query).observe(this, new Observer<List<Media>>() {
                         @Override
                         public void onChanged(List<Media> media) {
-                            // Filter the media list based on search query
-                            ArrayList<Media> filteredMediaList = new ArrayList<>();
-                            for (Media m : media) {
-                                if (m.getTitle().toLowerCase().contains(query.toLowerCase())) {
-                                    filteredMediaList.add(m);
-                                }
-                            }
-                            adapter.setData(filteredMediaList);
-                            Snackbar.make(recyclerView, String.valueOf(filteredMediaList.size() + " Media found"), Snackbar.LENGTH_LONG).show();
+                            adapter.setData((ArrayList<Media>) media);
+                            Log.d(TAG, "onChanged: " + query);
                         }
                     });
                 } else {
