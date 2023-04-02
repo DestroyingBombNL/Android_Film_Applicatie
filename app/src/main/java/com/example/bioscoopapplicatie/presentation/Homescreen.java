@@ -19,10 +19,12 @@ import android.widget.Spinner;
 import com.example.bioscoopapplicatie.R;
 import com.example.bioscoopapplicatie.domain.DataOrder;
 import com.example.bioscoopapplicatie.domain.Media;
+import com.example.bioscoopapplicatie.domain.MediaList;
 import com.example.bioscoopapplicatie.presentation.adapter.GenreSpinnerAdapter;
 import com.example.bioscoopapplicatie.presentation.adapter.HomescreenAdapter;
 import com.example.bioscoopapplicatie.presentation.adapter.OrderSpinnerAdapter;
 import com.example.bioscoopapplicatie.presentation.viewmodel.MediaViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -43,6 +45,9 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
     private OrderSpinnerAdapter orderAdapter;
 
     private ImageButton homeScreenButton, listAddButton, listViewButton;
+
+    private FloatingActionButton fabShare;
+    private MediaList mediaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +163,17 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
                 Log.d(TAG, "Button aangeroepen");
                 Intent intentListView = new Intent(this, ShowMediaList.class);
                 startActivity(intentListView);
+                break;
+
+            case R.id.floatingActionButton:
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                String title = "Sharing media info!";
+                String text = "The list is called: " + mediaList.getName() + "\n" +
+                        "This is what it is about: " + mediaList.getDescription();
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, title);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, text);
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
                 break;
         }
     }

@@ -118,7 +118,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         shareIntent.setType("text/plain");
 
         String title = "Sharing media info!";
-        String text = "It's called: " + media.getTitle() + "\n" +
+        String text = "The media is called: " + media.getTitle() + "\n" +
                       "This is what it is about: " + media.getOverview();
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, title);
         shareIntent.putExtra(Intent.EXTRA_TEXT, text);
