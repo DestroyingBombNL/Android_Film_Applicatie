@@ -13,6 +13,7 @@ public class Review {
     @Ignore
     @SerializedName("author_details")
     private AuthorDetails authorDetails;
+
     @SerializedName("content")
     private String description;
     @SerializedName("created_at")

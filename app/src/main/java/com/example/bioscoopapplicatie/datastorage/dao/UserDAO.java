@@ -1,4 +1,4 @@
-package com.example.bioscoopapplicatie.datastorage;
+package com.example.bioscoopapplicatie.datastorage.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

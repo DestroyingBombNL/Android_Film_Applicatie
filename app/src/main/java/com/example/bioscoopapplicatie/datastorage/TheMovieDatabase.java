@@ -10,17 +10,19 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.bioscoopapplicatie.datastorage.dao.MediaDAO;
+import com.example.bioscoopapplicatie.datastorage.dao.MediaListDAO;
+import com.example.bioscoopapplicatie.datastorage.dao.MediaListMediaDAO;
+import com.example.bioscoopapplicatie.datastorage.dao.ReviewDAO;
 import com.example.bioscoopapplicatie.domain.Media;
 import com.example.bioscoopapplicatie.domain.MediaList;
-import com.example.bioscoopapplicatie.domain.MediaListMedia;
-import com.example.bioscoopapplicatie.domain.MediaListResponse;
-import com.example.bioscoopapplicatie.domain.MediaResponse;
+import com.example.bioscoopapplicatie.domain.linkingtable.MediaListMedia;
+import com.example.bioscoopapplicatie.domain.response.MediaListResponse;
+import com.example.bioscoopapplicatie.domain.response.MediaResponse;
 import com.example.bioscoopapplicatie.domain.Review;
-import com.example.bioscoopapplicatie.domain.ReviewResponse;
+import com.example.bioscoopapplicatie.domain.response.ReviewResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Response;

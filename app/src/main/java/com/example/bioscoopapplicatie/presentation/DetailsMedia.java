@@ -1,8 +1,6 @@
 package com.example.bioscoopapplicatie.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,11 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.bioscoopapplicatie.R;
 import com.example.bioscoopapplicatie.domain.Media;
-import com.example.bioscoopapplicatie.presentation.viewmodel.MediaViewModel;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.bioscoopapplicatie.presentation.adapter.HomescreenAdapter;
 
 public class DetailsMedia extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = this.getClass().getSimpleName();

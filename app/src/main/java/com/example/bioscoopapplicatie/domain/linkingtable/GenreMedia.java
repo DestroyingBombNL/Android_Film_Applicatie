@@ -1,4 +1,7 @@
-package com.example.bioscoopapplicatie.domain;
+package com.example.bioscoopapplicatie.domain.linkingtable;
+
+import com.example.bioscoopapplicatie.domain.Genre;
+import com.example.bioscoopapplicatie.domain.Media;
 
 public class GenreMedia {
     private Genre genre;

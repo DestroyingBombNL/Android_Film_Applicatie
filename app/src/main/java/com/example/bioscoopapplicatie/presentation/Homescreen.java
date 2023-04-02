@@ -11,10 +11,17 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.example.bioscoopapplicatie.R;
+import com.example.bioscoopapplicatie.domain.DataGenre;
+import com.example.bioscoopapplicatie.domain.DataOrder;
 import com.example.bioscoopapplicatie.domain.Media;
+import com.example.bioscoopapplicatie.presentation.adapter.GenreSpinnerAdapter;
+import com.example.bioscoopapplicatie.presentation.adapter.HomescreenAdapter;
+import com.example.bioscoopapplicatie.presentation.adapter.OrderSpinnerAdapter;
 import com.example.bioscoopapplicatie.presentation.viewmodel.MediaViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -30,6 +37,11 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
     private Button searchButton;
     private int orientation;
     private int columnCount;
+    private Spinner spinner_genre;
+    private GenreSpinnerAdapter genreAdapter;
+    private Spinner spinner_order;
+    private OrderSpinnerAdapter orderAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +49,44 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         setViews();
         setRecyclerView();
         setViewModel();
+        setSpinner();
+    }
+
+    private void setSpinner(){
+        Log.i(TAG, "setSpinners");
+        //Genre spinner
+        this.spinner_genre = findViewById(R.id.homescreen_genre_spn);
+        genreAdapter = new GenreSpinnerAdapter(Homescreen.this, DataGenre.getGenreList());
+        spinner_genre.setAdapter(genreAdapter);
+        spinner_genre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedGenre = parent.getItemAtPosition(position).toString();
+                Log.d(TAG, "Selected genre: " + selectedGenre);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //Order spinner
+        this.spinner_order = findViewById(R.id.homescreen_miscellaneous_spn);
+        orderAdapter = new OrderSpinnerAdapter(Homescreen.this, DataOrder.getOrderList());
+        spinner_order.setAdapter(orderAdapter);
+        spinner_order.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedOrder = parent.getItemAtPosition(position).toString();
+                Log.d(TAG, "Selected order: " + selectedOrder);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
     }
 
     private void setViews() {
@@ -44,6 +94,7 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         this.searchButton = findViewById(R.id.search);
         this.searchButton.setOnClickListener(this);
     }
+
     private void setRecyclerView() {
         Log.i(TAG, "setRecyclerView");
         recyclerView = findViewById(R.id.homescreen_recycler);
@@ -82,10 +133,8 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.search:
-
-                Intent intent = new Intent(this, SearchActivity.class);
+                Intent intent = new Intent(this, SearchMedia.class);
                 startActivity(intent);
-
                 break;
         }
     }
