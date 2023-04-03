@@ -39,13 +39,13 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
     private HomescreenAdapter adapter;
     private GridLayoutManager mLayoutManager;
     private Button searchButton;
-    private int orientation;
-    private int columnCount;
+    int orientation;
+    int columnCount;
     private Spinner spinner_genre;
     private GenreSpinnerAdapter genreAdapter;
     private Spinner spinner_order;
     private OrderSpinnerAdapter orderAdapter;
-    private FloatingActionButton floatingActionButton;
+    FloatingActionButton floatingActionButton;
 
     private ImageButton homeScreenButton, listAddButton, listViewButton;
     private MediaList mediaList;
@@ -143,13 +143,13 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
     }
 
 
-    private void setViews() {
+    void setViews() {
         Log.i(TAG, "setViews");
         this.searchButton = findViewById(R.id.search);
         this.searchButton.setOnClickListener(this);
     }
 
-    private void setRecyclerView() {
+    void setRecyclerView() {
         Log.i(TAG, "setRecyclerView");
         recyclerView = findViewById(R.id.homescreen_recycler);
         adapter = new HomescreenAdapter(this);
@@ -158,7 +158,7 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         recyclerView.setAdapter(adapter);
     }
 
-    private void setViewModel() {
+    void setViewModel() {
         Log.i(TAG, "setViewModel");
         this.mediaViewModel = new ViewModelProvider(this).get(MediaViewModel.class);
         mediaViewModel.getAllMedia().observe(this, new Observer<List<Media>>() {
@@ -170,7 +170,7 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    private void setLayoutBasedOnOrientation() {
+    void setLayoutBasedOnOrientation() {
         Log.i(TAG, "setLayoutBasedOnOrientation");
         this.orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -239,5 +239,41 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         setViews();
         setRecyclerView();
         setViewModel();
+    }
+
+    public MediaViewModel getMediaViewModel() {
+        return mediaViewModel;
+    }
+
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
+    }
+
+    public HomescreenAdapter getAdapter() {
+        return adapter;
+    }
+
+    public Spinner getSpinner_genre() {
+        return spinner_genre;
+    }
+
+    public GenreSpinnerAdapter getGenreAdapter() {
+        return genreAdapter;
+    }
+
+    public Spinner getSpinner_order() {
+        return spinner_order;
+    }
+
+    public OrderSpinnerAdapter getOrderAdapter() {
+        return orderAdapter;
+    }
+
+    public MediaList getMediaList() {
+        return mediaList;
+    }
+
+    public GenreViewModel getGenreViewModel() {
+        return genreViewModel;
     }
 }

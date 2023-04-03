@@ -79,7 +79,7 @@ public class ShowMediaListDetails extends AppCompatActivity implements View.OnCl
         recyclerView.setAdapter(adapter);
     }
 
-    private void setViewModel() {
+    void setViewModel() {
         Log.i(TAG, "setViewModel");
         this.mediaListMediaViewModel = new ViewModelProvider(this).get(MediaListMediaViewModel.class);
         mediaListMediaViewModel.getAllMediaInList(String.valueOf(this.mediaList.getId())).observe(this, new Observer<List<Media>>() {
@@ -91,7 +91,7 @@ public class ShowMediaListDetails extends AppCompatActivity implements View.OnCl
         });
     }
 
-    private void setLayoutBasedOnOrientation() {
+    void setLayoutBasedOnOrientation() {
         Log.i(TAG, "setLayoutBasedOnOrientation");
         this.orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -157,5 +157,121 @@ public class ShowMediaListDetails extends AppCompatActivity implements View.OnCl
         setRecyclerView();
         setViewModel();
         setComponents();
+    }
+
+    public String getTAG() {
+        return TAG;
+    }
+
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
+    }
+
+    public HomescreenAdapter getAdapter() {
+        return adapter;
+    }
+
+    public GridLayoutManager getmLayoutManager() {
+        return mLayoutManager;
+    }
+
+    public Button getSearchButton() {
+        return searchButton;
+    }
+
+    public int getOrientation() {
+        return orientation;
+    }
+
+    public int getColumnCount() {
+        return columnCount;
+    }
+
+    public MediaListMediaViewModel getMediaListMediaViewModel() {
+        return mediaListMediaViewModel;
+    }
+
+    public FloatingActionButton getFloatingActionButton() {
+        return floatingActionButton;
+    }
+
+    public ImageButton getHomeScreenButton() {
+        return homeScreenButton;
+    }
+
+    public ImageButton getListAddButton() {
+        return listAddButton;
+    }
+
+    public ImageButton getListViewButton() {
+        return listViewButton;
+    }
+
+    public MediaList getMediaList() {
+        return mediaList;
+    }
+
+    public TextView getName_and_number_txt() {
+        return name_and_number_txt;
+    }
+
+    public int getListNumber() {
+        return listNumber;
+    }
+
+    public void setRecyclerView(RecyclerView recyclerView) {
+        this.recyclerView = recyclerView;
+    }
+
+    public void setAdapter(HomescreenAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    public void setmLayoutManager(GridLayoutManager mLayoutManager) {
+        this.mLayoutManager = mLayoutManager;
+    }
+
+    public void setSearchButton(Button searchButton) {
+        this.searchButton = searchButton;
+    }
+
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
+    }
+
+    public void setColumnCount(int columnCount) {
+        this.columnCount = columnCount;
+    }
+
+    public void setMediaListMediaViewModel(MediaListMediaViewModel mediaListMediaViewModel) {
+        this.mediaListMediaViewModel = mediaListMediaViewModel;
+    }
+
+    public void setFloatingActionButton(FloatingActionButton floatingActionButton) {
+        this.floatingActionButton = floatingActionButton;
+    }
+
+    public void setHomeScreenButton(ImageButton homeScreenButton) {
+        this.homeScreenButton = homeScreenButton;
+    }
+
+    public void setListAddButton(ImageButton listAddButton) {
+        this.listAddButton = listAddButton;
+    }
+
+    public void setListViewButton(ImageButton listViewButton) {
+        this.listViewButton = listViewButton;
+    }
+
+    public void setMediaList(MediaList mediaList) {
+        this.mediaList = mediaList;
+    }
+
+    public void setName_and_number_txt(TextView name_and_number_txt) {
+        this.name_and_number_txt = name_and_number_txt;
+    }
+
+    public void setListNumber(int listNumber) {
+        this.listNumber = listNumber;
     }
 }

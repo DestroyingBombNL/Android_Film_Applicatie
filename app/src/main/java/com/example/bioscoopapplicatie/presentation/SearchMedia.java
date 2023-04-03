@@ -14,10 +14,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import com.example.bioscoopapplicatie.R;
 import com.example.bioscoopapplicatie.domain.Media;
+import com.example.bioscoopapplicatie.domain.MediaList;
+import com.example.bioscoopapplicatie.presentation.adapter.GenreSpinnerAdapter;
 import com.example.bioscoopapplicatie.presentation.adapter.HomescreenAdapter;
+import com.example.bioscoopapplicatie.presentation.adapter.OrderSpinnerAdapter;
+import com.example.bioscoopapplicatie.presentation.viewmodel.GenreViewModel;
 import com.example.bioscoopapplicatie.presentation.viewmodel.MediaViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -37,7 +42,7 @@ public class SearchMedia extends AppCompatActivity implements View.OnClickListen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG,"searchActivity");
+        Log.d(TAG, "searchActivity");
         super.onCreate(savedInstanceState);
         setLayoutBasedOnOrientation();
         setViews();
@@ -46,14 +51,15 @@ public class SearchMedia extends AppCompatActivity implements View.OnClickListen
         setViewModel();
     }
 
-    private void setViews() {
+    void setViews() {
         Log.i(TAG, "setViews");
         this.searchInput = findViewById(R.id.search_bar);
         Button searchButton = findViewById(R.id.search_media);
         searchButton.setOnClickListener(this);
 //        this.searchInput.setOnClickListener(this);
     }
-    private void setRecyclerView() {
+
+    void setRecyclerView() {
         Log.i(TAG, "setRecyclerView");
         recyclerView = findViewById(R.id.search_recycler_view);
         adapter = new HomescreenAdapter(this);
@@ -62,7 +68,7 @@ public class SearchMedia extends AppCompatActivity implements View.OnClickListen
         recyclerView.setAdapter(adapter);
     }
 
-    private void setViewModel() {
+    void setViewModel() {
         Log.i(TAG, "setViewModel");
         this.mediaViewModel = new ViewModelProvider(this).get(MediaViewModel.class);
         mediaViewModel.getAllMedia().observe(this, new Observer<List<Media>>() {
@@ -75,7 +81,7 @@ public class SearchMedia extends AppCompatActivity implements View.OnClickListen
         });
     }
 
-    private void setLayoutBasedOnOrientation() {
+    void setLayoutBasedOnOrientation() {
         Log.i(TAG, "setLayoutBasedOnOrientation");
         this.orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -88,7 +94,7 @@ public class SearchMedia extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    public void setComponents(){
+    public void setComponents() {
         //Homepage footer
         this.homeScreenButton = findViewById(R.id.homeScreenButton);
         this.homeScreenButton.setOnClickListener(this);
@@ -149,5 +155,29 @@ public class SearchMedia extends AppCompatActivity implements View.OnClickListen
         setViews();
         setRecyclerView();
         setViewModel();
+    }
+
+    public MediaViewModel getMediaViewModel() {
+        return mediaViewModel;
+    }
+
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
+    }
+
+    public HomescreenAdapter getAdapter() {
+        return adapter;
+    }
+
+    public LinearLayoutManager getmLayoutManager() {
+        return mLayoutManager;
+    }
+
+    public int getOrientation() {
+        return orientation;
+    }
+
+    public int getColumnCount() {
+        return columnCount;
     }
 }

@@ -161,4 +161,24 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         setLayoutBasedOnOrientation();
         putDataInComponents();
     }
+
+    public Media getMedia() {
+        return media;
+    }
+
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
+    }
+
+    public HomescreenAdapter getAdapter() {
+        return adapter;
+    }
+
+    public GridLayoutManager getmLayoutManager() {
+        return mLayoutManager;
+    }
+
+    public int getOrientation() {
+        return orientation;
+    }
 }
