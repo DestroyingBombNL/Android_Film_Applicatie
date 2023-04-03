@@ -21,6 +21,11 @@ public interface MediaListMediaDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(MediaListMedia mediaListMedia);
 
-    @Query("SELECT media_table.* FROM media_table JOIN media_list_media_table ON media_table.id = media_list_media_table.mediaId JOIN media_list_table ON media_list_media_table.mediaListId = media_list_table.id WHERE media_list_table.id = :listId")
+    @Query("SELECT media_table.* " +
+            "FROM media_table " +
+            "JOIN media_list_media_table ON media_table.id = media_list_media_table.mediaId " +
+            "JOIN media_list_table ON media_list_media_table.mediaListId = media_list_table.id " +
+            "WHERE media_list_table.id = :listId")
     LiveData<List<Media>> getAllMediaInList(String listId);
+
 }

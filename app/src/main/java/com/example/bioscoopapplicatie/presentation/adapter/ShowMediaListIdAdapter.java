@@ -107,6 +107,7 @@ public class ShowMediaListIdAdapter extends RecyclerView.Adapter<ShowMediaListId
             Log.d(TAG, "ViewHolder onClick - list-item nr " + getAdapterPosition());
             MediaList currentMediaList = mediaLists.get(getAdapterPosition());
             setVerticalRecyclerView(currentMediaList.getId());
+            Log.d(TAG, "onClick: " + currentMediaList.getName());
         }
     }
 }

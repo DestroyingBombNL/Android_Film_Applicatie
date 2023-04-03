@@ -20,7 +20,7 @@ import java.util.List;
 public interface GenreDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Genre genre);
-    @Query("SELECT * from genre_table")
+    @Query("SELECT * FROM genre_table")
     LiveData<List<Genre>> getAllGenres();
 
     @Query("SELECT * FROM genre_table WHERE id = :filter")

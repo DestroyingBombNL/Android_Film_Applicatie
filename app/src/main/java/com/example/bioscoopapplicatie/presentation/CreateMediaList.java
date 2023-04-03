@@ -77,6 +77,7 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
         this.orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             //setContentView(R.layout.create_media_list_horizontal);
+            setContentView(R.layout.create_media_list_vertical);
         } else {
             setContentView(R.layout.create_media_list_vertical);
         }

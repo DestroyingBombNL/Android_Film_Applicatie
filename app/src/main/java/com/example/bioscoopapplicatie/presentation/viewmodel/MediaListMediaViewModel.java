@@ -28,4 +28,5 @@ public class MediaListMediaViewModel extends AndroidViewModel {
         allMedia = repository.getAllMediaInList(listId);
         return allMedia;
     }
+
 }
