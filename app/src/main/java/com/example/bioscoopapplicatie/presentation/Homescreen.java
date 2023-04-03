@@ -72,7 +72,6 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         genreViewModel.getAllGenres().observe(this, new Observer<List<Genre>>() {
             @Override
             public void onChanged(List<Genre> genres) {
-//              andere tabel moet worden gekoppeld om dit filter te laten werken.
                 genreAdapter = new GenreSpinnerAdapter(Homescreen.this, genres);
                 spinner_genre.setAdapter(genreAdapter);
             }
