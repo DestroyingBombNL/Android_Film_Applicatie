@@ -5,28 +5,27 @@ import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.bioscoopapplicatie.datastorage.TheMovieRepository;
+import com.example.bioscoopapplicatie.domain.Media;
 import com.example.bioscoopapplicatie.domain.MediaList;
 
 import java.util.List;
 
-public class MediaListViewModel extends AndroidViewModel {
+public class MediaListMediaViewModel extends AndroidViewModel {
     private final String TAG = this.getClass().getSimpleName();
     private TheMovieRepository repository;
-    private LiveData<List<MediaList> >allMediaLists;
+    private LiveData<List<Media>> allMedia;
 
-    public MediaListViewModel (Application application) {
+    public MediaListMediaViewModel (Application application) {
         super(application);
         Log.d(TAG, "MediaViewModel called");
         repository = new TheMovieRepository(application);
     }
-    public LiveData<List<MediaList>> getAllMediaLists() {
-        allMediaLists = repository.getAllMediaLists();
-        return allMediaLists;
-    }
-    public void insertMediaList(MediaList mediaList) {
-        repository.insert(mediaList);
-        repository.postMediaList(mediaList);
+
+    public LiveData<List<Media>> getAllMediaInList(String listId) {
+        allMedia = repository.getAllMediaInList(listId);
+        return allMedia;
     }
 }

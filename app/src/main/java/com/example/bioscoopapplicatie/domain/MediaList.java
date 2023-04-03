@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 @Entity(tableName="media_list_table")
@@ -14,7 +17,6 @@ public class MediaList {
     private String name;
     private String description;
     private int favoriteCount;
-
     public MediaList(int id, String name, String description, int favoriteCount) {
         this.id = id;
         this.name = name;
@@ -23,10 +25,9 @@ public class MediaList {
     }
 
     @Ignore
-    public MediaList(String name, String description, int favoriteCount, List<Integer> mediaList) {
+    public MediaList(String name, String description) {
         this.name = name;
         this.description = description;
-        this.favoriteCount = favoriteCount;
     }
 
     public int getId() {

@@ -70,8 +70,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/show_media_list_recycler_vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearTop"/>
+        android:layout_height="450dp"
+        android:layout_below="@+id/linearTop" />
 
     <Button
         android:id="@+id/show_media_list_share_btn"

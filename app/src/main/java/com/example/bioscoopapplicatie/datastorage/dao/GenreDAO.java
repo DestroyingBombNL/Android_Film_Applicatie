@@ -22,4 +22,7 @@ public interface GenreDAO {
     void insert(Genre genre);
     @Query("SELECT * from genre_table")
     LiveData<List<Genre>> getAllGenres();
+
+    @Query("SELECT * FROM genre_table WHERE id = :filter")
+    int getFilteredGenre(String filter);
 }

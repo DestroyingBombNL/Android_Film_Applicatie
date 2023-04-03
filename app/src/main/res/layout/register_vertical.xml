@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="16dp"
-            android:text="Make an account"
+            android:text="Make an user"
             android:textSize="24sp" />
 
         <!--    <TextView-->

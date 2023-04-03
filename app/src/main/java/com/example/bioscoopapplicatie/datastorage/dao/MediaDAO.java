@@ -24,6 +24,8 @@ public interface MediaDAO {
     LiveData<List<Media>> getAllMedia();
     @Query("SELECT id from media_table ORDER BY id ASC")
     LiveData<List<Integer>> getAllMediaId();
+    @Query("SELECT * FROM media_table WHERE id = :id")
+    LiveData<Media> getMediaById(String id);
     @Query("SELECT * from media_table WHERE original_title LIKE '%' || :filter || '%'")
     LiveData<List<Media>> getAllFilteredMedia(String filter);
 }

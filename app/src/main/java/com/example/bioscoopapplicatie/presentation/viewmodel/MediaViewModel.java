@@ -26,6 +26,10 @@ public class MediaViewModel extends AndroidViewModel {
         return allMedia;
     }
 
+    public LiveData<Media> getMediaById(String id) {
+        return repository.getMediaById(id);
+    }
+
     public LiveData<List<Media>> getFilteredMedia(String filter) {
         allMedia = repository.getAllFilteredMedia(filter);
         return allMedia;

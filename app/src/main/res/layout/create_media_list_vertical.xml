@@ -17,7 +17,6 @@
             android:id="@+id/logo_img"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -33,7 +32,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <Button
+        <EditText
             android:id="@+id/search_fld"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -69,11 +68,16 @@
             android:inputType="textPersonName" />
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/create_media_list_description_txt"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:hint="Description" />
+
     <Button
         android:id="@+id/create_media_list_create_list_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="450dp"
         android:text="Create List" />
 
     <androidx.appcompat.widget.Toolbar
@@ -86,9 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="1"
-            android:layout_marginStart="36dp"
-            android:layout_marginBottom="10dp">
+            android:weightSum="1">
 
             <ImageButton
                 android:id="@+id/homeScreenButton"

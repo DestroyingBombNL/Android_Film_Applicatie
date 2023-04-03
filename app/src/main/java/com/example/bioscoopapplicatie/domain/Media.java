@@ -7,11 +7,13 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity(tableName="media_table")
 public class Media {
     @Expose
     private boolean adult;
-
     @SerializedName("backdrop_path")
     @Expose
     @ColumnInfo(name="backdrop_path")
@@ -56,6 +58,11 @@ public class Media {
     @Expose
     @ColumnInfo(name="vote_count")
     private int voteCount;
+
+    @Ignore
+    @SerializedName("genre_ids")
+    @ColumnInfo(name="genre_ids")
+    private List<Integer> genres;
 
     public Media(int id, String title, String originalLanguage, String overview, double popularity, String releaseDate, boolean adult, String backdropPath, String posterPath, boolean video, double voteAverage, int voteCount) {
         this.id = id;
@@ -179,5 +186,13 @@ public class Media {
 
     public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
+    }
+
+    public List<Integer> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Integer> genres) {
+        this.genres = genres;
     }
 }

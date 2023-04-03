@@ -6,7 +6,10 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.bioscoopapplicatie.domain.User;
+import com.example.bioscoopapplicatie.domain.Genre;
+import com.example.bioscoopapplicatie.domain.linkingtable.GenreMedia;
+
+import java.util.List;
 
 /**
  * Data Access Object (DAO) for a word.
@@ -14,9 +17,10 @@ import com.example.bioscoopapplicatie.domain.User;
  * running a DB query, or deleting all words.
  */
 @Dao
-public interface UserDAO {
+public interface GenreMediaDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(User user);
-    @Query("SELECT * from user_table")
-    LiveData<User> getUser();
+    void insert(GenreMedia genreMedia);
+
+    @Query("SELECT * from genre_media_table")
+    LiveData<List<GenreMedia>> getAllGenreMedia();
 }

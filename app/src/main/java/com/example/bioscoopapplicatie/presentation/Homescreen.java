@@ -66,7 +66,7 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         Log.i(TAG, "setSpinners");
         //Genre spinner
         this.spinner_genre = findViewById(R.id.homescreen_genre_spn);
-//        genreAdapter = new GenreSpinnerAdapter(Homescreen.this, DataGenre.getGenreList());
+        //genreAdapter = new GenreSpinnerAdapter(Homescreen.this, DataGenre.getGenreList());
         spinner_genre.setAdapter(genreAdapter);
         spinner_genre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

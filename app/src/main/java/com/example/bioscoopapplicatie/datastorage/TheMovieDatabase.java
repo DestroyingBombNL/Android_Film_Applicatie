@@ -1,6 +1,7 @@
 package com.example.bioscoopapplicatie.datastorage;
 
 import android.content.Context;
+import android.media.session.MediaSession;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -12,23 +13,31 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.bioscoopapplicatie.datastorage.dao.AuthorDetailDAO;
 import com.example.bioscoopapplicatie.datastorage.dao.GenreDAO;
+import com.example.bioscoopapplicatie.datastorage.dao.GenreMediaDAO;
 import com.example.bioscoopapplicatie.datastorage.dao.MediaDAO;
 import com.example.bioscoopapplicatie.datastorage.dao.MediaListDAO;
 import com.example.bioscoopapplicatie.datastorage.dao.MediaListMediaDAO;
 import com.example.bioscoopapplicatie.datastorage.dao.ReviewDAO;
+import com.example.bioscoopapplicatie.datastorage.dao.UserDAO;
 import com.example.bioscoopapplicatie.domain.AuthorDetail;
 import com.example.bioscoopapplicatie.domain.Genre;
 import com.example.bioscoopapplicatie.domain.Media;
 import com.example.bioscoopapplicatie.domain.MediaList;
+import com.example.bioscoopapplicatie.domain.User;
+import com.example.bioscoopapplicatie.domain.linkingtable.GenreMedia;
 import com.example.bioscoopapplicatie.domain.linkingtable.MediaListMedia;
+import com.example.bioscoopapplicatie.domain.response.UserResponse;
 import com.example.bioscoopapplicatie.domain.response.GenreResponse;
 import com.example.bioscoopapplicatie.domain.response.MediaListResponse;
 import com.example.bioscoopapplicatie.domain.response.MediaResponse;
 import com.example.bioscoopapplicatie.domain.Review;
 import com.example.bioscoopapplicatie.domain.response.ReviewResponse;
+import com.example.bioscoopapplicatie.domain.response.TokenResponse;
 
 import java.io.IOException;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -40,7 +49,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * with it happen through the WordViewModel.
  */
 
-@Database(entities = {Media.class, MediaList.class, MediaListMedia.class, Review.class, AuthorDetail.class, Genre.class}, version = 31, exportSchema = false)
+@Database(entities = {Media.class, MediaList.class, MediaListMedia.class, Review.class, AuthorDetail.class, Genre.class, User.class, GenreMedia.class}, version = 35, exportSchema = false)
 public abstract class TheMovieDatabase extends RoomDatabase {
     private final static String TAG = TheMovieDatabase.class.getSimpleName();
 
@@ -50,6 +59,8 @@ public abstract class TheMovieDatabase extends RoomDatabase {
     public abstract MediaListMediaDAO mediaListMediaDao();
     public abstract GenreDAO genreDao();
     public abstract AuthorDetailDAO authorDetailDao();
+    public abstract UserDAO userDao();
+    public abstract GenreMediaDAO genreMediaDao();
     private static TheMovieDatabase INSTANCE;
 
     public static TheMovieDatabase getDatabase(final Context context) {
@@ -84,16 +95,20 @@ public abstract class TheMovieDatabase extends RoomDatabase {
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
         private final String TAG = this.getClass().getSimpleName();
+        private TheMovieAPI jsonApi;
         private final MediaDAO mediaDao;
         private final MediaListDAO mediaListDao;
         private final ReviewDAO reviewDao;
         private final MediaListMediaDAO mediaListMediaDao;
         private final GenreDAO genreDao;
         private final AuthorDetailDAO authorDetailDao;
+        private final UserDAO userDao;
+        private final GenreMediaDAO genreMediaDao;
         private int pageNumber;
         private int listId;
-        private int mediaReviewId;
         private String apiKey;
+        private String userToken;
+        private String sessionId;
         PopulateDbAsync(TheMovieDatabase db) {
             mediaDao = db.mediaDao();
             mediaListDao = db.mediaListDao();
@@ -101,10 +116,13 @@ public abstract class TheMovieDatabase extends RoomDatabase {
             mediaListMediaDao = db.mediaListMediaDao();
             genreDao = db.genreDao();
             authorDetailDao = db.authorDetailDao();
+            userDao = db.userDao();
+            genreMediaDao = db.genreMediaDao();
             apiKey = "8a27b4ebdf0d58efaf6c4450b7718cc7";
+            userToken = "";
+            sessionId = "";
             pageNumber = 1;
             listId = 1;
-            mediaReviewId = 1;
         }
 
         @Override
@@ -115,31 +133,32 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                     .baseUrl("https://api.themoviedb.org/3/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            TheMovieAPI jsonApi = retrofit.create(TheMovieAPI.class);
+            this.jsonApi = retrofit.create(TheMovieAPI.class);
+
+            //Get all genres
+            Call<GenreResponse> callGenres = jsonApi.getGenres(apiKey);
+            try {
+                Response<GenreResponse> genreResponse = callGenres.execute();
+                if (genreResponse.isSuccessful()) {
+                    for (Genre genre : genreResponse.body().getGenres()) {
+                        genreDao.insert(genre);
+                    }
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "Error whilst trying to get mediaLists from API");
+            }
 
             //Repeat this process 6 times: Go through the pagenumber and add every media object to the database
             for (int i = 0; i < 6; i++) {
                 Call<MediaResponse> callMedia = jsonApi.getAllMedia(apiKey, pageNumber);
                 try {
                     Response<MediaResponse> response = callMedia.execute();
-                    Log.e(TAG, String.valueOf(response.code()));
                     if (response.isSuccessful()) {
                         for (Media media : response.body().getResult()) {
                             mediaDao.insert(media);
-                            mediaReviewId = media.getId();
-                            //For every media in the database, check whether it has a review attached to it
-                            Call<ReviewResponse> callReviews = jsonApi.getReviews(mediaReviewId, apiKey);
-                            try {
-                                Response<ReviewResponse> reviewResponse = callReviews.execute();
-                                if (reviewResponse.isSuccessful()) {
-                                    for (Review review : reviewResponse.body().getResults()) {
-                                        reviewDao.insert(review);
-                                    }
-                                }
-                            } catch (IOException e) {
-                                Log.e(TAG, "THere is no review for this specific movie");
-                                throw new RuntimeException(e);
-                            }
+                            int mediaReviewId = media.getId();
+                            checkMediaHasReview(mediaReviewId);
+                            checkMediaHasGenre(media);
                         }
                     } else {
                         Log.e(TAG, "Error, no access to API");
@@ -156,7 +175,6 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                 Call<MediaListResponse> callMediaLists = jsonApi.getAllMediaLists(listId, apiKey);
                 try {
                     Response<MediaListResponse> responseMediaLists = callMediaLists.execute();
-                    Log.e(TAG, String.valueOf(responseMediaLists.code()));
                     if (responseMediaLists.isSuccessful()) {
                         MediaList mediaList = new MediaList(
                                 responseMediaLists.body().getId(),
@@ -165,23 +183,11 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                                 responseMediaLists.body().getFavoriteCount());
                         mediaListDao.insert(mediaList);
                         for (Media media : responseMediaLists.body().getItems()) {
-                            if (mediaDao.getAllFilteredMedia("id = " + media.getId()) == null) {
+                            if (mediaDao.getMediaById(String.valueOf(media.getId())) == null) {
                                 mediaDao.insert(media);
-                                mediaReviewId = media.getId();
-                                //For every media in the database, check whether it has a review attached to it
-                                Call<ReviewResponse> callReviews = jsonApi.getReviews(mediaReviewId, apiKey);
-                                try {
-                                    Response<ReviewResponse> reviewResponse = callReviews.execute();
-                                    if (reviewResponse.isSuccessful()) {
-                                        for (Review review : reviewResponse.body().getResults()) {
-                                            reviewDao.insert(review);
-                                            authorDetailDao.insert(review.getAuthorDetails());
-                                        }
-                                    }
-                                } catch (IOException e) {
-                                    Log.e(TAG, "There is no review for this specific movie");
-                                    throw new RuntimeException(e);
-                                }
+                                int mediaReviewId = media.getId();
+                                checkMediaHasReview(mediaReviewId);
+                                checkMediaHasGenre(media);
                             }
                             MediaListMedia mediaListMedia = new MediaListMedia(responseMediaLists.body().getId(), media.getId());
                             mediaListMediaDao.insert(mediaListMedia);
@@ -193,20 +199,33 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                 }
                 listId++;
             }
+            return null;
+        }
 
-            //Get all genres
-            Call<GenreResponse> callGenres = jsonApi.getGenres(apiKey);
+        //For every media in the database, check whether it has a review attached to it
+        private void checkMediaHasReview(int mediaReviewId) {
+            Call<ReviewResponse> callReviews = jsonApi.getReviews(mediaReviewId, apiKey);
             try {
-                Response<GenreResponse> genreResponse = callGenres.execute();
-                if (genreResponse.isSuccessful()) {
-                    for (Genre genre : genreResponse.body().getGenres()) {
-                        genreDao.insert(genre);
+                Response<ReviewResponse> reviewResponse = callReviews.execute();
+                if (reviewResponse.isSuccessful()) {
+                    for (Review review : reviewResponse.body().getResults()) {
+                        reviewDao.insert(review);
+                        authorDetailDao.insert(review.getAuthorDetails());
                     }
                 }
             } catch (IOException e) {
-                Log.e(TAG, "Error whilst trying to get mediaLists from API");
+                Log.e(TAG, "There is no review for this specific movie");
+                throw new RuntimeException(e);
             }
-            return null;
+        }
+
+        private void checkMediaHasGenre(Media media) {
+            for (int id : media.getGenres()) {
+                if (id == genreDao.getFilteredGenre(String.valueOf(id))) {
+                    GenreMedia genreMedia = new GenreMedia(id, media.getId());
+                    genreMediaDao.insert(genreMedia);
+                }
+            }
         }
     }
 }
