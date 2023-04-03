@@ -43,10 +43,9 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
     private GenreSpinnerAdapter genreAdapter;
     private Spinner spinner_order;
     private OrderSpinnerAdapter orderAdapter;
+    private FloatingActionButton floatingActionButton;
 
     private ImageButton homeScreenButton, listAddButton, listViewButton;
-
-    private FloatingActionButton fabShare;
     private MediaList mediaList;
 
     @Override
@@ -151,6 +150,10 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         //List button footer
         this.listViewButton = findViewById(R.id.listViewButton);
         this.listViewButton.setOnClickListener(this);
+
+        //Fab
+        this.floatingActionButton = findViewById(R.id.floatingActionButton);
+        this.floatingActionButton.setOnClickListener(this);
     }
 
     @Override
