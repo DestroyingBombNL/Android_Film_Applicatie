@@ -40,21 +40,13 @@ import java.util.List;
 
 public class ShowMediaList extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = this.getClass().getSimpleName();
-    private ImageView logo_img;
-    private EditText search_fld;
-
-    private RecyclerView recyclerViewId;
-    private RecyclerView recyclerViewMedia;
+    private RecyclerView recyclerView;
     private ShowMediaListIdAdapter adapter;
-    private HomescreenAdapter homescreenAdapter;
     private GridLayoutManager mLayoutManager;
     private MediaListViewModel mediaListViewModel;
-
-    private Spinner filter_spn;
     private int orientation;
     private ImageButton homeScreenButton, listAddButton, listViewButton;
     private FloatingActionButton floatingActionButton;
-    private MediaList mediaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +55,12 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
         setLayoutBasedOnOrientation();
         setComponents();
         setViewModel();
-        setrecyclerViewId();
+        setRecyclerView();
     }
 
     private void setComponents() {
         Log.i(TAG, "setComponents");
-//        recyclerViewId = findViewById(R.id.show_media_list_recycler_horizontal);
-        recyclerViewMedia = findViewById(R.id.show_media_list_recycler_vertical);
+        recyclerView = findViewById(R.id.show_media_list_recycler_vertical);
 
         //Homepage footer
         this.homeScreenButton = findViewById(R.id.homeScreenButton);
@@ -86,47 +77,23 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
         //Fab
         this.floatingActionButton = findViewById(R.id.floatingActionButton);
         this.floatingActionButton.setOnClickListener(this);
-        /*
-        this.logo_img = findViewById(R.id.logo_img);
-        this.logo_img.setOnClickListener(this);
-        this.search_fld = findViewById(R.id.search_fld);
-        this.search_fld.setOnClickListener(this);
-        this.share_btn = findViewById(R.id.show_media_list_share_btn);
-        this.share_btn.setOnClickListener(this);
-        this.bar_home_btn = findViewById(R.id.create_media_list_bar_home_btn);
-        this.bar_home_btn.setOnClickListener(this);
-        this.bar_create_media_list_btn = findViewById(R.id.create_media_list_bar_btn);
-        this.bar_create_media_list_btn.setOnClickListener(this);
-        this.bar_show_media_list_btn = findViewById(R.id.create_media_list_bar_show_media_list_btn);
-        */
     }
 
     private void setViewModel() {
         Log.i(TAG, "setViewModel");
         this.mediaListViewModel = new ViewModelProvider(this).get(MediaListViewModel.class);
-        mediaListViewModel.getAllMediaLists().observe(this, new Observer<List<MediaList>>() {
-            @Override
-            public void onChanged(List<MediaList> mediaLists) {
-                adapter.setData((ArrayList<MediaList>) mediaLists);
-                Snackbar.make(recyclerViewId, String.valueOf(mediaLists.size() + " MediaLists read"), Snackbar.LENGTH_LONG);
-            }
+        mediaListViewModel.getAllMediaLists().observe(this, mediaLists -> {
+            adapter.setData((ArrayList<MediaList>) mediaLists);
+            Snackbar.make(recyclerView, mediaLists.size() + " MediaLists read", Snackbar.LENGTH_LONG);
         });
     }
 
-    private void setrecyclerViewId() {
+    private void setRecyclerView() {
         Log.i(TAG, "setRecyclerViewId");
-        recyclerViewId = findViewById(R.id.show_media_list_recycler_horizontal);
-        recyclerViewMedia = findViewById(R.id.show_media_list_recycler_vertical);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
-
-        homescreenAdapter = new HomescreenAdapter(this);
-        recyclerViewMedia.setLayoutManager(mLayoutManager);
-        recyclerViewMedia.setAdapter(homescreenAdapter);
-
-        adapter = new ShowMediaListIdAdapter(getApplicationContext(), homescreenAdapter, this, this);
-        recyclerViewId.setLayoutManager(linearLayoutManager);
-        recyclerViewId.setAdapter(adapter);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
+        adapter = new ShowMediaListIdAdapter(getApplicationContext());
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(adapter);
     }
 
     private void setLayoutBasedOnOrientation() {
@@ -153,10 +120,10 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
                 startActivity(intentAdd);
                 break;
             case R.id.listViewButton:
-                Log.d(TAG, "Button aangeroepen");
                 Intent intentListView = new Intent(this, ShowMediaList.class);
                 startActivity(intentListView);
                 break;
+                /*
             case R.id.floatingActionButton:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
@@ -166,7 +133,7 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, title);
                 shareIntent.putExtra(Intent.EXTRA_TEXT, text);
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
-                break;
+                break;*/
         }
     }
 

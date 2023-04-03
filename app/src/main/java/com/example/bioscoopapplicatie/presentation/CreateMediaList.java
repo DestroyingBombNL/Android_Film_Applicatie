@@ -96,7 +96,7 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
                 startActivity(intentAdd);
                 break;
             case R.id.listViewButton:
-                Log.d(TAG, "Button aangeroepen");
+                
                 Intent intentListView = new Intent(this, ShowMediaList.class);
                 startActivity(intentListView);
                 break;
