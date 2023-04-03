@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
     android:orientation="vertical"
     tools:context=".presentation.CreateMediaList">
 
     <LinearLayout
+        android:id="@+id/linearTop"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/logo_img"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_height="wrap_content"
+            android:background="@mipmap/app_logo_foreground" />
 
         <TextView
             android:id="@+id/page_txt"
@@ -35,10 +35,10 @@
         <EditText
             android:id="@+id/search_fld"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:inputType="textPersonName"
             android:text="Search" />
 
@@ -47,48 +47,64 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:orientation="horizontal">
+        android:layout_marginHorizontal="10dp"
+        android:orientation="vertical"
+        android:layout_below="@id/linearTop">
 
-        <TextView
-            android:id="@+id/create_media_list_name_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="10dp"
-            android:gravity="center_vertical"
-            android:text="Listname:"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/create_media_list_name_fld"
+        <LinearLayout
+            android:id="@+id/linearMid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Awesome Media"
-            android:inputType="textPersonName" />
+            android:layout_marginVertical="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/create_media_list_name_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:gravity="center_vertical"
+                android:text="Listname:"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/create_media_list_name_fld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Awesome Media"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/create_media_list_description_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearMid"
+            android:hint="Description" />
+
+        <Button
+            android:id="@+id/create_media_list_create_list_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/create_media_list_description_txt"
+            android:text="Create List" />
+
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/create_media_list_description_txt"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:hint="Description" />
-
-    <Button
-        android:id="@+id/create_media_list_create_list_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create List" />
-
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#7A7A7A">
+        android:layout_alignParentBottom="true"
+        android:background="#7A7A7A"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -114,5 +130,7 @@
                 android:layout_marginLeft="60dp"
                 app:srcCompat="@android:drawable/ic_dialog_dialer" />
         </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
-</LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

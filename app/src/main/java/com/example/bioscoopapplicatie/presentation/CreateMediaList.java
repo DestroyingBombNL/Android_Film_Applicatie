@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
     private Button create_btn;
     private TextView description_txt;
     private int orientation;
+    private ImageButton homeScreenButton, listAddButton, listViewButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +53,18 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
         this.create_btn.setOnClickListener(this);
         this.name_fld = findViewById(R.id.create_media_list_name_fld);
         this.description_txt = findViewById(R.id.create_media_list_description_txt);
-        /*
-        this.bar_home_btn = findViewById(R.id.create_media_list_bar_home_btn);
-        this.bar_home_btn.setOnClickListener(this);
-        this.bar_create_media_list_btn = findViewById(R.id.create_media_list_bar_btn);
-        this.bar_create_media_list_btn.setOnClickListener(this);
-        this.bar_show_media_list_btn = findViewById(R.id.create_media_list_bar_show_media_list_btn);
-        */
+
+        //Homepage footer
+        this.homeScreenButton = findViewById(R.id.homeScreenButton);
+        this.homeScreenButton.setOnClickListener(this);
+
+        //List_add footer
+        this.listAddButton = findViewById(R.id.listAddButton);
+        this.listAddButton.setOnClickListener(this);
+
+        //List button footer
+        this.listViewButton = findViewById(R.id.listViewButton);
+        this.listViewButton.setOnClickListener(this);
     }
 
     private void setViewModel() {
@@ -79,23 +86,18 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         Log.d(TAG, "onClick");
         switch (view.getId()) {
-            case R.id.logo_img:
-                /*Intent intent = new Intent(this, Homescreen.class);
-                startActivity(intent);*/
-                break;
-            case R.id.search_fld:
-
-                Intent searchIntent = new Intent(this, SearchMedia.class);
-                startActivity(searchIntent);
-                break;
-            case R.id.create_media_list_create_list_btn:
-                MediaList mediaList = new MediaList(
-                        String.valueOf(this.name_fld.getText()),
-                        String.valueOf(this.description_txt.getText())
-                );
-                this.mediaListViewModel.insertMediaList(mediaList);
-                Intent intent = new Intent(this, ShowMediaList.class);
+            case R.id.homeScreenButton:
+                Intent intent = new Intent(this, Homescreen.class);
                 startActivity(intent);
+                break;
+            case R.id.listAddButton:
+                Intent intentAdd = new Intent(this, CreateMediaList.class);
+                startActivity(intentAdd);
+                break;
+            case R.id.listViewButton:
+                Log.d(TAG, "Button aangeroepen");
+                Intent intentListView = new Intent(this, ShowMediaList.class);
+                startActivity(intentListView);
                 break;
         }
     }

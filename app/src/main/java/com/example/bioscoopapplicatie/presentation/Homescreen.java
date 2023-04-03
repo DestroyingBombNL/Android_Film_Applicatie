@@ -228,17 +228,6 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
                 Intent intentListView = new Intent(this, ShowMediaList.class);
                 startActivity(intentListView);
                 break;
-
-            case R.id.floatingActionButton:
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                String title = "Sharing media info!";
-                String text = "The list is called: " + mediaList.getName() + "\n" +
-                        "This is what it is about: " + mediaList.getDescription();
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT, title);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, text);
-                startActivity(Intent.createChooser(shareIntent, "Share via"));
-                break;
         }
     }
 

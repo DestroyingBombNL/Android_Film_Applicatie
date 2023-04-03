@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
     private HomescreenAdapter adapter;
     private GridLayoutManager mLayoutManager;
     private int orientation;
+    private ImageButton homeScreenButton, listAddButton, listViewButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
@@ -78,6 +80,17 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         this.to_list_btn = findViewById(R.id.details_media_to_list_btn);
         this.share_btn.setOnClickListener(this);
         this.to_list_btn.setOnClickListener(this);
+
+        this.homeScreenButton = findViewById(R.id.homeScreenButton);
+        this.homeScreenButton.setOnClickListener(this);
+
+        //List_add footer
+        this.listAddButton = findViewById(R.id.listAddButton);
+        this.listAddButton.setOnClickListener(this);
+
+        //List button footer
+        this.listViewButton = findViewById(R.id.listViewButton);
+        this.listViewButton.setOnClickListener(this);
     }
 
     private void setRecyclerView() {
@@ -111,20 +124,34 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.details_media_share_btn:
+                Button shareButton = findViewById(R.id.details_media_share_btn);
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
 
-        Log.d(TAG, "onClick");
-        Button shareButton = findViewById(R.id.details_media_share_btn);
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-
-        String title = "Sharing media info!";
-        String text = "The media is called: " + media.getTitle() + "\n" +
-                      "This is what it is about: " + media.getOverview();
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, title);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, text);
-        startActivity(Intent.createChooser(shareIntent, "Share via"));
-        finish();
+                String title = "Sharing media info!";
+                String text = "The media is called: " + media.getTitle() + "\n" +
+                        "This is what it is about: " + media.getOverview();
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, title);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, text);
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
+                finish();
+            case R.id.homeScreenButton:
+                Intent intent = new Intent(this, Homescreen.class);
+                startActivity(intent);
+                break;
+            case R.id.listAddButton:
+                Intent intentAdd = new Intent(this, CreateMediaList.class);
+                startActivity(intentAdd);
+                break;
+            case R.id.listViewButton:
+                Log.d(TAG, "Button aangeroepen");
+                Intent intentListView = new Intent(this, ShowMediaList.class);
+                startActivity(intentListView);
+                break;
+        }
     }
 
     @Override

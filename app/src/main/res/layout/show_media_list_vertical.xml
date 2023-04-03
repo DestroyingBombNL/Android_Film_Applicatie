@@ -1,98 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
     android:gravity="end"
     android:orientation="vertical"
     tools:context=".presentation.ShowMediaList">
 
     <LinearLayout
-        android:id="@+id/linearTop"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/logo_img"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            tools:srcCompat="@tools:sample/avatars" />
+        <LinearLayout
+            android:id="@+id/linearTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/page_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            <ImageView
+                android:id="@+id/logo_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@mipmap/app_logo_foreground" />
+
+            <TextView
+                android:id="@+id/page_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
+                android:text="Lists"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/search_fld"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Search"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearSpin"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/linearTop"
+            android:layout_marginVertical="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/show_media_list_recycler_horizontal"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp" />
+
+            <Spinner
+                android:id="@+id/show_media_list_spn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/show_media_list_recycler_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
             android:layout_marginHorizontal="10dp"
-            android:fontFamily="sans-serif-black"
-            android:gravity="center"
-            android:text="Homescreen"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/search_fld"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="center"
-            android:inputType="textPersonName"
-            android:text="Search" />
-
+            android:layout_below="@+id/linearSpin" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginVertical="10dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/show_media_list_recycler_horizontal"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="10dp" />
-
-        <Spinner
-            android:id="@+id/show_media_list_spn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/show_media_list_recycler_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_below="@+id/linearTop" />
-
-    <Button
-        android:id="@+id/show_media_list_share_btn"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Share" />
-
-    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#7A7A7A">
+        android:background="#7A7A7A"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginBottom="10dp"
             android:orientation="horizontal"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:layout_marginStart="36dp"
+            android:layout_marginBottom="10dp">
 
             <ImageButton
                 android:id="@+id/homeScreenButton"
@@ -116,6 +120,20 @@
                 android:layout_marginLeft="60dp"
                 app:srcCompat="@android:drawable/ic_dialog_dialer" />
         </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
 
-</LinearLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="95dp"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_menu_share" />
+
+
+</RelativeLayout>

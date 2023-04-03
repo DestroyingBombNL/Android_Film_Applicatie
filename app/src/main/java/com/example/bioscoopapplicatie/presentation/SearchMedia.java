@@ -6,12 +6,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.bioscoopapplicatie.R;
 import com.example.bioscoopapplicatie.domain.Media;
@@ -31,12 +33,15 @@ public class SearchMedia extends AppCompatActivity implements View.OnClickListen
     private EditText searchInput;
     private int orientation;
     private int columnCount;
+    private ImageButton homeScreenButton, listAddButton, listViewButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG,"searchActivity");
         super.onCreate(savedInstanceState);
         setLayoutBasedOnOrientation();
         setViews();
+        setComponents();
         setRecyclerView();
         setViewModel();
     }
@@ -83,9 +88,36 @@ public class SearchMedia extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+    public void setComponents(){
+        //Homepage footer
+        this.homeScreenButton = findViewById(R.id.homeScreenButton);
+        this.homeScreenButton.setOnClickListener(this);
+
+        //List_add footer
+        this.listAddButton = findViewById(R.id.listAddButton);
+        this.listAddButton.setOnClickListener(this);
+
+        //List button footer
+        this.listViewButton = findViewById(R.id.listViewButton);
+        this.listViewButton.setOnClickListener(this);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.homeScreenButton:
+                Intent intent = new Intent(this, Homescreen.class);
+                startActivity(intent);
+                break;
+            case R.id.listAddButton:
+                Intent intentAdd = new Intent(this, CreateMediaList.class);
+                startActivity(intentAdd);
+                break;
+            case R.id.listViewButton:
+                Log.d(TAG, "Button aangeroepen");
+                Intent intentListView = new Intent(this, ShowMediaList.class);
+                startActivity(intentListView);
+                break;
             case R.id.search_media:
                 String query = searchInput.getText().toString().trim();
                 if (!query.isEmpty()) {
