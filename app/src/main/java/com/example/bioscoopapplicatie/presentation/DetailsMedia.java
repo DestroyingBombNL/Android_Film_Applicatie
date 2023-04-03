@@ -67,7 +67,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void setComponents() {
+    void setComponents() {
         Log.i(TAG, "setComponents");
         this.media_img = findViewById(R.id.details_media_img);
         this.title_txt = findViewById(R.id.details_media_title_txt);
@@ -93,7 +93,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         this.listViewButton.setOnClickListener(this);
     }
 
-    private void setRecyclerView() {
+    void setRecyclerView() {
         Log.i(TAG, "setRecyclerView");
         recyclerView = findViewById(R.id.details_media_recycler);
         adapter = new HomescreenAdapter(this);
@@ -113,7 +113,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         this.description_txt.setText(media.getOverview());
     }
 
-    private void setLayoutBasedOnOrientation() {
+    void setLayoutBasedOnOrientation() {
         Log.i(TAG, "setLayoutBasedOnOrientation");
         this.orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -180,5 +180,125 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
 
     public int getOrientation() {
         return orientation;
+    }
+
+    public void setMedia(Media media) {
+        this.media = media;
+    }
+
+    public void setMedia_img(ImageView media_img) {
+        this.media_img = media_img;
+    }
+
+    public void setTitle_txt(TextView title_txt) {
+        this.title_txt = title_txt;
+    }
+
+    public void setPopularity_txt(TextView popularity_txt) {
+        this.popularity_txt = popularity_txt;
+    }
+
+    public void setAdult_txt(TextView adult_txt) {
+        this.adult_txt = adult_txt;
+    }
+
+    public void setDate_txt(TextView date_txt) {
+        this.date_txt = date_txt;
+    }
+
+    public void setLanguage_txt(TextView language_txt) {
+        this.language_txt = language_txt;
+    }
+
+    public void setShare_btn(Button share_btn) {
+        this.share_btn = share_btn;
+    }
+
+    public void setTo_list_btn(Button to_list_btn) {
+        this.to_list_btn = to_list_btn;
+    }
+
+    public void setDescription_txt(TextView description_txt) {
+        this.description_txt = description_txt;
+    }
+
+    public void setRecyclerView(RecyclerView recyclerView) {
+        this.recyclerView = recyclerView;
+    }
+
+    public void setAdapter(HomescreenAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    public void setmLayoutManager(GridLayoutManager mLayoutManager) {
+        this.mLayoutManager = mLayoutManager;
+    }
+
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
+    }
+
+    public void setHomeScreenButton(ImageButton homeScreenButton) {
+        this.homeScreenButton = homeScreenButton;
+    }
+
+    public void setListAddButton(ImageButton listAddButton) {
+        this.listAddButton = listAddButton;
+    }
+
+    public void setListViewButton(ImageButton listViewButton) {
+        this.listViewButton = listViewButton;
+    }
+
+    public String getTAG() {
+        return TAG;
+    }
+
+    public ImageView getMedia_img() {
+        return media_img;
+    }
+
+    public TextView getTitle_txt() {
+        return title_txt;
+    }
+
+    public TextView getPopularity_txt() {
+        return popularity_txt;
+    }
+
+    public TextView getAdult_txt() {
+        return adult_txt;
+    }
+
+    public TextView getDate_txt() {
+        return date_txt;
+    }
+
+    public TextView getLanguage_txt() {
+        return language_txt;
+    }
+
+    public Button getShare_btn() {
+        return share_btn;
+    }
+
+    public Button getTo_list_btn() {
+        return to_list_btn;
+    }
+
+    public TextView getDescription_txt() {
+        return description_txt;
+    }
+
+    public ImageButton getHomeScreenButton() {
+        return homeScreenButton;
+    }
+
+    public ImageButton getListAddButton() {
+        return listAddButton;
+    }
+
+    public ImageButton getListViewButton() {
+        return listViewButton;
     }
 }

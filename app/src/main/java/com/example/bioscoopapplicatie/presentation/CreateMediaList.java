@@ -43,7 +43,7 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
         setViewModel();
     }
 
-    private void setComponents() {
+    void setComponents() {
         Log.i(TAG, "setComponents");
         this.logo_img = findViewById(R.id.logo_img);
         this.logo_img.setOnClickListener(this);
@@ -67,7 +67,7 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
         this.listViewButton.setOnClickListener(this);
     }
 
-    private void setViewModel() {
+    void setViewModel() {
         Log.i(TAG, "setViewModel");
         this.mediaListViewModel = new ViewModelProvider(this).get(MediaListViewModel.class);
     }
@@ -107,5 +107,89 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         setLayoutBasedOnOrientation();
+    }
+
+    public String getTAG() {
+        return TAG;
+    }
+
+    public ImageView getLogo_img() {
+        return logo_img;
+    }
+
+    public void setLogo_img(ImageView logo_img) {
+        this.logo_img = logo_img;
+    }
+
+    public EditText getSearch_fld() {
+        return search_fld;
+    }
+
+    public void setSearch_fld(EditText search_fld) {
+        this.search_fld = search_fld;
+    }
+
+    public MediaListViewModel getMediaListViewModel() {
+        return mediaListViewModel;
+    }
+
+    public void setMediaListViewModel(MediaListViewModel mediaListViewModel) {
+        this.mediaListViewModel = mediaListViewModel;
+    }
+
+    public EditText getName_fld() {
+        return name_fld;
+    }
+
+    public void setName_fld(EditText name_fld) {
+        this.name_fld = name_fld;
+    }
+
+    public Button getCreate_btn() {
+        return create_btn;
+    }
+
+    public void setCreate_btn(Button create_btn) {
+        this.create_btn = create_btn;
+    }
+
+    public TextView getDescription_txt() {
+        return description_txt;
+    }
+
+    public void setDescription_txt(TextView description_txt) {
+        this.description_txt = description_txt;
+    }
+
+    public int getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
+    }
+
+    public ImageButton getHomeScreenButton() {
+        return homeScreenButton;
+    }
+
+    public void setHomeScreenButton(ImageButton homeScreenButton) {
+        this.homeScreenButton = homeScreenButton;
+    }
+
+    public ImageButton getListAddButton() {
+        return listAddButton;
+    }
+
+    public void setListAddButton(ImageButton listAddButton) {
+        this.listAddButton = listAddButton;
+    }
+
+    public ImageButton getListViewButton() {
+        return listViewButton;
+    }
+
+    public void setListViewButton(ImageButton listViewButton) {
+        this.listViewButton = listViewButton;
     }
 }

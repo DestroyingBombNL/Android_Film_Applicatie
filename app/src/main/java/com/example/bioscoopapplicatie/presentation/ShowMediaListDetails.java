@@ -70,7 +70,7 @@ public class ShowMediaListDetails extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void setRecyclerView() {
+    void setRecyclerView() {
         Log.i(TAG, "setRecyclerView");
         recyclerView = findViewById(R.id.show_media_list_details_recycler_view);
         adapter = new HomescreenAdapter(this);

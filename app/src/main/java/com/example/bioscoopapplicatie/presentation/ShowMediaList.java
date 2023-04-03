@@ -58,7 +58,7 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
         setRecyclerView();
     }
 
-    private void setComponents() {
+    void setComponents() {
         Log.i(TAG, "setComponents");
         recyclerView = findViewById(R.id.show_media_list_recycler_vertical);
 
@@ -79,7 +79,7 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
         this.floatingActionButton.setOnClickListener(this);
     }
 
-    private void setViewModel() {
+    void setViewModel() {
         Log.i(TAG, "setViewModel");
         this.mediaListViewModel = new ViewModelProvider(this).get(MediaListViewModel.class);
         mediaListViewModel.getAllMediaLists().observe(this, mediaLists -> {
@@ -88,7 +88,7 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    private void setRecyclerView() {
+    void setRecyclerView() {
         Log.i(TAG, "setRecyclerViewId");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
         adapter = new ShowMediaListIdAdapter(getApplicationContext());
