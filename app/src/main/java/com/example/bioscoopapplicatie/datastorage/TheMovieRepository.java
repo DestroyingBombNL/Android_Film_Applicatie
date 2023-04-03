@@ -201,7 +201,17 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
         allMedia = mediaDao.getAllFilteredMedia(filter);
         return allMedia;
     }
+    @Override
+    public LiveData<List<Media>> getAllOrderedVoteAverageMedia() {
+        allMedia = mediaDao.getAllOrderedVoteAverageMedia();
+        return allMedia;
+    }
 
+    @Override
+    public LiveData<List<Media>> getAllOrderedReleaseDateMedia() {
+        allMedia = mediaDao.getAllOrderedReleaseDateMedia();
+        return allMedia;
+    }
     @Override
     public void insert(MediaList mediaList) {
         new insertMediaListAsyncTask(mediaListDao).execute(mediaList);

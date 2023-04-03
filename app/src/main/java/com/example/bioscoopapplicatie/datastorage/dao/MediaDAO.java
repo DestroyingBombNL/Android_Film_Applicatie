@@ -28,4 +28,10 @@ public interface MediaDAO {
     LiveData<Media> getMediaById(String id);
     @Query("SELECT * from media_table WHERE original_title LIKE '%' || :filter || '%'")
     LiveData<List<Media>> getAllFilteredMedia(String filter);
+
+    //zou anders kunnen, maar werkt op een of andere manier niet.
+    @Query("SELECT * from media_table ORDER BY vote_average DESC")
+    LiveData<List<Media>> getAllOrderedVoteAverageMedia();
+    @Query("SELECT * from media_table ORDER BY release_date DESC")
+    LiveData<List<Media>> getAllOrderedReleaseDateMedia();
 }

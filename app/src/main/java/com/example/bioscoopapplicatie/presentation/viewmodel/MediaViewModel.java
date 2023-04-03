@@ -34,4 +34,13 @@ public class MediaViewModel extends AndroidViewModel {
         allMedia = repository.getAllFilteredMedia(filter);
         return allMedia;
     }
+    public LiveData<List<Media>> getAllOrderedVoteAverageMedia() {
+        allMedia = repository.getAllOrderedVoteAverageMedia();
+        return allMedia;
+    }
+
+    public LiveData<List<Media>> getAllOrderedReleaseDateMedia() {
+        allMedia = repository.getAllOrderedReleaseDateMedia();
+        return allMedia;
+    }
 }

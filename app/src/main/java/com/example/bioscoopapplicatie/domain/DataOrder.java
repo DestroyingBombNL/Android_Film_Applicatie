@@ -16,7 +16,7 @@ public class DataOrder {
         OrderList.add(rating);
 
         Order genre = new Order();
-        genre.setName("Genre");
+        genre.setName("Release Date");
         OrderList.add(genre);
 
         return OrderList;
