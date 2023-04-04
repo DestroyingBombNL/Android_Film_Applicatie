@@ -120,6 +120,10 @@ public class ShowMediaListDetails extends AppCompatActivity implements View.OnCl
         this.listViewButton.setOnClickListener(this);
 
         this.name_and_number_txt.setText("List: " + this.listNumber + " - Created by " + this.mediaList.getName());
+
+        //Fab
+        this.floatingActionButton = findViewById(R.id.floatingActionButton);
+        this.floatingActionButton.setOnClickListener(this);
     }
 
     @Override
@@ -144,6 +148,18 @@ public class ShowMediaListDetails extends AppCompatActivity implements View.OnCl
             case R.id.listViewButton:
                 Intent intentListView = new Intent(this, ShowMediaList.class);
                 startActivity(intentListView);
+                break;
+
+            case R.id.floatingActionButton:
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+
+                String title = "Sharing media info!";
+                String text = "The media is called: " + mediaList.getName() + "\n" +
+                        "This is what it is about: " + mediaList.getDescription();
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, title);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, text);
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
                 break;
         }
     }

@@ -196,9 +196,6 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         this.listViewButton = findViewById(R.id.listViewButton);
         this.listViewButton.setOnClickListener(this);
 
-        //Fab
-        this.floatingActionButton = findViewById(R.id.floatingActionButton);
-        this.floatingActionButton.setOnClickListener(this);
     }
 
     @Override

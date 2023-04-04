@@ -37,6 +37,8 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
     private GridLayoutManager mLayoutManager;
     private int orientation;
     private ImageButton homeScreenButton, listAddButton, listViewButton;
+    private Button shareButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
@@ -91,6 +93,10 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         //List button footer
         this.listViewButton = findViewById(R.id.listViewButton);
         this.listViewButton.setOnClickListener(this);
+
+        //Share button
+        this.shareButton = findViewById(R.id.details_media_share_btn);
+        this.shareButton.setOnClickListener(this);
     }
 
     void setRecyclerView() {
@@ -127,17 +133,17 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.details_media_share_btn:
-                Button shareButton = findViewById(R.id.details_media_share_btn);
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
 
                 String title = "Sharing media info!";
                 String text = "The media is called: " + media.getTitle() + "\n" +
-                        "This is what it is about: " + media.getOverview();
+                        "This is what it is about: " + media.getOverview() + "\n" +
+                        "People give this media a rating of " + media.getVoteAverage() + "!";
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, title);
                 shareIntent.putExtra(Intent.EXTRA_TEXT, text);
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
-                finish();
+                break;
             case R.id.homeScreenButton:
                 Intent intent = new Intent(this, Homescreen.class);
                 startActivity(intent);

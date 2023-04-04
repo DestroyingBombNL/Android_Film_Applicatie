@@ -46,8 +46,6 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
     private MediaListViewModel mediaListViewModel;
     private int orientation;
     private ImageButton homeScreenButton, listAddButton, listViewButton;
-    private FloatingActionButton floatingActionButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
@@ -74,9 +72,7 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
         this.listViewButton = findViewById(R.id.listViewButton);
         this.listViewButton.setOnClickListener(this);
 
-        //Fab
-        this.floatingActionButton = findViewById(R.id.floatingActionButton);
-        this.floatingActionButton.setOnClickListener(this);
+
     }
 
     void setViewModel() {
@@ -123,17 +119,6 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
                 Intent intentListView = new Intent(this, ShowMediaList.class);
                 startActivity(intentListView);
                 break;
-                /*
-            case R.id.floatingActionButton:
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                String title = "Sharing media info!";
-                String text = "The list is called: " + mediaList.getName() + "\n" +
-                        "This is what it is about: " + mediaList.getDescription();
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT, title);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, text);
-                startActivity(Intent.createChooser(shareIntent, "Share via"));
-                break;*/
         }
     }
 

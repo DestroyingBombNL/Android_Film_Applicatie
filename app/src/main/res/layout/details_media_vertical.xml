@@ -8,7 +8,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -113,42 +116,42 @@
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#7A7A7A"
-        android:orientation="horizontal">
-
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginBottom="10dp"
+            android:layout_alignParentBottom="true"
+            android:background="#7A7A7A"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/homeScreenButton"
-                android:layout_width="55dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="6dp"
-                app:srcCompat="@mipmap/app_logo_foreground" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/listAddButton"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginLeft="60dp"
-                app:srcCompat="@android:drawable/ic_menu_add" />
+                <ImageButton
+                    android:id="@+id/homeScreenButton"
+                    android:layout_width="55dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="6dp"
+                    app:srcCompat="@mipmap/app_logo_foreground" />
 
-            <ImageButton
-                android:id="@+id/listViewButton"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginLeft="60dp"
-                app:srcCompat="@android:drawable/ic_dialog_dialer" />
+                <ImageButton
+                    android:id="@+id/listAddButton"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="60dp"
+                    app:srcCompat="@android:drawable/ic_menu_add" />
+
+                <ImageButton
+                    android:id="@+id/listViewButton"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="60dp"
+                    app:srcCompat="@android:drawable/ic_dialog_dialer" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</RelativeLayout>
+    </RelativeLayout>
