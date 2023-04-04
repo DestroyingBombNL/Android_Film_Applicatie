@@ -2,6 +2,7 @@ package com.example.bioscoopapplicatie.domain;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName="genre_table")
@@ -15,6 +16,7 @@ public class Genre {
         this.id = id;
         this.name = name;
     }
+
     public int getId() {
         return id;
     }

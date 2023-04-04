@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bioscoopapplicatie.R;
 import com.example.bioscoopapplicatie.domain.MediaList;
@@ -97,13 +98,21 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
                 startActivity(intentListView);
                 break;
             case R.id.create_media_list_create_list_btn:
-                MediaList mediaList = new MediaList(
-                        String.valueOf(this.name_fld.getText()),
-                        String.valueOf(this.description_txt.getText())
-                );
-                this.mediaListViewModel.insertMediaList(mediaList);
-                Intent intentCreateNewList = new Intent(this, ShowMediaList.class);
-                startActivity(intentCreateNewList);
+                String name = String.valueOf(this.name_fld.getText());
+                String description = String.valueOf(this.description_txt.getText());
+                if (name.isEmpty()) {
+                    Toast.makeText(this, "Please enter listname", Toast.LENGTH_SHORT).show();
+                } else if (!name.isEmpty() && description.isEmpty()) {
+                    MediaList mediaList = new MediaList(name,"No description");
+                    this.mediaListViewModel.insertMediaList(mediaList);
+                    Intent intentCreateNewList = new Intent(this, ShowMediaList.class);
+                    startActivity(intentCreateNewList);
+                } else {
+                    MediaList mediaList = new MediaList(name,description);
+                    this.mediaListViewModel.insertMediaList(mediaList);
+                    Intent intentCreateNewList = new Intent(this, ShowMediaList.class);
+                    startActivity(intentCreateNewList);
+                }
                 break;
         }
     }
