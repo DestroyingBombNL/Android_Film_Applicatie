@@ -191,7 +191,7 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                                 checkMediaHasGenre(media);
                             }
                             MediaListMedia mediaListMedia = new MediaListMedia(responseMediaLists.body().getId(), media.getId());
-                            mediaListMediaDao.insert(mediaListMedia);
+                            mediaListMediaDao.insertMediaToList(mediaListMedia);
                         }
                     }
                 } catch (IOException e) {

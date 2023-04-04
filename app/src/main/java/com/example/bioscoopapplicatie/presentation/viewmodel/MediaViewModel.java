@@ -44,4 +44,9 @@ public class MediaViewModel extends AndroidViewModel {
         allMedia = repository.getAllOrderedReleaseDateMedia();
         return allMedia;
     }
+
+    public LiveData<List<Media>> getAllFilteredMediaByGenre(int genreId) {
+        allMedia = repository.getAllFilteredMediaByGenre(genreId);
+        return allMedia;
+    }
 }

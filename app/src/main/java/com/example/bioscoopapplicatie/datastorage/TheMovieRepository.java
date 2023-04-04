@@ -101,7 +101,7 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
     }
 
     @Override
-    public void insert(MediaListMedia mediaListMedia) {
+    public void insertMediaToList(MediaListMedia mediaListMedia) {
         new insertMediaListMediaAsyncTask(mediaListMediaDao).execute(mediaListMedia);
     }
 
@@ -212,6 +212,13 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
         allMedia = mediaDao.getAllOrderedReleaseDateMedia();
         return allMedia;
     }
+
+    @Override
+    public LiveData<List<Media>> getAllFilteredMediaByGenre(int genreId) {
+        allMedia = mediaDao.getAllFilteredMediaByGenre(genreId);
+        return allMedia;
+    }
+
     @Override
     public void insert(MediaList mediaList) {
         new insertMediaListAsyncTask(mediaListDao).execute(mediaList);
@@ -392,7 +399,7 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
 
         @Override
         protected Void doInBackground(final MediaListMedia... params) {
-            mAsyncTaskDao.insert(params[0]);
+            mAsyncTaskDao.insertMediaToList(params[0]);
             return null;
         }
     }

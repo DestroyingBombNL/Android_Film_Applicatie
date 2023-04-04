@@ -34,4 +34,11 @@ public interface MediaDAO {
     LiveData<List<Media>> getAllOrderedVoteAverageMedia();
     @Query("SELECT * from media_table ORDER BY release_date DESC")
     LiveData<List<Media>> getAllOrderedReleaseDateMedia();
+
+//    getAllFilteredMediaByGenre
+    @Query("SELECT mt.* FROM media_table mt " +
+            "INNER JOIN genre_media_table gmt ON mt.id = gmt.mediaId " +
+            "INNER JOIN genre_table gt ON gmt.genreId = gt.id " +
+            "WHERE gt.id = :genreId")
+    LiveData<List<Media>> getAllFilteredMediaByGenre(int genreId);
 }

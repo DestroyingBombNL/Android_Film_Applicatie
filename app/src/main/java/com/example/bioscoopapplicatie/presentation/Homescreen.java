@@ -21,6 +21,7 @@ import com.example.bioscoopapplicatie.domain.DataOrder;
 import com.example.bioscoopapplicatie.domain.Genre;
 import com.example.bioscoopapplicatie.domain.Media;
 import com.example.bioscoopapplicatie.domain.MediaList;
+import com.example.bioscoopapplicatie.domain.linkingtable.MediaListMedia;
 import com.example.bioscoopapplicatie.presentation.adapter.GenreSpinnerAdapter;
 import com.example.bioscoopapplicatie.presentation.adapter.HomescreenAdapter;
 import com.example.bioscoopapplicatie.presentation.adapter.OrderSpinnerAdapter;
@@ -72,15 +73,33 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         genreViewModel.getAllGenres().observe(this, new Observer<List<Genre>>() {
             @Override
             public void onChanged(List<Genre> genres) {
+                genres.add(0, new Genre(0, "All"));
+                spinner_genre.setSelection(0);
                 genreAdapter = new GenreSpinnerAdapter(Homescreen.this, genres);
                 spinner_genre.setAdapter(genreAdapter);
+
             }
         });
         spinner_genre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Integer selectedGenreId = (Integer) parent.getItemAtPosition(position);
-                Log.d(TAG, "Selected genre id: " + selectedGenreId);
+                Genre selectedGenre = (Genre) genreAdapter.getItem(position);
+                Log.i(TAG, "onItemSelected: " + selectedGenre.getName());
+                if(position == 0){
+                    mediaViewModel.getAllMedia().observe(Homescreen.this, new Observer<List<Media>>() {
+                        @Override
+                        public void onChanged(List<Media> media) {
+                            adapter.setData((ArrayList<Media>) media);
+                        }
+                    });
+                } else {
+                    mediaViewModel.getAllFilteredMediaByGenre(selectedGenre.getId()).observe(Homescreen.this, new Observer<List<Media>>() {
+                        @Override
+                        public void onChanged(List<Media> media) {
+                            adapter.setData((ArrayList<Media>) media);
+                        }
+                    });
+                }
             }
 
             @Override

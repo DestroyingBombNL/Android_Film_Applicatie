@@ -8,28 +8,28 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.bioscoopapplicatie.R;
-import com.example.bioscoopapplicatie.domain.Genre;
 import com.example.bioscoopapplicatie.domain.MediaList;
 
 import java.util.List;
 
-public class GenreSpinnerAdapter extends BaseAdapter {
-    private Context context;
-    private List<Genre> genreList;
+public class ToListSpinnerAdapter extends BaseAdapter {
 
-    public GenreSpinnerAdapter(Context context, List<Genre> genreList) {
+    private Context context;
+    private List<MediaList> mediaList;
+
+    public ToListSpinnerAdapter(Context context, List<MediaList> mediaList) {
         this.context = context;
-        this.genreList = genreList;
+        this.mediaList = mediaList;
     }
 
     @Override
     public int getCount() {
-        return genreList != null ? genreList.size() : 0;
+        return mediaList != null ? mediaList.size() : 0;
     }
 
     @Override
     public Object getItem(int i) {
-        return genreList.get(i);
+        return mediaList.get(i);
     }
 
     @Override
@@ -39,11 +39,11 @@ public class GenreSpinnerAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View rootView = LayoutInflater.from(context).inflate(R.layout.item_genre, viewGroup, false);
+        View rootView = LayoutInflater.from(context).inflate(R.layout.item_list, viewGroup, false);
 
-        TextView txtName = rootView.findViewById(R.id.name_genre);
-        txtName.setText(genreList.get(i).getName());
+        TextView txtName = rootView.findViewById(R.id.name_list);
+        txtName.setText(mediaList.get(i).getName());
 
-        return rootView;
+        return txtName;
     }
 }

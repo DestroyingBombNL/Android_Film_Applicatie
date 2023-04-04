@@ -30,6 +30,10 @@ public class MediaList {
         this.description = description;
     }
 
+    public MediaList() {
+//empty constructor
+    }
+
     public int getId() {
         return id;
     }

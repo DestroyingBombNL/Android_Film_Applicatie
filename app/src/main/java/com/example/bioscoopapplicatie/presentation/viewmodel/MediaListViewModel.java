@@ -7,7 +7,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.bioscoopapplicatie.datastorage.TheMovieRepository;
+import com.example.bioscoopapplicatie.domain.Media;
 import com.example.bioscoopapplicatie.domain.MediaList;
+import com.example.bioscoopapplicatie.domain.linkingtable.MediaListMedia;
 
 import java.util.List;
 
@@ -28,5 +30,9 @@ public class MediaListViewModel extends AndroidViewModel {
     public void insertMediaList(MediaList mediaList) {
         repository.insert(mediaList);
         repository.postMediaList(mediaList);
+    }
+
+    public void insertMediaToList(MediaListMedia mediaListMedia) {
+        repository.insertMediaToList(mediaListMedia);
     }
 }

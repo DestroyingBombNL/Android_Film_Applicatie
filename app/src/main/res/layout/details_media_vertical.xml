@@ -87,11 +87,11 @@
                     android:layout_height="wrap_content"
                     android:text="Share" />
 
-                <Button
-                    android:id="@+id/details_media_to_list_btn"
+                <Spinner
+                    android:id="@+id/details_media_to_list_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="To List" />
+                    />
             </LinearLayout>
 
         </LinearLayout>

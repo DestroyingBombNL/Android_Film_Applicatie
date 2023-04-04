@@ -24,4 +24,6 @@ public interface MediaListDAO {
 
     @Query("SELECT * from media_list_table")
     LiveData<List<MediaList>> getAllMediaLists();
+
+
 }

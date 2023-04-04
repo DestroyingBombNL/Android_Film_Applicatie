@@ -1,6 +1,8 @@
 package com.example.bioscoopapplicatie.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,16 +11,26 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.bioscoopapplicatie.R;
 import com.example.bioscoopapplicatie.domain.Media;
+import com.example.bioscoopapplicatie.domain.MediaList;
+import com.example.bioscoopapplicatie.domain.linkingtable.MediaListMedia;
 import com.example.bioscoopapplicatie.presentation.adapter.HomescreenAdapter;
+import com.example.bioscoopapplicatie.presentation.adapter.ToListSpinnerAdapter;
+import com.example.bioscoopapplicatie.presentation.viewmodel.GenreViewModel;
+import com.example.bioscoopapplicatie.presentation.viewmodel.MediaListViewModel;
+
+import java.util.List;
 
 public class DetailsMedia extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = this.getClass().getSimpleName();
@@ -30,14 +42,17 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
     private TextView date_txt;
     private TextView language_txt;
     private Button share_btn;
-    private Button to_list_btn;
     private TextView description_txt;
     private RecyclerView recyclerView;
     private HomescreenAdapter adapter;
     private GridLayoutManager mLayoutManager;
+    private ToListSpinnerAdapter toListSpinnerAdapter;
+    private Spinner toListSpinner;
     private int orientation;
     private ImageButton homeScreenButton, listAddButton, listViewButton;
     private Button shareButton;
+    private MediaListViewModel mediaListViewModel;
+    private MediaList mediaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +62,45 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         readData();
         setComponents();
         setRecyclerView();
+        setSpinner();
         putDataInComponents();
     }
 
+    private void setSpinner() {
+        Log.i(TAG, "setSpinner");
+        this.toListSpinner = findViewById(R.id.details_media_to_list_spinner);
+        mediaListViewModel = new ViewModelProvider(this).get(MediaListViewModel.class);
+        mediaListViewModel.getAllMediaLists().observe(this, new Observer<List<MediaList>>() {
+            @Override
+            public void onChanged(List<MediaList> mediaLists) {
+                // Add an empty option at the beginning of the list
+                MediaList emptyOption = new MediaList();
+                mediaLists.add(0, emptyOption);
+                // Set up the spinner adapter
+                toListSpinnerAdapter = new ToListSpinnerAdapter(DetailsMedia.this, mediaLists);
+                toListSpinner.setAdapter(toListSpinnerAdapter);
+            }
+        });
+
+        toListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                MediaList mediaList = (MediaList) toListSpinnerAdapter.getItem(position);
+                // Ignore the selection if the empty option is selected
+                if (position == 0) {
+                    return;
+                }
+                Log.i(TAG, "onItemSelected: " + mediaList.getName());
+                // Add media to list selected in spinner
+                mediaListViewModel.insertMediaToList(new MediaListMedia(mediaList.getId(), media.getId()));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.i(TAG, "Nothing selected");
+            }
+        });
+    }
     private void readData() {
         Log.i(TAG, "readData");
         Bundle extra = getIntent().getExtras();
@@ -79,9 +130,8 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         this.language_txt = findViewById(R.id.details_media_language_txt);
         this.description_txt = findViewById(R.id.details_media_description_txt);
         this.share_btn = findViewById(R.id.details_media_share_btn);
-        this.to_list_btn = findViewById(R.id.details_media_to_list_btn);
         this.share_btn.setOnClickListener(this);
-        this.to_list_btn.setOnClickListener(this);
+
 
         this.homeScreenButton = findViewById(R.id.homeScreenButton);
         this.homeScreenButton.setOnClickListener(this);
@@ -97,6 +147,9 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         //Share button
         this.shareButton = findViewById(R.id.details_media_share_btn);
         this.shareButton.setOnClickListener(this);
+
+        //Spinner
+        this.toListSpinner = findViewById(R.id.details_media_to_list_spinner);
     }
 
     void setRecyclerView() {
@@ -220,10 +273,6 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         this.share_btn = share_btn;
     }
 
-    public void setTo_list_btn(Button to_list_btn) {
-        this.to_list_btn = to_list_btn;
-    }
-
     public void setDescription_txt(TextView description_txt) {
         this.description_txt = description_txt;
     }
@@ -286,10 +335,6 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
 
     public Button getShare_btn() {
         return share_btn;
-    }
-
-    public Button getTo_list_btn() {
-        return to_list_btn;
     }
 
     public TextView getDescription_txt() {

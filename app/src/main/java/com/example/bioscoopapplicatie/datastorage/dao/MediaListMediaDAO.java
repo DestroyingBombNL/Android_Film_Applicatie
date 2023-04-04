@@ -19,7 +19,7 @@ import java.util.List;
 @Dao
 public interface MediaListMediaDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(MediaListMedia mediaListMedia);
+    void insertMediaToList(MediaListMedia mediaListMedia);
 
     @Query("SELECT media_table.* " +
             "FROM media_table " +
@@ -27,5 +27,4 @@ public interface MediaListMediaDAO {
             "JOIN media_list_table ON media_list_media_table.mediaListId = media_list_table.id " +
             "WHERE media_list_table.id = :listId")
     LiveData<List<Media>> getAllMediaInList(String listId);
-
 }
