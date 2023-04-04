@@ -135,6 +135,7 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                     .build();
             this.jsonApi = retrofit.create(TheMovieAPI.class);
 
+
             //Get all genres
             Call<GenreResponse> callGenres = jsonApi.getGenres(apiKey);
             try {

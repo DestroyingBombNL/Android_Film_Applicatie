@@ -27,7 +27,7 @@ public class Media {
     @ColumnInfo(name="original_language")
     private String originalLanguage;
 
-    @SerializedName("original_title")
+    @SerializedName(value="title", alternate = {"original_title", "original_name"})
     @Expose
     @ColumnInfo(name="original_title")
     private String title;
@@ -42,7 +42,7 @@ public class Media {
     @ColumnInfo(name="poster_path")
     private String posterPath;
 
-    @SerializedName("release_date")
+    @SerializedName(value="date", alternate = {"release_date", "first_air_date"})
     @Expose
     @ColumnInfo(name="release_date")
     private String releaseDate;

@@ -41,4 +41,9 @@ public interface TheMovieAPI {
 
     @GET("api/user/profile")
     Call<LoginResponse> getUserProfile(@Header("Authorization") String token);*/
+
+    @GET("discover/tv")
+    Call<MediaResponse> getTvShows(@Query("api_key") String apiKey, @Query("page") int page);
+
+
 }
