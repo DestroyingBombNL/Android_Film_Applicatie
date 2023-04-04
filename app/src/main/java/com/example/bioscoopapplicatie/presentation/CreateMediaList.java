@@ -24,10 +24,6 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
     private ImageView logo_img;
     private EditText search_fld;
     private MediaListViewModel mediaListViewModel;
-
-    /*private Button bar_home_btn;
-    private Button bar_create_media_list_btn;
-    private Button bar_show_media_list_btn;*/
     private EditText name_fld;
     private Button create_btn;
     private TextView description_txt;
@@ -99,6 +95,15 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
                 
                 Intent intentListView = new Intent(this, ShowMediaList.class);
                 startActivity(intentListView);
+                break;
+            case R.id.create_media_list_create_list_btn:
+                MediaList mediaList = new MediaList(
+                        String.valueOf(this.name_fld.getText()),
+                        String.valueOf(this.description_txt.getText())
+                );
+                this.mediaListViewModel.insertMediaList(mediaList);
+                Intent intentCreateNewList = new Intent(this, ShowMediaList.class);
+                startActivity(intentCreateNewList);
                 break;
         }
     }
