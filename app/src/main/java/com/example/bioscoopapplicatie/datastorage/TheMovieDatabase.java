@@ -35,6 +35,7 @@ import com.example.bioscoopapplicatie.domain.response.ReviewResponse;
 import com.example.bioscoopapplicatie.domain.response.TokenResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -225,7 +226,9 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                 Response<ReviewResponse> reviewResponse = callReviews.execute();
                 if (reviewResponse.isSuccessful()) {
                     for (Review review : reviewResponse.body().getResults()) {
-                        reviewDao.insert(review);
+                        Review insertReview = review;
+                        reviewDao.insert(insertReview);
+                        reviewDao.updateReview(String.valueOf(reviewResponse.body().getId()), insertReview.getId());
                         authorDetailDao.insert(review.getAuthorDetails());
                     }
                 }

@@ -3,12 +3,15 @@ package com.example.bioscoopapplicatie.presentation;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,10 +26,19 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.bioscoopapplicatie.R;
+import com.example.bioscoopapplicatie.domain.AuthorDetail;
 import com.example.bioscoopapplicatie.domain.Media;
+import com.example.bioscoopapplicatie.domain.Review;
+import com.example.bioscoopapplicatie.presentation.adapter.DetailsMediaAdapter;
 import com.example.bioscoopapplicatie.domain.MediaList;
 import com.example.bioscoopapplicatie.domain.linkingtable.MediaListMedia;
 import com.example.bioscoopapplicatie.presentation.adapter.HomescreenAdapter;
+import com.example.bioscoopapplicatie.presentation.viewmodel.AuthorDetailViewModel;
+import com.example.bioscoopapplicatie.presentation.viewmodel.ReviewViewModel;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 import com.example.bioscoopapplicatie.presentation.adapter.ToListSpinnerAdapter;
 import com.example.bioscoopapplicatie.presentation.viewmodel.GenreViewModel;
 import com.example.bioscoopapplicatie.presentation.viewmodel.MediaListViewModel;
@@ -45,8 +57,10 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
     private Button share_btn;
     private TextView description_txt;
     private RecyclerView recyclerView;
-    private HomescreenAdapter adapter;
+    private DetailsMediaAdapter adapter;
     private GridLayoutManager mLayoutManager;
+    private ReviewViewModel reviewViewModel;
+    private AuthorDetailViewModel authorDetailViewModel;
     private ToListSpinnerAdapter toListSpinnerAdapter;
     private Spinner toListSpinner;
     private int orientation;
@@ -63,6 +77,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         readData();
         setComponents();
         setRecyclerView();
+        setViewModel();
         setSpinner();
         putDataInComponents();
     }
@@ -155,11 +170,30 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         this.toListSpinner = findViewById(R.id.details_media_to_list_spinner);
     }
 
+    void setViewModel() {
+        Log.i(TAG, "setViewModel");
+        authorDetailViewModel = new AuthorDetailViewModel(getApplication());
+        authorDetailViewModel.getAllAuthorDetails().observe(this, new Observer<List<AuthorDetail>>() {
+            @Override
+            public void onChanged(List<AuthorDetail> authorDetails) {
+                adapter.setAuthorDetailData((ArrayList<AuthorDetail>) authorDetails);
+                Snackbar.make(recyclerView, String.valueOf(authorDetails.size() + " Author details read"), Snackbar.LENGTH_LONG);
+            }
+        });
+        reviewViewModel = new ReviewViewModel(getApplication());
+        reviewViewModel.getFilteredReviews(String.valueOf(DetailsMedia.this.media.getId())).observe(this, new Observer<List<Review>>() {
+            @Override
+            public void onChanged(List<Review> reviews) {
+                adapter.setReviewData((ArrayList<Review>) reviews);
+                Snackbar.make(recyclerView, String.valueOf(reviews.size() + " Reviews read"), Snackbar.LENGTH_LONG);
+            }
+        });
+    }
     void setRecyclerView() {
         Log.i(TAG, "setRecyclerView");
         recyclerView = findViewById(R.id.details_media_recycler);
-        adapter = new HomescreenAdapter(this);
-        mLayoutManager = new GridLayoutManager(this, 1);
+        adapter = new DetailsMediaAdapter(this, getApplication());
+        mLayoutManager = new GridLayoutManager(this, 1, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
     }
@@ -232,7 +266,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         return recyclerView;
     }
 
-    public HomescreenAdapter getAdapter() {
+    public DetailsMediaAdapter getAdapter() {
         return adapter;
     }
 
@@ -284,7 +318,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         this.recyclerView = recyclerView;
     }
 
-    public void setAdapter(HomescreenAdapter adapter) {
+    public void setAdapter(DetailsMediaAdapter adapter) {
         this.adapter = adapter;
     }
 

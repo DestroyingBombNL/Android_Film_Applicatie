@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName="author_details_table")
+@Entity(tableName="author_detail_table")
 public class AuthorDetail {
     private String name;
     @PrimaryKey

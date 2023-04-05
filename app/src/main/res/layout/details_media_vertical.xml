@@ -106,9 +106,8 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_below="@id/details_media_description_txt"
-            android:layout_margin="10dp">
+            android:layout_height="200dp"
+            android:layout_below="@id/details_media_description_txt">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/details_media_recycler"

@@ -189,6 +189,7 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
+
     void setLayoutBasedOnOrientation() {
         Log.i(TAG, "setLayoutBasedOnOrientation");
         this.orientation = getResources().getConfiguration().orientation;

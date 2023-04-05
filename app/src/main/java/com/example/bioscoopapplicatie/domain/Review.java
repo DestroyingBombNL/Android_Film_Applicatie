@@ -23,11 +23,15 @@ public class Review {
     @NonNull
     private String id;
 
-    public Review(String author, String description, String createdAt, String id) {
+    @NonNull
+    private int mediaId;
+
+    public Review(String author, String description, String createdAt, String id, int mediaId) {
         this.author = author;
         this.description = description;
         this.createdAt = createdAt;
         this.id = id;
+        this.mediaId = mediaId;
     }
 
     @Ignore
@@ -77,5 +81,13 @@ public class Review {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getMediaId() {
+        return mediaId;
+    }
+
+    public void setMediaId(int mediaId) {
+        this.mediaId = mediaId;
     }
 }
