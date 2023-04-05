@@ -112,6 +112,12 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
         return this.mediaInList;
     }
 
+    @Override
+    public LiveData<List<Media>> getAllFilteredMediaListByGenre(int genreId) {
+        mediaInList = mediaListMediaDao.getAllFilteredMediaListByGenre(genreId);
+        return mediaInList;
+    }
+
     //Token request
     private static class GenerateTokenTask extends AsyncTask<Void, Void, String> {
         private String apiKey;
