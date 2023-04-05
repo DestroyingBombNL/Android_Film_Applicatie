@@ -23,7 +23,7 @@ import com.example.bioscoopapplicatie.presentation.viewmodel.MediaListViewModel;
 public class CreateMediaList extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = this.getClass().getSimpleName();
     private ImageView logo_img;
-    private EditText search_fld;
+    private Button search_fld;
     private MediaListViewModel mediaListViewModel;
     private EditText name_fld;
     private Button create_btn;
@@ -44,7 +44,7 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
         Log.i(TAG, "setComponents");
         this.logo_img = findViewById(R.id.logo_img);
         this.logo_img.setOnClickListener(this);
-        this.search_fld = findViewById(R.id.search_fld);
+        this.search_fld = findViewById(R.id.search);
         this.search_fld.setOnClickListener(this);
         this.create_btn = findViewById(R.id.create_media_list_create_list_btn);
         this.create_btn.setOnClickListener(this);
@@ -93,7 +93,6 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
                 startActivity(intentAdd);
                 break;
             case R.id.listViewButton:
-                
                 Intent intentListView = new Intent(this, ShowMediaList.class);
                 startActivity(intentListView);
                 break;
@@ -113,6 +112,14 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
                     Intent intentCreateNewList = new Intent(this, ShowMediaList.class);
                     startActivity(intentCreateNewList);
                 }
+                break;
+            case R.id.logo_img:
+                Intent intentHome = new Intent(this, Homescreen.class);
+                startActivity(intentHome);
+                break;
+            case R.id.search:
+                Intent intentSearch = new Intent(this, SearchMedia.class);
+                startActivity(intentSearch);
                 break;
         }
     }
@@ -135,11 +142,11 @@ public class CreateMediaList extends AppCompatActivity implements View.OnClickLi
         this.logo_img = logo_img;
     }
 
-    public EditText getSearch_fld() {
+    public Button getSearch_fld() {
         return search_fld;
     }
 
-    public void setSearch_fld(EditText search_fld) {
+    public void setSearch_fld(Button search_fld) {
         this.search_fld = search_fld;
     }
 

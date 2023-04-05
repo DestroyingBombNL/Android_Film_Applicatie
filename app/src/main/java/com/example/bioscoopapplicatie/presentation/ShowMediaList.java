@@ -46,6 +46,9 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
     private MediaListViewModel mediaListViewModel;
     private int orientation;
     private ImageButton homeScreenButton, listAddButton, listViewButton;
+    private ImageView logo_img;
+    private Button search;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
@@ -72,6 +75,13 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
         this.listViewButton = findViewById(R.id.listViewButton);
         this.listViewButton.setOnClickListener(this);
 
+        //Header logo
+        this.logo_img = findViewById(R.id.logo_img);
+        this.logo_img.setOnClickListener(this);
+
+        //Header search
+        this.search = findViewById(R.id.search);
+        this.search.setOnClickListener(this);
 
     }
 
@@ -118,6 +128,14 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
             case R.id.listViewButton:
                 Intent intentListView = new Intent(this, ShowMediaList.class);
                 startActivity(intentListView);
+                break;
+            case R.id.logo_img:
+                Intent intentHome = new Intent(this, Homescreen.class);
+                startActivity(intentHome);
+                break;
+            case R.id.search:
+                Intent intentSearch = new Intent(this, SearchMedia.class);
+                startActivity(intentSearch);
                 break;
         }
     }
