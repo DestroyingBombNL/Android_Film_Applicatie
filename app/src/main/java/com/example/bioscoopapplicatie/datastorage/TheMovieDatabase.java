@@ -152,10 +152,12 @@ public abstract class TheMovieDatabase extends RoomDatabase {
             //Repeat this process 6 times: Go through the pagenumber and add every media object to the database
             for (int i = 0; i < 6; i++) {
                 Call<MediaResponse> callMedia = jsonApi.getAllMedia(apiKey, pageNumber);
+                Call<MediaResponse> callTvShow = jsonApi.getTvShows(apiKey, pageNumber);
                 try {
-                    Response<MediaResponse> response = callMedia.execute();
-                    if (response.isSuccessful()) {
-                        for (Media media : response.body().getResult()) {
+                    // Execute the first API call
+                    Response<MediaResponse> responseMedia = callMedia.execute();
+                    if (responseMedia.isSuccessful()) {
+                        for (Media media : responseMedia.body().getResult()) {
                             mediaDao.insert(media);
                             int mediaReviewId = media.getId();
                             checkMediaHasReview(mediaReviewId);
@@ -163,6 +165,19 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                         }
                     } else {
                         Log.e(TAG, "Error, no access to API");
+                    }
+
+                    // Execute the second API call
+                    Response<MediaResponse> responseTvShow = callTvShow.execute();
+                    if (responseTvShow.isSuccessful()) {
+                        for (Media tvShow : responseTvShow.body().getResult()) {
+                            mediaDao.insert(tvShow);
+                            int tvShowReviewId = tvShow.getId();
+                            checkMediaHasReview(tvShowReviewId);
+                            checkMediaHasGenre(tvShow);
+                        }
+                    } else {
+                        Log.e(TAG, "Error, no access to TV show API");
                     }
                 } catch (IOException e) {
                     Log.e(TAG, "Error whilst trying to get media from API");
