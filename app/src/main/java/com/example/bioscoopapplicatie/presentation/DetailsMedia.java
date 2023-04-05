@@ -76,6 +76,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
             public void onChanged(List<MediaList> mediaLists) {
                 // Add an empty option at the beginning of the list
                 MediaList emptyOption = new MediaList();
+                emptyOption.setName("Add to list");
                 mediaLists.add(0, emptyOption);
                 // Set up the spinner adapter
                 toListSpinnerAdapter = new ToListSpinnerAdapter(DetailsMedia.this, mediaLists);

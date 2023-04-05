@@ -22,7 +22,7 @@ public interface MediaListDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(MediaList mediaList);
 
-    @Query("SELECT * from media_list_table")
+    @Query("SELECT * FROM media_list_table ORDER BY id DESC")
     LiveData<List<MediaList>> getAllMediaLists();
 
 

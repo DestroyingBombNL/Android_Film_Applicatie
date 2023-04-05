@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity(tableName="media_list_table")
 public class MediaList {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
     private String name;
