@@ -27,22 +27,18 @@
             android:exported="false" />
         <activity
             android:name=".presentation.Homescreen"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.ShowMediaListDetails">
-
-        </activity>
-        <activity
-            android:name=".presentation.Login"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </intent-filter>
         </activity>
-        <activity android:name=".presentation.Register" />
-        <activity android:name=".presentation.ForgotPassword" />
+
+        <activity
+            android:name=".presentation.ShowMediaListDetails">
+        </activity>
+
     </application>
 
 </manifest>
