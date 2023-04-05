@@ -14,6 +14,6 @@ import java.util.List;
 public interface AuthorDetailDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(AuthorDetail authorDetail);
-    @Query("SELECT * from author_details_table")
+    @Query("SELECT * FROM author_detail_table")
     LiveData<List<AuthorDetail>> getAllAuthorDetails();
 }

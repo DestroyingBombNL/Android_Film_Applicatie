@@ -24,6 +24,4 @@ public interface MediaListDAO {
 
     @Query("SELECT * FROM media_list_table ORDER BY id DESC")
     LiveData<List<MediaList>> getAllMediaLists();
-
-
 }

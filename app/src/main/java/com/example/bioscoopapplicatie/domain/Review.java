@@ -22,21 +22,25 @@ public class Review {
     @PrimaryKey
     @NonNull
     private String id;
+    @NonNull
+    private int mediaId;
 
-    public Review(String author, String description, String createdAt, String id) {
+    public Review(String author, String description, String createdAt, String id, int mediaId) {
         this.author = author;
         this.description = description;
         this.createdAt = createdAt;
         this.id = id;
+        this.mediaId = mediaId;
     }
 
     @Ignore
-    public Review(String author, AuthorDetail authorDetail, String description, String createdAt, String id) {
+    public Review(String author, AuthorDetail authorDetail, String description, String createdAt, String id, int mediaId) {
         this.author = author;
         this.authorDetail = authorDetail;
         this.description = description;
         this.createdAt = createdAt;
         this.id = id;
+        this.mediaId = mediaId;
     }
 
     public String getAuthor() {
@@ -77,5 +81,13 @@ public class Review {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getMediaId() {
+        return mediaId;
+    }
+
+    public void setMediaId(int mediaId) {
+        this.mediaId = mediaId;
     }
 }

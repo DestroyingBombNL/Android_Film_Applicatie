@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.bioscoopapplicatie.datastorage.dao.AuthorDetailDAO;
 import com.example.bioscoopapplicatie.datastorage.dao.GenreDAO;
@@ -58,10 +59,10 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
     private LiveData<List<MediaList>> allMediaLists;
     private LiveData<List<Review>> allReviews;
     private LiveData<List<AuthorDetail>> allAuthorDetails;
+    private LiveData<List<Review>> filteredReviews;
     private LiveData<User> user;
     private LiveData<List<GenreMedia>> allGenreMedia;
     private LiveData<List<Media>> mediaInList;
-
     public TheMovieRepository(Application application) {
         TheMovieDatabase db = TheMovieDatabase.getDatabase(application);
         mediaDao = db.mediaDao();
@@ -236,6 +237,12 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
     }
 
     @Override
+    public LiveData<List<Review>> getAllReviews() {
+        allReviews = reviewDao.getAllReviews();
+        return allReviews;
+    }
+
+    @Override
     public void insert(AuthorDetail authorDetail) {
         new insertAuthorDetailAsyncTask(authorDetailDao).execute(authorDetail);
     }
@@ -244,6 +251,17 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
     public LiveData<List<AuthorDetail>> getAllAuthorDetails() {
         allAuthorDetails = authorDetailDao.getAllAuthorDetails();
         return allAuthorDetails;
+    }
+
+    @Override
+    public LiveData<List<Review>> getFilteredReviews(String mediaId) {
+        filteredReviews = reviewDao.getFilteredReviews(mediaId);
+        return filteredReviews;
+    }
+
+    @Override
+    public void updateReview(String mediaId, String id) {
+        reviewDao.updateReview(mediaId, id);
     }
 
     @Override

@@ -35,6 +35,7 @@ import com.example.bioscoopapplicatie.domain.response.ReviewResponse;
 import com.example.bioscoopapplicatie.domain.response.TokenResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -49,7 +50,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * with it happen through the WordViewModel.
  */
 
-@Database(entities = {Media.class, MediaList.class, MediaListMedia.class, Review.class, AuthorDetail.class, Genre.class, User.class, GenreMedia.class}, version = 39, exportSchema = false)
+@Database(entities = {Media.class, MediaList.class, MediaListMedia.class, Review.class, AuthorDetail.class, Genre.class, User.class, GenreMedia.class}, version = 40, exportSchema = false)
 public abstract class TheMovieDatabase extends RoomDatabase {
     private final static String TAG = TheMovieDatabase.class.getSimpleName();
 
@@ -225,7 +226,9 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                 Response<ReviewResponse> reviewResponse = callReviews.execute();
                 if (reviewResponse.isSuccessful()) {
                     for (Review review : reviewResponse.body().getResults()) {
-                        reviewDao.insert(review);
+                        Review insertReview = review;
+                        reviewDao.insert(insertReview);
+                        reviewDao.updateReview(String.valueOf(reviewResponse.body().getId()), insertReview.getId());
                         authorDetailDao.insert(review.getAuthorDetails());
                     }
                 }
