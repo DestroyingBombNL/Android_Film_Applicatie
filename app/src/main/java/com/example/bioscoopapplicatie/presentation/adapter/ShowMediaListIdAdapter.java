@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.bioscoopapplicatie.R;
 import com.example.bioscoopapplicatie.domain.MediaList;
 import com.example.bioscoopapplicatie.presentation.ShowMediaListDetails;
+import com.example.bioscoopapplicatie.presentation.viewmodel.MediaListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +25,11 @@ public class ShowMediaListIdAdapter extends RecyclerView.Adapter<ShowMediaListId
     private List<MediaList> mediaLists;
     private LayoutInflater inflater;
     private Context context;
-    public ShowMediaListIdAdapter(Context context) {
+    private MediaListViewModel mediaListViewModel;
+    public ShowMediaListIdAdapter(Context context, MediaListViewModel mediaListViewModel) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
+        this.mediaListViewModel = mediaListViewModel;
     }
 
     @NonNull
@@ -44,6 +48,23 @@ public class ShowMediaListIdAdapter extends RecyclerView.Adapter<ShowMediaListId
         holder.name_txt.setText("Created By: " + this.mediaLists.get(position).getName());
         holder.favorite_count_txt.setText("Favorite Count: " + this.mediaLists.get(position).getFavoriteCount());
         holder.description_txt.setText(this.mediaLists.get(position).getDescription());
+        holder.itemView.setOnClickListener(view -> {
+            Log.d(TAG, "ViewHolder onClick - listitem nr " + position);
+            MediaList currentMediaList = mediaLists.get(position);
+            Intent showMediaListDetailsIntent = new Intent(context, ShowMediaListDetails.class);
+            showMediaListDetailsIntent.putExtra("id", currentMediaList.getId());
+            showMediaListDetailsIntent.putExtra("name", currentMediaList.getName());
+            showMediaListDetailsIntent.putExtra("description", currentMediaList.getDescription());
+            showMediaListDetailsIntent.putExtra("favoriteCount", currentMediaList.getFavoriteCount());
+            showMediaListDetailsIntent.putExtra("listNumber", position);
+            showMediaListDetailsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(showMediaListDetailsIntent);
+        });
+        holder.delete_btn.setOnClickListener(view -> {
+            MediaList currentMediaList = mediaLists.get(position);
+            Log.d(TAG, "ViewHolder onClick - delete listitem nr " + currentMediaList.getId());
+            mediaListViewModel.deleteList(currentMediaList, currentMediaList.getId());
+        });
     }
 
     @Override
@@ -59,33 +80,21 @@ public class ShowMediaListIdAdapter extends RecyclerView.Adapter<ShowMediaListId
         notifyDataSetChanged();
     }
 
-    class MediaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    static class MediaViewHolder extends RecyclerView.ViewHolder {
         private final String TAG = MediaViewHolder.class.getSimpleName();
         public TextView number_txt;
         public TextView name_txt;
         public TextView favorite_count_txt;
         public TextView description_txt;
+        public Button delete_btn;
+
         public MediaViewHolder(@NonNull View itemView) {
             super(itemView);
             number_txt = itemView.findViewById(R.id.show_media_list_number_item_txt);
             name_txt = itemView.findViewById(R.id.show_media_list_number_item_name_txt);
             favorite_count_txt = itemView.findViewById(R.id.show_media_list_number_item_favorite_count_txt);
-            this.description_txt = itemView.findViewById(R.id.show_media_list_number_item_description_txt);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            Log.d(TAG, "ViewHolder onClick - listitem nr " + getAdapterPosition());
-            MediaList currentMediaList = mediaLists.get(getAdapterPosition());
-            Intent showMediaListDetailsIntent = new Intent(context, ShowMediaListDetails.class);
-            showMediaListDetailsIntent.putExtra("id", currentMediaList.getId());
-            showMediaListDetailsIntent.putExtra("name", currentMediaList.getName());
-            showMediaListDetailsIntent.putExtra("description", currentMediaList.getDescription());
-            showMediaListDetailsIntent.putExtra("favoriteCount", currentMediaList.getFavoriteCount());
-            showMediaListDetailsIntent.putExtra("listNumber", getAdapterPosition());
-            showMediaListDetailsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(showMediaListDetailsIntent);
+            description_txt = itemView.findViewById(R.id.show_media_list_number_item_description_txt);
+            delete_btn = itemView.findViewById(R.id.deleteListButton);
         }
     }
 }

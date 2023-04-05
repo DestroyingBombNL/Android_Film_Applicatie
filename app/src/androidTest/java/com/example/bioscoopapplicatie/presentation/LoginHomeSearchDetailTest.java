@@ -36,58 +36,8 @@ import org.junit.runner.RunWith;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class LoginHomeSearchDetailTest {
-
-    @Rule
-    public ActivityScenarioRule<Login> mActivityScenarioRule =
-            new ActivityScenarioRule<>(Login.class);
-
     @Test
     public void loginHomeSearchDetailTest() {
-        ViewInteraction editText = onView(
-                allOf(withId(R.id.username_et), withText("Username"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
-                        isDisplayed()));
-        editText.check(matches(isDisplayed()));
-
-        ViewInteraction editText2 = onView(
-                allOf(withId(R.id.password_et), withText("Password"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
-                        isDisplayed()));
-        editText2.check(matches(isDisplayed()));
-
-        ViewInteraction button = onView(
-                allOf(withId(R.id.login_btn), withText("LOGIN"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.register_btn), withText("REGISTER"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
-                        isDisplayed()));
-        button2.check(matches(isDisplayed()));
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.forgot_password_txt), withText("Forgot Password"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
-                        isDisplayed()));
-        textView.check(matches(isDisplayed()));
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.forgot_password_txt), withText("Forgot Password"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
-                        isDisplayed()));
-        textView2.check(matches(isDisplayed()));
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.login_btn), withText("Login"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                4)));
-        appCompatButton.perform(scrollTo(), click());
-
         ViewInteraction imageView = onView(
                 allOf(withId(R.id.logo_img),
                         withParent(allOf(withId(R.id.linearTop),

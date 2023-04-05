@@ -113,6 +113,11 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
     }
 
     @Override
+    public void deleteListFromMediaListMedia(int mediaListId) {
+        new deleteListFromMediaListMediaAsyncTask(mediaListMediaDao).execute(mediaListId);
+    }
+
+    @Override
     public LiveData<List<Media>> getAllFilteredMediaListByGenre(int genreId) {
         mediaInList = mediaListMediaDao.getAllFilteredMediaListByGenre(genreId);
         return mediaInList;
@@ -218,6 +223,11 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
     public LiveData<List<Media>> getAllOrderedReleaseDateMedia() {
         allMedia = mediaDao.getAllOrderedReleaseDateMedia();
         return allMedia;
+    }
+
+    @Override
+    public void deleteList(MediaList mediaList) {
+        new deleteMediaListAsyncTask(mediaListDao).execute(mediaList);
     }
 
     @Override
@@ -381,6 +391,31 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
         @Override
         protected Void doInBackground(final Genre... params) {
             mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+    private class deleteMediaListAsyncTask extends AsyncTask<MediaList, Void, Void>{
+        private MediaListDAO mAsyncTaskDao;
+
+        public deleteMediaListAsyncTask(MediaListDAO mediaListDao) {mAsyncTaskDao = mediaListDao;}
+        @Override
+        protected Void doInBackground(final MediaList... params) {
+            mAsyncTaskDao.deleteList(params[0]);
+            return null;
+        }
+    }
+
+    private static class deleteListFromMediaListMediaAsyncTask extends AsyncTask<Integer, Void, Void> {
+        private MediaListMediaDAO mediaListMediaDao;
+
+        public deleteListFromMediaListMediaAsyncTask(MediaListMediaDAO dao) {
+            mediaListMediaDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... params) {
+            mediaListMediaDao.deleteListFromMediaListMedia(params[0]);
             return null;
         }
     }

@@ -35,4 +35,9 @@ public class MediaListViewModel extends AndroidViewModel {
     public void insertMediaToList(MediaListMedia mediaListMedia) {
         repository.insertMediaToList(mediaListMedia);
     }
+
+    public void deleteList(MediaList mediaList, int mediaListId){
+        repository.deleteListFromMediaListMedia(mediaListId);
+        repository.deleteList(mediaList);
+    }
 }

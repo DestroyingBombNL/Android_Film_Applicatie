@@ -50,7 +50,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * with it happen through the WordViewModel.
  */
 
-@Database(entities = {Media.class, MediaList.class, MediaListMedia.class, Review.class, AuthorDetail.class, Genre.class, User.class, GenreMedia.class}, version = 40, exportSchema = false)
+@Database(entities = {Media.class, MediaList.class, MediaListMedia.class, Review.class, AuthorDetail.class, Genre.class, User.class, GenreMedia.class}, version = 140, exportSchema = false)
 public abstract class TheMovieDatabase extends RoomDatabase {
     private final static String TAG = TheMovieDatabase.class.getSimpleName();
 

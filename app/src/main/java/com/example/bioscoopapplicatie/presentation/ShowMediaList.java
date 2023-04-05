@@ -87,7 +87,7 @@ public class ShowMediaList extends AppCompatActivity implements View.OnClickList
     void setRecyclerView() {
         Log.i(TAG, "setRecyclerViewId");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
-        adapter = new ShowMediaListIdAdapter(getApplicationContext());
+        adapter = new ShowMediaListIdAdapter(getApplicationContext(), mediaListViewModel);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
     }

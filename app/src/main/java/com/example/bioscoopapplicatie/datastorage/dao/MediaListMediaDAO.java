@@ -34,4 +34,7 @@ public interface MediaListMediaDAO {
             "INNER JOIN genre_table gt ON gmt.genreId = gt.id " +
             "WHERE gt.id = :genreId")
     LiveData<List<Media>> getAllFilteredMediaListByGenre(int genreId);
+
+    @Query("DELETE FROM media_list_media_table WHERE mediaListId = :mediaListId")
+    void deleteListFromMediaListMedia(int mediaListId);
 }
