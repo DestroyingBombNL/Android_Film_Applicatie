@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.bioscoopapplicatie.R;
@@ -93,6 +94,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
                 Log.i(TAG, "onItemSelected: " + mediaList.getName());
                 // Add media to list selected in spinner
                 mediaListViewModel.insertMediaToList(new MediaListMedia(mediaList.getId(), media.getId()));
+                Toast.makeText(DetailsMedia.this, "Added to " + mediaList.getName(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -150,7 +150,7 @@ public abstract class TheMovieDatabase extends RoomDatabase {
             }
 
             //Repeat this process 6 times: Go through the pagenumber and add every media object to the database
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 3; i++) {
                 Call<MediaResponse> callMedia = jsonApi.getAllMedia(apiKey, pageNumber);
                 Call<MediaResponse> callTvShow = jsonApi.getTvShows(apiKey, pageNumber);
                 try {
