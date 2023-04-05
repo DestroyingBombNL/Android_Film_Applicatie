@@ -48,6 +48,10 @@ public class ShowMediaListDetails extends AppCompatActivity implements View.OnCl
     private MediaList mediaList;
     private TextView name_and_number_txt;
     private int listNumber;
+    private Spinner spinner_genre;
+    private GenreSpinnerAdapter genreAdapter;
+    private GenreViewModel genreViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,7 @@ public class ShowMediaListDetails extends AppCompatActivity implements View.OnCl
         setRecyclerView();
         setViewModel();
         setComponents();
+        setSpinner();
     }
 
     private void readData() {
@@ -124,6 +129,60 @@ public class ShowMediaListDetails extends AppCompatActivity implements View.OnCl
         //Fab
         this.floatingActionButton = findViewById(R.id.floatingActionButton);
         this.floatingActionButton.setOnClickListener(this);
+    }
+
+    private void setSpinner(){
+        Log.i(TAG, "setSpinners");
+        // Check if the intent has extra data
+        Bundle extra = getIntent().getExtras();
+        if (extra != null) {
+            this.mediaList = new MediaList(extra.getInt("id"),
+                    extra.getString("name"),
+                    extra.getString("description"),
+                    extra.getInt("favoriteCount"));
+            this.listNumber = extra.getInt("listNumber");
+        }
+
+        //Genre spinner
+        this.spinner_genre = findViewById(R.id.list_genre_spn);
+        genreViewModel = new ViewModelProvider(this).get(GenreViewModel.class);
+        genreViewModel.getAllGenres().observe(this, new Observer<List<Genre>>() {
+            @Override
+            public void onChanged(List<Genre> genres) {
+                genres.add(0, new Genre(0, "All"));
+                spinner_genre.setSelection(0);
+                genreAdapter = new GenreSpinnerAdapter(ShowMediaListDetails.this, genres);
+                spinner_genre.setAdapter(genreAdapter);
+
+            }
+        });
+        spinner_genre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Genre selectedGenre = (Genre) genreAdapter.getItem(position);
+                Log.i(TAG, "onItemSelected: " + selectedGenre.getName());
+                if(position == 0){
+                    mediaListMediaViewModel.getAllMediaInList(String.valueOf(mediaList.getId())).observe(ShowMediaListDetails.this, new Observer<List<Media>>() {
+                        @Override
+                        public void onChanged(List<Media> media) {
+                            adapter.setData((ArrayList<Media>) media);
+                        }
+                    });
+                } else {
+                    mediaListMediaViewModel.getAllFilteredMediaListByGenre(selectedGenre.getId()).observe(ShowMediaListDetails.this, new Observer<List<Media>>() {
+                        @Override
+                        public void onChanged(List<Media> media) {
+                            adapter.setData((ArrayList<Media>) media);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override

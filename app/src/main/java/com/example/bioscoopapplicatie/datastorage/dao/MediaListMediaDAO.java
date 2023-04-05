@@ -27,4 +27,11 @@ public interface MediaListMediaDAO {
             "JOIN media_list_table ON media_list_media_table.mediaListId = media_list_table.id " +
             "WHERE media_list_table.id = :listId")
     LiveData<List<Media>> getAllMediaInList(String listId);
+    //    getAllFilteredMediaByGenre
+    @Query("SELECT mt.* FROM media_table mt " +
+            "INNER JOIN media_list_media_table mlt ON mt.id = mlt.mediaId " +
+            "INNER JOIN genre_media_table gmt ON mt.id = gmt.mediaId " +
+            "INNER JOIN genre_table gt ON gmt.genreId = gt.id " +
+            "WHERE gt.id = :genreId")
+    LiveData<List<Media>> getAllFilteredMediaListByGenre(int genreId);
 }
