@@ -66,6 +66,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
     private int orientation;
     private ImageButton homeScreenButton, listAddButton, listViewButton;
     private Button shareButton;
+    private Button reviewButton;
     private MediaListViewModel mediaListViewModel;
     private MediaList mediaList;
 
@@ -166,6 +167,10 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         this.shareButton = findViewById(R.id.details_media_share_btn);
         this.shareButton.setOnClickListener(this);
 
+        //ReviewMedia button
+        this.reviewButton = findViewById(R.id.details_media_review_btn);
+        this.reviewButton.setOnClickListener(this);
+
         //Spinner
         this.toListSpinner = findViewById(R.id.details_media_to_list_spinner);
     }
@@ -246,6 +251,22 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
                 Log.d(TAG, "Button aangeroepen");
                 Intent intentListView = new Intent(this, ShowMediaList.class);
                 startActivity(intentListView);
+                break;
+            case R.id.details_media_review_btn:
+                Intent intentReview = new Intent(this, ReviewMedia.class);
+                intentReview.putExtra("id", this.media.getId());
+                intentReview.putExtra("title", this.media.getTitle());
+                intentReview.putExtra("language", this.media.getOriginalLanguage());
+                intentReview.putExtra("overview", this.media.getOverview());
+                intentReview.putExtra("popularity", this.media.getPopularity());
+                intentReview.putExtra("releaseDate", this.media.getReleaseDate());
+                intentReview.putExtra("adult", this.media.isAdult());
+                intentReview.putExtra("backdropPath", this.media.getBackdropPath());
+                intentReview.putExtra("posterPath", this.media.getPosterPath());
+                intentReview.putExtra("video", this.media.isVideo());
+                intentReview.putExtra("voteAverage", this.media.getVoteAverage());
+                intentReview.putExtra("voteCount", this.media.getVoteCount());
+                startActivity(intentReview);
                 break;
         }
     }

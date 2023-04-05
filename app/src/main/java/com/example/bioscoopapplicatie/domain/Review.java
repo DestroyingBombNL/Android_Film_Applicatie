@@ -22,7 +22,6 @@ public class Review {
     @PrimaryKey
     @NonNull
     private String id;
-
     @NonNull
     private int mediaId;
 
@@ -35,12 +34,13 @@ public class Review {
     }
 
     @Ignore
-    public Review(String author, AuthorDetail authorDetail, String description, String createdAt, String id) {
+    public Review(String author, AuthorDetail authorDetail, String description, String createdAt, String id, int mediaId) {
         this.author = author;
         this.authorDetail = authorDetail;
         this.description = description;
         this.createdAt = createdAt;
         this.id = id;
+        this.mediaId = mediaId;
     }
 
     public String getAuthor() {

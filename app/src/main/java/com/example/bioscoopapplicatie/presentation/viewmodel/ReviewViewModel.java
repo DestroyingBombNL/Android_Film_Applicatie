@@ -32,4 +32,7 @@ public class ReviewViewModel extends AndroidViewModel {
         filteredReviews = repository.getFilteredReviews(mediaId);
         return filteredReviews;
     }
+    public void insertReview(Review review) {
+        repository.insert(review);
+    }
 }

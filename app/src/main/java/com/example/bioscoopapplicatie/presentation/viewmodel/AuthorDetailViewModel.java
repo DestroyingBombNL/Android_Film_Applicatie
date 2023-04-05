@@ -23,9 +23,12 @@ public class AuthorDetailViewModel extends AndroidViewModel {
         Log.d(TAG, "AuthorDetailViewModel called");
         repository = new TheMovieRepository(application);
     }
-
     public LiveData<List<AuthorDetail>> getAllAuthorDetails() {
         allAuthorDetails = repository.getAllAuthorDetails();
         return allAuthorDetails;
+    }
+
+    public void insertAuthorDetail(AuthorDetail authorDetail) {
+        repository.insert(authorDetail);
     }
 }
