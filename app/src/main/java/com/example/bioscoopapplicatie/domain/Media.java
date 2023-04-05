@@ -6,8 +6,6 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName="media_table")
@@ -46,6 +44,7 @@ public class Media {
     @Expose
     @ColumnInfo(name="release_date")
     private String releaseDate;
+
     @Expose
     private boolean video;
 

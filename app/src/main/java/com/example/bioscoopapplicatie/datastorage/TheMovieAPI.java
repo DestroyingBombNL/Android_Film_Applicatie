@@ -44,6 +44,4 @@ public interface TheMovieAPI {
 
     @GET("discover/tv")
     Call<MediaResponse> getTvShows(@Query("api_key") String apiKey, @Query("page") int page);
-
-
 }

@@ -49,6 +49,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
     private final String TAG = this.getClass().getSimpleName();
     private Media media;
     private ImageView media_img;
+    private ImageView detail_media_backdrp;
     private TextView title_txt;
     private TextView popularity_txt;
     private TextView adult_txt;
@@ -149,6 +150,7 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
         this.language_txt = findViewById(R.id.details_media_language_txt);
         this.description_txt = findViewById(R.id.details_media_description_txt);
         this.share_btn = findViewById(R.id.details_media_share_btn);
+        this.detail_media_backdrp = findViewById(R.id.details_media_backdrp);
         this.share_btn.setOnClickListener(this);
 
 
@@ -206,11 +208,17 @@ public class DetailsMedia extends AppCompatActivity implements View.OnClickListe
     private void putDataInComponents() {
         Log.i(TAG, "putDataInComponents");
         Glide.with(this).load("https://image.tmdb.org/t/p/original" + this.media.getPosterPath()).into(this.media_img);
+        Glide.with(this).load("https://image.tmdb.org/t/p/original" + this.media.getBackdropPath()).into(this.detail_media_backdrp);
         this.title_txt.setText(media.getTitle());
-        this.popularity_txt.setText(String.valueOf(media.getPopularity()));
-        this.adult_txt.setText(String.valueOf(media.isAdult()));
-        this.date_txt.setText(media.getReleaseDate());
-        this.language_txt.setText(media.getOriginalLanguage());
+        this.popularity_txt.setText("Rating: " + String.valueOf(media.getVoteAverage()));
+        if(media.isAdult()){
+            this.adult_txt.setText("This movie is 18+");
+        } else {
+            this.adult_txt.setText("This movie is not 18+");
+        }
+
+        this.date_txt.setText("Release date: " + media.getReleaseDate());
+        this.language_txt.setText("Original language: " + media.getOriginalLanguage());
         this.description_txt.setText(media.getOverview());
     }
 

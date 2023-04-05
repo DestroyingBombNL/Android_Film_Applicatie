@@ -100,11 +100,13 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
                         }
                     });
                 }
+
+                spinner_genre.setSelection(position);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                spinner_genre.setTooltipText("Select genre filter");
             }
         });
 
@@ -116,7 +118,6 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedOrder = spinner_order.getSelectedItem().toString();
-
                 Log.d(TAG, "Selected order: " + selectedOrder);
 
                 if(selectedOrder.equals("0")) {
