@@ -1,7 +1,6 @@
 package com.example.bioscoopapplicatie.datastorage;
 
 import android.content.Context;
-import android.media.session.MediaSession;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -23,19 +22,19 @@ import com.example.bioscoopapplicatie.domain.AuthorDetail;
 import com.example.bioscoopapplicatie.domain.Genre;
 import com.example.bioscoopapplicatie.domain.Media;
 import com.example.bioscoopapplicatie.domain.MediaList;
+import com.example.bioscoopapplicatie.domain.Review;
 import com.example.bioscoopapplicatie.domain.User;
 import com.example.bioscoopapplicatie.domain.linkingtable.GenreMedia;
 import com.example.bioscoopapplicatie.domain.linkingtable.MediaListMedia;
-import com.example.bioscoopapplicatie.domain.response.UserResponse;
 import com.example.bioscoopapplicatie.domain.response.GenreResponse;
 import com.example.bioscoopapplicatie.domain.response.MediaListResponse;
 import com.example.bioscoopapplicatie.domain.response.MediaResponse;
-import com.example.bioscoopapplicatie.domain.Review;
 import com.example.bioscoopapplicatie.domain.response.ReviewResponse;
+import com.example.bioscoopapplicatie.domain.response.SessionResponse;
 import com.example.bioscoopapplicatie.domain.response.TokenResponse;
+import com.example.bioscoopapplicatie.domain.response.UserResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -50,7 +49,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * with it happen through the WordViewModel.
  */
 
-@Database(entities = {Media.class, MediaList.class, MediaListMedia.class, Review.class, AuthorDetail.class, Genre.class, User.class, GenreMedia.class}, version = 140, exportSchema = false)
+@Database(entities = {Media.class, MediaList.class, MediaListMedia.class, Review.class, AuthorDetail.class, Genre.class, User.class, GenreMedia.class}, version = 142, exportSchema = false)
 public abstract class TheMovieDatabase extends RoomDatabase {
     private final static String TAG = TheMovieDatabase.class.getSimpleName();
 
@@ -63,7 +62,6 @@ public abstract class TheMovieDatabase extends RoomDatabase {
     public abstract UserDAO userDao();
     public abstract GenreMediaDAO genreMediaDao();
     private static TheMovieDatabase INSTANCE;
-
     public static TheMovieDatabase getDatabase(final Context context) {
         Log.d(TAG, "getDatabase");
         if (INSTANCE == null) {
@@ -110,6 +108,7 @@ public abstract class TheMovieDatabase extends RoomDatabase {
         private String apiKey;
         private String userToken;
         private String sessionId;
+        private User user;
         PopulateDbAsync(TheMovieDatabase db) {
             mediaDao = db.mediaDao();
             mediaListDao = db.mediaListDao();
@@ -136,6 +135,9 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                     .build();
             this.jsonApi = retrofit.create(TheMovieAPI.class);
 
+            generateToken();
+            authorizeSession();
+            createSessionId();
 
             //Get all genres
             Call<GenreResponse> callGenres = jsonApi.getGenres(apiKey);
@@ -216,6 +218,46 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                 }
                 listId++;
             }
+
+            Call<UserResponse> callUser = jsonApi.getUser(apiKey, sessionId);
+            try {
+                Response<UserResponse> userResponse = callUser.execute();
+                if (userResponse.isSuccessful()) {
+                    user = new User(userResponse.body().getId(), userResponse.body().getUsername(), userResponse.body().getName());
+                    user.setSessionId(this.sessionId);
+                    userDao.insert(user);
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "Error when trying to get user from API");
+            }
+
+            //Get all of the current users lists
+            Call<MediaListResponse> callUserMediaLists = jsonApi.getAllMediaListsWithUser(user.getId(), apiKey, sessionId);
+            try {
+                Response<MediaListResponse> userMediaListsResponse = callUserMediaLists.execute();
+                if (userMediaListsResponse.isSuccessful()) {
+                    MediaList mediaList = new MediaList(
+                            userMediaListsResponse.body().getId(),
+                            userMediaListsResponse.body().getCreatedBy(),
+                            userMediaListsResponse.body().getDescription(),
+                            userMediaListsResponse.body().getFavoriteCount());
+                    mediaListDao.insert(mediaList);
+                    if (!(userMediaListsResponse.body().getItems() == null)) {
+                        for (Media media : userMediaListsResponse.body().getItems()) {
+                            if (mediaDao.getAllFilteredMedia("id = " + media.getId()) == null) {
+                                mediaDao.insert(media);
+                                int mediaReviewId = media.getId();
+                                checkMediaHasReview(mediaReviewId);
+                            }
+                            MediaListMedia mediaListMedia = new MediaListMedia(userMediaListsResponse.body().getId(), media.getId());
+                            mediaListMediaDao.insertMediaToList(mediaListMedia);
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "Error whilst trying to get mediaLists from the user from the API");
+            }
+
             return null;
         }
 
@@ -245,6 +287,61 @@ public abstract class TheMovieDatabase extends RoomDatabase {
                     genreMediaDao.insert(genreMedia);
                 }
             }
+        }
+
+        private void generateToken() {
+            Call<TokenResponse> callTokenResponse = this.jsonApi.getToken(apiKey);
+            try {
+                Response<TokenResponse> tokenResponse = callTokenResponse.execute();
+                if (tokenResponse.isSuccessful()) {
+                    this.userToken = tokenResponse.body().getToken();
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "Error whilst trying to get token from API");
+            }
+        }
+        private void authorizeSession() {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("{\"username\":\"");
+            stringBuilder.append("DestroyingBombNL\",");
+            stringBuilder.append("\"password\":\"");
+            stringBuilder.append("Pizza2017\",");
+            stringBuilder.append("\"request_token\":\"");
+            stringBuilder.append(this.userToken);
+            stringBuilder.append("\"}");
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), stringBuilder.toString());
+            Call<TokenResponse> callSessionResponse = this.jsonApi.getSession(apiKey, requestBody);
+            try {
+                Response<TokenResponse> sessionResponse = callSessionResponse.execute();
+                if (sessionResponse.isSuccessful()) {
+                    this.userToken = sessionResponse.body().getToken();
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "Error whilst trying to get sessionID from API");
+            }
+        }
+
+        private void createSessionId() {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("{\"request_token\":\"");
+            stringBuilder.append(this.userToken);
+            stringBuilder.append("\"}");
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), stringBuilder.toString());
+            Call<SessionResponse> call = jsonApi.createSession(apiKey, requestBody);
+            call.enqueue(new retrofit2.Callback<SessionResponse>() {
+                @Override
+                public void onResponse(Call<SessionResponse> call, Response<SessionResponse> response) {
+                    if (response.isSuccessful()) {
+                        sessionId = response.body().getSessionId();
+                    } else {
+                        Log.e(TAG, "An error has occurred when trying to get the token out of the request body");
+                    }
+                }
+                @Override
+                public void onFailure(Call<SessionResponse> call, Throwable t) {
+                    Log.e(TAG, "An error has occured when trying to make a connection to the api");
+                }
+            });
         }
     }
 }

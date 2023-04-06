@@ -4,12 +4,16 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.bioscoopapplicatie.datastorage.TheMovieRepository;
 import com.example.bioscoopapplicatie.domain.Media;
 import com.example.bioscoopapplicatie.domain.MediaList;
+import com.example.bioscoopapplicatie.domain.User;
 import com.example.bioscoopapplicatie.domain.linkingtable.MediaListMedia;
+import com.example.bioscoopapplicatie.presentation.Homescreen;
 
 import java.util.List;
 

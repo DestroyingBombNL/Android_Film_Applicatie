@@ -12,6 +12,7 @@ public class User {
     private String username;
     private String name;
 
+    private String sessionId;
     public User(int id, String username, String name) {
         this.id = id;
         this.username = username;
@@ -40,5 +41,13 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 }

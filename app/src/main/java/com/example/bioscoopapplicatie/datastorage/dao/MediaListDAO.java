@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.bioscoopapplicatie.domain.Genre;
 import com.example.bioscoopapplicatie.domain.Media;
@@ -25,6 +26,9 @@ public interface MediaListDAO {
 
     @Query("SELECT * FROM media_list_table ORDER BY id DESC")
     LiveData<List<MediaList>> getAllMediaLists();
+
+    @Query("UPDATE media_list_table SET id = :value WHERE name = :name")
+    void updateMediaList(String value, String name);
 
     @Delete
     void deleteList(MediaList mediaList);

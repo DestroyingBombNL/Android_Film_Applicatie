@@ -2,10 +2,11 @@ package com.example.bioscoopapplicatie.datastorage;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.text.method.NumberKeyListener;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.bioscoopapplicatie.datastorage.dao.AuthorDetailDAO;
 import com.example.bioscoopapplicatie.datastorage.dao.GenreDAO;
@@ -23,6 +24,8 @@ import com.example.bioscoopapplicatie.domain.Review;
 import com.example.bioscoopapplicatie.domain.User;
 import com.example.bioscoopapplicatie.domain.linkingtable.GenreMedia;
 import com.example.bioscoopapplicatie.domain.linkingtable.MediaListMedia;
+import com.example.bioscoopapplicatie.domain.response.ListIdResponse;
+import com.example.bioscoopapplicatie.domain.response.SessionResponse;
 import com.example.bioscoopapplicatie.domain.response.TokenResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -41,9 +44,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, ReviewDAO, UserDAO, AuthorDetailDAO, GenreMediaDAO, MediaListMediaDAO {
     private final String TAG = this.getClass().getSimpleName();
     private String apiKey;
-    private String token;
     private String contentType;
-    private String sessionId;
     private TheMovieAPI jsonApi;
     private MediaDAO mediaDao;
     private MediaListDAO mediaListDao;
@@ -69,13 +70,12 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
         mediaListDao = db.mediaListDao();
         reviewDao = db.reviewDao();
         genreDao = db.genreDao();
+        userDao = db.userDao();
         authorDetailDao = db.authorDetailDao();
         genreMediaDao = db.genreMediaDao();
         mediaListMediaDao = db.mediaListMediaDao();
         this.apiKey = "8a27b4ebdf0d58efaf6c4450b7718cc7";
         this.contentType = "application/json;charset=utf-8";
-        this.token = "";
-        this.sessionId = "";
         setRetrofit();
     }
     
@@ -93,9 +93,7 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
 
     public void postMediaList(MediaList mediaList) {
         try {
-            this.token = new GenerateTokenTask(this.apiKey, this.jsonApi, this.TAG).execute().get();
-            this.sessionId = new GenerateSessionTask(this.apiKey, this.jsonApi, this.token, this.TAG).execute().get();
-            new postMediaList(this.TAG, this.contentType, this.apiKey, this.sessionId, this.jsonApi, mediaList).execute();
+            new PostMediaListAsyncTask(this.TAG, this.contentType, this.apiKey, "f0325ea82b693953ece330904aede3c7d54726dd", this.jsonApi, mediaList, mediaListDao).execute();
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
@@ -121,70 +119,6 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
     public LiveData<List<Media>> getAllFilteredMediaListByGenre(int genreId) {
         mediaInList = mediaListMediaDao.getAllFilteredMediaListByGenre(genreId);
         return mediaInList;
-    }
-
-    //Token request
-    private static class GenerateTokenTask extends AsyncTask<Void, Void, String> {
-        private String apiKey;
-        private TheMovieAPI jsonApi;
-        private String TAG;
-
-        public GenerateTokenTask(String apiKey, TheMovieAPI jsonApi, String TAG) {
-            this.apiKey = apiKey;
-            this.jsonApi = jsonApi;
-            this.TAG = TAG;
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            Call<TokenResponse> callTokenResponse = this.jsonApi.getToken(apiKey);
-            try {
-                Response<TokenResponse> tokenResponse = callTokenResponse.execute();
-                if (tokenResponse.isSuccessful()) {
-                    return tokenResponse.body().getToken();
-                }
-            } catch (IOException e) {
-                Log.e(TAG, "Error whilst trying to get token from API");
-            }
-            return "";
-        }
-    }
-
-    private static class GenerateSessionTask extends AsyncTask<Void, Void, String> {
-        private String apiKey;
-        private TheMovieAPI jsonApi;
-        private String token;
-        private String TAG;
-
-        public GenerateSessionTask(String apiKey, TheMovieAPI jsonApi, String token, String TAG) {
-            this.apiKey = apiKey;
-            this.jsonApi = jsonApi;
-            this.token = token;
-            this.TAG = TAG;
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("{\"username\":\"");
-            stringBuilder.append("DestroyingBombNL\",");
-            stringBuilder.append("\"password\":\"");
-            stringBuilder.append("Pizza2017\",");
-            stringBuilder.append("\"request_token\":\"");
-            stringBuilder.append(this.token);
-            stringBuilder.append("\"}");
-            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), stringBuilder.toString());
-            Call<TokenResponse> callSessionResponse = this.jsonApi.getSession(apiKey, requestBody);
-            try {
-                Response<TokenResponse> sessionResponse = callSessionResponse.execute();
-                if (sessionResponse.isSuccessful()) {
-                    return sessionResponse.body().getToken();
-                }
-            } catch (IOException e) {
-                Log.e(TAG, "Error whilst trying to get sessionID from API");
-            }
-            return "";
-        }
     }
 
     @Override
@@ -245,6 +179,11 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
     public LiveData<List<MediaList>> getAllMediaLists() {
         allMediaLists = mediaListDao.getAllMediaLists();
         return allMediaLists;
+    }
+
+    @Override
+    public void updateMediaList(String value, String name) {
+        mediaListDao.updateMediaList(value, name);
     }
 
     @Override
@@ -463,20 +402,40 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
         }
     }
 
-    private static class postMediaList extends AsyncTask<Void, Void, Void> {
+    private static class UpdateMediaListAsyncTask extends AsyncTask<Void, Void, Void> {
+        private MediaListDAO mediaListDao;
+        private int listId;
+        private String name;
+
+        public UpdateMediaListAsyncTask(MediaListDAO mediaListDao, int listId, String name) {
+            this.mediaListDao = mediaListDao;
+            this.listId = listId;
+            this.name = name;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mediaListDao.updateMediaList(String.valueOf(listId), name);
+            return null;
+        }
+    }
+
+    private static class PostMediaListAsyncTask extends AsyncTask<Void, Void, Void> {
         private String TAG;
         private String contentType;
         private String apiKey;
         private String sessionId;
         private TheMovieAPI jsonApi;
         private MediaList mediaList;
-        public postMediaList(String TAG, String contentType, String apiKey, String sessionId, TheMovieAPI jsonApi, MediaList mediaList) {
+        private MediaListDAO mediaListDao;
+        public PostMediaListAsyncTask(String TAG, String contentType, String apiKey, String sessionId, TheMovieAPI jsonApi, MediaList mediaList, MediaListDAO mediaListDao) {
             this.TAG = TAG;
             this.contentType = contentType;
             this.apiKey = apiKey;
             this.sessionId = sessionId;
             this.jsonApi = jsonApi;
             this.mediaList = mediaList;
+            this.mediaListDao = mediaListDao;
         }
         @Override
         protected Void doInBackground(Void... voids) {
@@ -488,19 +447,20 @@ public class TheMovieRepository implements MediaDAO, GenreDAO, MediaListDAO, Rev
                 stringBuilder.append(mediaList.getDescription());
                 stringBuilder.append("\",\"language\":\"en\"}");
                 RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), stringBuilder.toString());
-                Call<Void> call = jsonApi.postMediaList(contentType, apiKey, sessionId, requestBody);
-                call.enqueue(new Callback<Void>() {
+                Call<ListIdResponse> call = jsonApi.postMediaList(contentType, apiKey, sessionId, requestBody);
+                call.enqueue(new Callback<ListIdResponse>() {
                     @Override
-                    public void onResponse(Call call, Response response) {
+                    public void onResponse(Call<ListIdResponse> call, Response<ListIdResponse> response) {
                         if (response.isSuccessful()) {
                             Log.i(TAG, "Media posted successfully with status code: " + response.code());
+                            new UpdateMediaListAsyncTask(mediaListDao, response.body().getListId(), mediaList.getName());
                         } else {
                             Log.i(TAG, "The request did not register with status code: " + response.code());
                         }
                     }
 
                     @Override
-                    public void onFailure(Call call, Throwable t) {
+                    public void onFailure(Call<ListIdResponse> call, Throwable t) {
                         Log.e(TAG, "onFailure, error whilst trying to post mediaList");
                     }
                 });

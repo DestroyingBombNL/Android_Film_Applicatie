@@ -1,5 +1,9 @@
 package com.example.bioscoopapplicatie.datastorage;
 
+import android.media.session.MediaSession;
+
+import com.example.bioscoopapplicatie.domain.response.ListIdResponse;
+import com.example.bioscoopapplicatie.domain.response.SessionResponse;
 import com.example.bioscoopapplicatie.domain.response.UserResponse;
 import com.example.bioscoopapplicatie.domain.response.GenreResponse;
 import com.example.bioscoopapplicatie.domain.response.MediaListResponse;
@@ -8,8 +12,11 @@ import com.example.bioscoopapplicatie.domain.response.ReviewResponse;
 import com.example.bioscoopapplicatie.domain.response.TokenResponse;
 
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -34,7 +41,9 @@ public interface TheMovieAPI {
     @GET("account/{account_id}/lists")
     Call<MediaListResponse> getAllMediaListsWithUser(@Path("account_id") int listId, @Query("api_key") String apiKey, @Query("session_id") String sessionId);
     @POST("list")
-    Call<Void> postMediaList(@Header("Content-Type") String contentType, @Query("api_key") String apiKey, @Query("session_id") String sessionId, @Body RequestBody body);
+    Call<ListIdResponse> postMediaList(@Header("Content-Type") String contentType, @Query("api_key") String apiKey, @Query("session_id") String sessionId, @Body RequestBody body);
+    @POST("authentication/session/new")
+    Call<SessionResponse> createSession(@Query("api_key") String apiKey, @Body RequestBody body);
     /*
     @POST("api/auth/login")
     Call<LoginResponse> login(@Body() LoginData loginData);

@@ -21,12 +21,14 @@ import com.example.bioscoopapplicatie.domain.DataOrder;
 import com.example.bioscoopapplicatie.domain.Genre;
 import com.example.bioscoopapplicatie.domain.Media;
 import com.example.bioscoopapplicatie.domain.MediaList;
+import com.example.bioscoopapplicatie.domain.User;
 import com.example.bioscoopapplicatie.domain.linkingtable.MediaListMedia;
 import com.example.bioscoopapplicatie.presentation.adapter.GenreSpinnerAdapter;
 import com.example.bioscoopapplicatie.presentation.adapter.HomescreenAdapter;
 import com.example.bioscoopapplicatie.presentation.adapter.OrderSpinnerAdapter;
 import com.example.bioscoopapplicatie.presentation.viewmodel.GenreViewModel;
 import com.example.bioscoopapplicatie.presentation.viewmodel.MediaViewModel;
+import com.example.bioscoopapplicatie.presentation.viewmodel.UserViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -61,7 +63,6 @@ public class Homescreen extends AppCompatActivity implements View.OnClickListene
         setViewModel();
         setSpinner();
         setComponents();
-
     }
 
 
